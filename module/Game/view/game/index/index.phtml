@@ -1,0 +1,21 @@
+
+<?php if ($this->games): ?>
+
+    <table>
+        <tr>
+            <th>Title</th>
+        </tr>
+
+        <?php foreach ($this->games as $key => $val): ?>
+            <tr>
+                <td><?= $this->escapeHtml($val['title']) ?></td>
+            </tr>
+        <?php endforeach; ?>
+
+    </table>
+
+<?php else: ?>
+
+    <p>There are no books to display.</p>
+
+<?php endif;?>
