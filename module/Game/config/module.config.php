@@ -2,6 +2,8 @@
 
 use Game\Controller\GameController;
 use Game\Controller\IndexController;
+use Game\Controller\Platform\BrowserController;
+use Game\Controller\Platform\PcController;
 use Game\Controller\PlatformController;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
@@ -36,7 +38,8 @@ return [
                         'options' => [
                             'route' => '/browser',
                             'defaults' => [
-                                'action' => 'browser',
+                                'controller' => BrowserController::class,
+                                'action' => 'index',
                             ],
                         ],
                     ],
@@ -45,7 +48,8 @@ return [
                         'options' => [
                             'route' => '/pc',
                             'defaults' => [
-                                'action' => 'pc',
+                                'controller' => PcController::class,
+                                'action' => 'index',
                             ],
                         ],
                     ],
@@ -70,7 +74,9 @@ return [
         'factories' => [
             IndexController::class => InvokableFactory::class,
             PlatformController::class => InvokableFactory::class,
-            GameController::class => InvokableFactory::class
+            GameController::class => InvokableFactory::class,
+            BrowserController::class => InvokableFactory::class,
+            PcController::class => InvokableFactory::class
         ],
     ],
     'view_manager' => [
