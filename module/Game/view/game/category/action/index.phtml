@@ -1,0 +1,17 @@
+<div class="row justify-content-between align-items-center pb-3">
+    <div class="col-4">
+        <h1>Action games</h1>
+    </div>
+    <div class="col-4">
+        <?php
+        $this->form->prepare();
+
+        echo $this->form()->openTag($this->form);
+        echo $this->formRow($this->form->get('sort-by'));
+        echo $this->form()->closeTag();
+        ?>
+    </div>
+</div>
+
+<?= $this->partial('partials/game-grid', ['games' => $this->games]) ?>
+

@@ -1,5 +1,7 @@
 <?php
 
+use Game\Controller\Category\ActionController;
+use Game\Controller\CategoryController;
 use Game\Controller\GameController;
 use Game\Controller\IndexController;
 use Game\Controller\Platform\BrowserController;
@@ -55,6 +57,29 @@ return [
                     ],
                 ],
             ],
+            'categories' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/categories',
+                    'defaults' => [
+                        'controller' => CategoryController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'action' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/action',
+                            'defaults' => [
+                                'controller' => ActionController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
             'game' => [
                 'type' => Segment::class,
                 'options' => [
@@ -76,7 +101,9 @@ return [
             PlatformController::class => InvokableFactory::class,
             GameController::class => InvokableFactory::class,
             BrowserController::class => InvokableFactory::class,
-            PcController::class => InvokableFactory::class
+            PcController::class => InvokableFactory::class,
+            CategoryController::class => InvokableFactory::class,
+            ActionController::class => InvokableFactory::class
         ],
     ],
     'view_manager' => [
