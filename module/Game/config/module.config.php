@@ -1,8 +1,10 @@
 <?php
 
+use Game\Controller\GameController;
 use Game\Controller\IndexController;
 use Game\Controller\PlatformController;
 use Laminas\Router\Http\Literal;
+use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
@@ -49,12 +51,26 @@ return [
                     ],
                 ],
             ],
+            'game' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/game/:id',
+                    'constraints' => [
+                        'id' => '[0-9]+'
+                    ],
+                    'defaults' => [
+                        'controller' => GameController::class,
+                        'action' => 'details'
+                    ]
+                ]
+            ]
         ],
     ],
     'controllers' => [
         'factories' => [
             IndexController::class => InvokableFactory::class,
-            PlatformController::class => InvokableFactory::class
+            PlatformController::class => InvokableFactory::class,
+            GameController::class => InvokableFactory::class
         ],
     ],
     'view_manager' => [
