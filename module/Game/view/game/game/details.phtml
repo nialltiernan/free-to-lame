@@ -1,20 +1,31 @@
-<div class="row">
-    <div class="col">
-        <img src="<?= $this->escapeHtml($this->game['thumbnail']) ?>" class="img-fluid rounded">
-
-        <form method="GET" action="<?= $this->escapeHtml($this->game['game_url']) ?>">
-            <input type="submit" class="btn btn-primary" value="Play now!">
+<div class="d-flex flex-column flex-lg-row">
+    <div class="d-flex flex-grow-1 align-self-center flex-column">
+        <img src="<?= $this->escapeHtml($this->game['thumbnail']) ?>" class="rounded mx-auto img-thumbnail">
+        <form method="GET" action="<?= $this->escapeHtml($this->game['game_url']) ?>" class="mx-auto mt-3">
+            <input type="submit" class="btn btn-primary py-2 px-4" value="Play now!">
         </form>
     </div>
-    <div class="col">
-        <h1><?= $this->escapeHtml($this->game['title']) ?></h1>
+    <div class="w-50">
+        <div class="d-flex align-items-end">
+            <h1>
+                <?= $this->escapeHtml($this->game['title']) ?>
+            </h1>
+        </div>
+
+        <p class="small text-muted">
+            <?= $this->escapeHtml($this->game['genre']) ?> ·
+            <?= $this->escapeHtml($this->game['platform']) ?> ·
+            <?= $this->escapeHtml($this->game['publisher']) ?> ·
+            <?= $this->escapeHtml($this->game['developer']) ?> ·
+            <?= $this->escapeHtml($this->game['release_date']) ?>
+        </p>
         <p><?= $this->escapeHtml($this->game['description']) ?></p>
     </div>
 </div>
 
 <?php if($this->game['screenshots']): ?>
     <?php $count = 0 ?>
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <div id="carouselExampleIndicators" class="carousel slide mt-5" data-ride="carousel">
         <ol class="carousel-indicators">
             <?php foreach ($this->game['screenshots'] as $screenshot): ?>
                 <li data-target="#carouselExampleIndicators" data-slide-to="<?= $count ?>" <?= $count === 0 ? 'class="active"' : '' ?>></li>
@@ -41,37 +52,12 @@
     </div>
 <?php endif; ?>
 
-<h2>Details</h2>
-
-<table class="table">
-    <tbody>
-        <tr>
-            <td>Genre</td>
-            <td><?= $this->escapeHtml($this->game['genre']) ?></td>
-        </tr>
-        <tr>
-            <td>Platform</td>
-            <td><?= $this->escapeHtml($this->game['platform']) ?></td>
-        </tr>
-        <tr>
-            <td>Publisher</td>
-            <td><?= $this->escapeHtml($this->game['publisher']) ?></td>
-        </tr>
-        <tr>
-            <td>Developer</td>
-            <td><?= $this->escapeHtml($this->game['developer']) ?></td>
-        </tr>
-        <tr>
-            <td>Release Date</td>
-            <td><?= $this->escapeHtml($this->game['release_date']) ?></td>
-        </tr>
-    </tbody>
-</table>
-
 <?php if ($this->hasSystemRequirements):?>
-    <h2>System requirements</h2>
-    <table class="table">
-        <tbody>
+    <div class="mt-5">
+        <h2>System requirements</h2>
+
+        <table class="table">
+            <tbody>
             <tr>
                 <td>Operating System</td>
                 <td><?= $this->escapeHtml($this->game['minimum_system_requirements']['os']) ?></td>
@@ -92,6 +78,7 @@
                 <td>Storage</td>
                 <td><?= $this->escapeHtml($this->game['minimum_system_requirements']['storage']) ?></td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 <?php endif; ?>

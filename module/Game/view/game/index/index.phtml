@@ -3,12 +3,7 @@
 <div class="row">
     <?php $count = 0 ?>
     <?php foreach ($this->games as $game): ?>
-        <div class="col py-3 px-lg-5 border bg-light">
-            <a href="<?= $this->escapeHtml($game['game_url']) ?>" target="_blank">
-                <img src="<?= $this->escapeHtml($game['thumbnail']) ?>" class="img-fluid rounded">
-            </a>
-            <a href="<?= $this->url('game', ['id' => $game['id']]) ?>">Details</a>
-        </div>
+        <?= $this->partial('partials/game-card', ['game' => $game]) ?>
         <?php $count++ ?>
         <?php if ($count > 2): ?>
             <?php $count = 0 ?>
