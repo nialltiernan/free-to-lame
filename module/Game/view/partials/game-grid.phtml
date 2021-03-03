@@ -1,0 +1,11 @@
+<div class="row">
+    <?php $count = 0 ?>
+    <?php foreach ($games as $game): ?>
+        <?= $this->partial('partials/game-card', ['game' => $game]) ?>
+        <?php $count++ ?>
+        <?php if ($count > 2): ?>
+            <?php $count = 0 ?>
+            <div class="w-100"></div>
+        <?php endif; ?>
+    <?php endforeach; ?>
+</div>
