@@ -1,25 +1,33 @@
-<div class="d-flex flex-column flex-lg-row">
-    <div class="d-flex flex-grow-1 align-self-center flex-column">
-        <img src="<?= $this->escapeHtml($this->game['thumbnail']) ?>" class="rounded mx-auto img-thumbnail">
-        <form method="GET" action="<?= $this->escapeHtml($this->game['game_url']) ?>" class="mx-auto mt-3">
-            <input type="submit" class="btn btn-primary py-2 px-4" value="Play now!">
-        </form>
-    </div>
-    <div class="w-50">
-        <div class="d-flex align-items-end">
-            <h1>
-                <?= $this->escapeHtml($this->game['title']) ?>
-            </h1>
+<div class="row">
+    <div class="col-md-6">
+        <div class="row g-0 rounded overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+                <img src="<?= $this->escapeHtml($this->game['thumbnail']) ?>" class="rounded mx-auto img-thumbnail">
+                <form method="GET" action="<?= $this->escapeHtml($this->game['game_url']) ?>" class="mx-auto mt-3">
+                    <input type="submit" class="btn btn-primary py-2 px-4" value="Play now!">
+                </form>
+            </div>
         </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row g-0 rounded overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+                <div class="d-flex align-items-end">
+                    <h1>
+                        <?= $this->escapeHtml($this->game['title']) ?>
+                    </h1>
+                </div>
 
-        <p class="small text-muted">
-            <?= $this->escapeHtml($this->game['genre']) ?> ·
-            <?= $this->escapeHtml($this->game['platform']) ?> ·
-            <?= $this->escapeHtml($this->game['publisher']) ?> ·
-            <?= $this->escapeHtml($this->game['developer']) ?> ·
-            <?= $this->escapeHtml($this->game['release_date']) ?>
-        </p>
-        <p><?= $this->escapeHtml($this->game['description']) ?></p>
+                <p class="small text-muted">
+                    <?= $this->escapeHtml($this->game['genre']) ?> ·
+                    <?= $this->escapeHtml($this->game['platform']) ?> ·
+                    <?= $this->escapeHtml($this->game['publisher']) ?> ·
+                    <?= $this->escapeHtml($this->game['developer']) ?> ·
+                    <?= $this->escapeHtml($this->game['release_date']) ?>
+                </p>
+                <p><?= $this->escapeHtml($this->game['description']) ?></p>
+            </div>
+        </div>
     </div>
 </div>
 
