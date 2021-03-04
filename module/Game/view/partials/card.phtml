@@ -1,10 +1,15 @@
-<div class="col py-3 px-4 border bg-light">
-    <a href="<?= $this->url('game', ['id' => $game['id']]) ?>">
+<div class="col">
+    <div class="card shadow-sm">
         <img src="<?= $this->escapeHtml($game['thumbnail']) ?>" class="img-fluid rounded">
-    </a>
-    <a href="<?= $this->escapeHtml($game['game_url']) ?>" target="_blank">
-        <h5 class="d-none d-md-block">
-            <?= $this->escapeHtml($game['title']) ?>
-        </h5>
-    </a>
+        <div class="card-body">
+            <p class="card-text"><?= substr($this->escapeHtml($game['short_description']), 0, 110) ?></p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a href="<?= $this->escapeHtml($game['game_url']) ?>" class="btn btn-sm btn-outline-secondary">Play now</a>
+                    <a href="<?= $this->url('game', ['id' => $game['id']]) ?>" class="btn btn-sm btn-outline-secondary">Details</a>
+                </div>
+                <small class="text-muted d-md-none d-lg-block"><?= substr($this->escapeHtml($game['release_date']), 0, 4) ?></small>
+            </div>
+        </div>
+    </div>
 </div>

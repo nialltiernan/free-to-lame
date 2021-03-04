@@ -1,11 +1,9 @@
-<div class="row">
-    <?php $count = 0 ?>
-    <?php foreach ($games as $game): ?>
-        <?= $this->partial('partials/card', ['game' => $game]) ?>
-        <?php $count++ ?>
-        <?php if ($count > 2): ?>
-            <?php $count = 0 ?>
-            <div class="w-100"></div>
-        <?php endif; ?>
-    <?php endforeach; ?>
+<div class="album py-2 bg-light">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <?php foreach ($games as $game): ?>
+                <?= $this->partial('partials/card', ['game' => $game]) ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
 </div>
