@@ -3,52 +3,22 @@ declare(strict_types=1);
 
 namespace Game\Controller\Platform;
 
-use ArrayObject;
 use FreeToGame\Filters\Platforms\Browser;
 use FreeToGame\Sort\PopularitySort;
-use Game\Factory\SelectFactory;
-use Game\Factory\SortFactory;
+use Game\Controller\GridController;
 use Game\Service\PlatformGamesRetriever;
-use Laminas\Form\Form;
-use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
-class BrowserController extends AbstractActionController
+class BrowserController extends GridController
 {
     public function indexAction(): ViewModel
     {
-        $request = $this->getRequest();
+        $sortBy = $this->request->getPost('sort-by', 'popularity');
 
-        $sortBy = $request->getPost('sort-by', 'popularity');
-
-        $form = $this->initForm($sortBy);
-
-        $sort = $request->isPost() ? SortFactory::getSort($sortBy) : new PopularitySort();
+        $sort = $this->request->isPost() ? $this->getSort($sortBy) : new PopularitySort();
 
         $games = PlatformGamesRetriever::execute(new Browser(), $sort);
 
-        return new ViewModel(['games' => $games, 'form' => $form]);
-    }
-
-    private function initForm(string $sortBy): Form
-    {
-        $select = SelectFactory::getSortBySelect();
-
-        $form = new Form('form-sort-by');
-        $form->setAttribute('action', 'browser');
-        $form->add($select);
-
-        $this->bindFormData($sortBy, $form);
-
-        return $form;
-    }
-
-    private function bindFormData(string $sortBy, Form $form): void
-    {
-        $data = new ArrayObject();
-
-        $data['sort-by'] = $sortBy;
-
-        $form->bind($data);
+        return new ViewModel(['games' => $games, 'form' => $this->initSortByForm('browser', $sortBy)]);
     }
 }
