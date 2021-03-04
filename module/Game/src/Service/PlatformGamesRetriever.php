@@ -19,6 +19,6 @@ class PlatformGamesRetriever
 
         $freeToGame = new FreeToGame();
 
-        return array_slice($freeToGame->fetchList($filterCollection, $sort)->getData(), 0, 5);
+        return $freeToGame->fetchList($filterCollection, $sort)->getData();
     }
 }
