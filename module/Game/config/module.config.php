@@ -1,6 +1,17 @@
 <?php
 
 use Game\Controller\Category\ActionController;
+use Game\Controller\Category\ActionRolePlayingGameController;
+use Game\Controller\Category\AnimeController;
+use Game\Controller\Category\BattleRoyaleController;
+use Game\Controller\Category\CardController;
+use Game\Controller\Category\FantasyController;
+use Game\Controller\Category\FightingController;
+use Game\Controller\Category\FirstPersonController;
+use Game\Controller\Category\FlightController;
+use Game\Controller\Category\HorrorController;
+use Game\Controller\Category\LowSpecificationsController;
+use Game\Controller\Category\MartialArtsController;
 use Game\Controller\CategoryController;
 use Game\Controller\GameController;
 use Game\Controller\IndexController;
@@ -78,6 +89,106 @@ return [
                             ],
                         ],
                     ],
+                    'action-role-playing-game' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/action-role-playing-game',
+                            'defaults' => [
+                                'controller' => ActionRolePlayingGameController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'anime' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/anime',
+                            'defaults' => [
+                                'controller' => AnimeController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'battle-royale' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/battle-royale',
+                            'defaults' => [
+                                'controller' => BattleRoyaleController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'card' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/card',
+                            'defaults' => [
+                                'controller' => CardController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'fighting' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/fighting',
+                            'defaults' => [
+                                'controller' => FlightController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'first-person' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/first-person',
+                            'defaults' => [
+                                'controller' => FirstPersonController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'flight' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/flight',
+                            'defaults' => [
+                                'controller' => FlightController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'horror' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/horror',
+                            'defaults' => [
+                                'controller' => HorrorController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'low-specifications' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/low-specifications',
+                            'defaults' => [
+                                'controller' => LowSpecificationsController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'martial-arts' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/martial-arts',
+                            'defaults' => [
+                                'controller' => MartialArtsController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
                 ],
             ],
             'game' => [
@@ -103,7 +214,18 @@ return [
             BrowserController::class => InvokableFactory::class,
             PcController::class => InvokableFactory::class,
             CategoryController::class => InvokableFactory::class,
-            ActionController::class => InvokableFactory::class
+            ActionController::class => InvokableFactory::class,
+            ActionRolePlayingGameController::class => InvokableFactory::class,
+            AnimeController::class => InvokableFactory::class,
+            BattleRoyaleController::class => InvokableFactory::class,
+            CardController::class => InvokableFactory::class,
+            FantasyController::class => InvokableFactory::class,
+            FightingController::class => InvokableFactory::class,
+            FirstPersonController::class => InvokableFactory::class,
+            FlightController::class => InvokableFactory::class,
+            HorrorController::class => InvokableFactory::class,
+            LowSpecificationsController::class => InvokableFactory::class,
+            MartialArtsController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
