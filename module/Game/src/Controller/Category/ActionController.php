@@ -4,16 +4,11 @@ declare(strict_types=1);
 namespace Game\Controller\Category;
 
 use ArrayObject;
-use FreeToGame\Client as FreeToGame;
-use FreeToGame\Filters\CategoryFilter;
-use FreeToGame\Filters\FilterCollection;
-use FreeToGame\Filters\PlatformFilter;
-use FreeToGame\Filters\Platforms\Browser;
 use FreeToGame\Filters\SearchTerms\Action;
 use FreeToGame\Sort\PopularitySort;
-use FreeToGame\Sort\Sort;
 use Game\Factory\SelectFactory;
 use Game\Factory\SortFactory;
+use Game\Service\CategoryGamesRetriever;
 use Laminas\Form\Form;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
@@ -30,7 +25,9 @@ class ActionController extends AbstractActionController
 
         $sort = $request->isPost() ? SortFactory::getSort($sortBy) : new PopularitySort();
 
-        return new ViewModel(['games' => $this->getGames($sort), 'form' => $form]);
+        $games = CategoryGamesRetriever::execute(new Action(), $sort);
+
+        return new ViewModel(['games' => $games, 'form' => $form]);
     }
 
     private function initForm(string $sortBy): Form
@@ -53,21 +50,5 @@ class ActionController extends AbstractActionController
         $data['sort-by'] = $sortBy;
 
         $form->bind($data);
-    }
-
-    /**
-     * @param \FreeToGame\Sort\Sort $sort
-     * @return array
-     * @throws \FreeToGame\ApiException
-     */
-    private function getGames(Sort $sort): array
-    {
-        $filterCollection = new FilterCollection();
-
-        $filterCollection->setCategoryFilter(new CategoryFilter(new Action()));
-
-        $freeToGame = new FreeToGame();
-
-        return $freeToGame->fetchList($filterCollection, $sort)->getData();
     }
 }
