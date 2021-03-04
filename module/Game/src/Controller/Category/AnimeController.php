@@ -5,20 +5,24 @@ namespace Game\Controller\Category;
 
 use FreeToGame\Filters\SearchTerms\Anime;
 use FreeToGame\Sort\PopularitySort;
-use Game\Controller\CategoryController;
+use Game\Factory\SortFactory;
+use Game\Form\SortByForm;
 use Game\Service\CategoryGamesRetriever;
+use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
-class AnimeController extends CategoryController
+class AnimeController extends AbstractActionController
 {
     public function indexAction(): ViewModel
     {
         $sortBy = $this->request->getPost('sort-by', 'popularity');
 
-        $sort = $this->request->isPost() ? $this->getSort($sortBy) : new PopularitySort();
+        $sort = $this->request->isPost() ? SortFactory::getSort($sortBy) : new PopularitySort();
 
         $games = CategoryGamesRetriever::execute(new Anime(), $sort);
 
-        return new ViewModel(['games' => $games, 'form' => $this->initSortByForm('anime', $sortBy)]);
+        $form = new SortByForm('grid-sort-by', ['action' => 'anime', 'sort-by' => $sortBy]);
+
+        return new ViewModel(['games' => $games, 'form' => $form]);
     }
 }

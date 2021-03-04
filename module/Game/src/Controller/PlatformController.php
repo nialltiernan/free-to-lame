@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Game\Controller;
 
-class PlatformController extends GridController
+use Laminas\Mvc\Controller\AbstractActionController;
+
+class PlatformController extends AbstractActionController
 {
 }
