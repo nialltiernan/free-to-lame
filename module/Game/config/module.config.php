@@ -12,6 +12,11 @@ use Game\Controller\Category\FlightController;
 use Game\Controller\Category\HorrorController;
 use Game\Controller\Category\LowSpecificationsController;
 use Game\Controller\Category\MartialArtsController;
+use Game\Controller\Category\MassivelyMultiplayerOnlineController;
+use Game\Controller\Category\MassivelyMultiplayerOnlineFirstPersonShooterController;
+use Game\Controller\Category\MassivelyMultiplayerOnlineRealTimeStrategyController;
+use Game\Controller\Category\MassivelyMultiplayerOnlineRolePlayingGameController;
+use Game\Controller\Category\MassivelyMultiplayerOnlineThirdPersonShooterController;
 use Game\Controller\CategoryController;
 use Game\Controller\GameController;
 use Game\Controller\IndexController;
@@ -189,6 +194,56 @@ return [
                             ],
                         ],
                     ],
+                    'mmo' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/mmo',
+                            'defaults' => [
+                                'controller' => MassivelyMultiplayerOnlineController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'mmofps' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/mmofps',
+                            'defaults' => [
+                                'controller' => MassivelyMultiplayerOnlineFirstPersonShooterController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'mmorts' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/mmorts',
+                            'defaults' => [
+                                'controller' => MassivelyMultiplayerOnlineRealTimeStrategyController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'mmorpg' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/mmorpg',
+                            'defaults' => [
+                                'controller' => MassivelyMultiplayerOnlineRolePlayingGameController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'mmotps' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/mmotps',
+                            'defaults' => [
+                                'controller' => MassivelyMultiplayerOnlineThirdPersonShooterController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
                 ],
             ],
             'game' => [
@@ -226,6 +281,11 @@ return [
             HorrorController::class => InvokableFactory::class,
             LowSpecificationsController::class => InvokableFactory::class,
             MartialArtsController::class => InvokableFactory::class,
+            MassivelyMultiplayerOnlineController::class => InvokableFactory::class,
+            MassivelyMultiplayerOnlineFirstPersonShooterController::class => InvokableFactory::class,
+            MassivelyMultiplayerOnlineRealTimeStrategyController::class => InvokableFactory::class,
+            MassivelyMultiplayerOnlineRolePlayingGameController::class => InvokableFactory::class,
+            MassivelyMultiplayerOnlineThirdPersonShooterController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
