@@ -17,6 +17,16 @@ use Game\Controller\Category\MassivelyMultiplayerOnlineFirstPersonShooterControl
 use Game\Controller\Category\MassivelyMultiplayerOnlineRealTimeStrategyController;
 use Game\Controller\Category\MassivelyMultiplayerOnlineRolePlayingGameController;
 use Game\Controller\Category\MassivelyMultiplayerOnlineThirdPersonShooterController;
+use Game\Controller\Category\MilitaryController;
+use Game\Controller\Category\MultiplayerOnlineBattleArenaController;
+use Game\Controller\Category\OpenWorldController;
+use Game\Controller\Category\PermadeathController;
+use Game\Controller\Category\PixelController;
+use Game\Controller\Category\PlayerVersusEnvironmentController;
+use Game\Controller\Category\PlayerVersusPlayerController;
+use Game\Controller\Category\RacingController;
+use Game\Controller\Category\SailingController;
+use Game\Controller\Category\SandboxController;
 use Game\Controller\CategoryController;
 use Game\Controller\GameController;
 use Game\Controller\IndexController;
@@ -244,6 +254,106 @@ return [
                             ],
                         ],
                     ],
+                    'military' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/military',
+                            'defaults' => [
+                                'controller' => MilitaryController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'multiplayer-online-battle-arena' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/multiplayer-online-battle-arena',
+                            'defaults' => [
+                                'controller' => MultiplayerOnlineBattleArenaController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'open-world' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/open-world',
+                            'defaults' => [
+                                'controller' => OpenWorldController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'permadeath' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/permadeath',
+                            'defaults' => [
+                                'controller' => PermadeathController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'pixel' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/pixel',
+                            'defaults' => [
+                                'controller' => PixelController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'pve' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/pve',
+                            'defaults' => [
+                                'controller' => PlayerVersusEnvironmentController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'pvp' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/pvp',
+                            'defaults' => [
+                                'controller' => PlayerVersusPlayerController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'racing' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/racing',
+                            'defaults' => [
+                                'controller' => RacingController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'sailing' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/sailing',
+                            'defaults' => [
+                                'controller' => SailingController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'sandbox' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/sandbox',
+                            'defaults' => [
+                                'controller' => SandboxController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
                 ],
             ],
             'game' => [
@@ -286,6 +396,16 @@ return [
             MassivelyMultiplayerOnlineRealTimeStrategyController::class => InvokableFactory::class,
             MassivelyMultiplayerOnlineRolePlayingGameController::class => InvokableFactory::class,
             MassivelyMultiplayerOnlineThirdPersonShooterController::class => InvokableFactory::class,
+            MilitaryController::class => InvokableFactory::class,
+            MultiplayerOnlineBattleArenaController::class => InvokableFactory::class,
+            OpenWorldController::class => InvokableFactory::class,
+            PermadeathController::class => InvokableFactory::class,
+            PixelController::class => InvokableFactory::class,
+            PlayerVersusEnvironmentController::class => InvokableFactory::class,
+            PlayerVersusPlayerController::class => InvokableFactory::class,
+            RacingController::class => InvokableFactory::class,
+            SailingController::class => InvokableFactory::class,
+            SandboxController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
