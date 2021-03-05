@@ -36,6 +36,14 @@ use Game\Controller\Category\SportsController;
 use Game\Controller\Category\StrategyController;
 use Game\Controller\Category\SuperheroController;
 use Game\Controller\Category\SurvivalController;
+use Game\Controller\Category\TankController;
+use Game\Controller\Category\ThirdPersonController;
+use Game\Controller\Category\TopDownController;
+use Game\Controller\Category\TowerDefenseController;
+use Game\Controller\Category\TurnBasedController;
+use Game\Controller\Category\TwoDimensionsController;
+use Game\Controller\Category\VoxelController;
+use Game\Controller\Category\ZombieController;
 use Game\Controller\CategoryController;
 use Game\Controller\GameController;
 use Game\Controller\IndexController;
@@ -453,6 +461,86 @@ return [
                             ],
                         ],
                     ],
+                    'tank' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/tank',
+                            'defaults' => [
+                                'controller' => TankController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'third-person' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/third-person',
+                            'defaults' => [
+                                'controller' => ThirdPersonController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'top-down' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/top-down',
+                            'defaults' => [
+                                'controller' => TopDownController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'tower-defense' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/tower-defense',
+                            'defaults' => [
+                                'controller' => TowerDefenseController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'turn-based' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/turn-based',
+                            'defaults' => [
+                                'controller' => TurnBasedController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'two-dimension' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/two-dimension',
+                            'defaults' => [
+                                'controller' => TwoDimensionsController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'voxel' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/voxel',
+                            'defaults' => [
+                                'controller' => VoxelController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'zombie' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/zombie',
+                            'defaults' => [
+                                'controller' => ZombieController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
                 ],
             ],
             'game' => [
@@ -514,6 +602,14 @@ return [
             StrategyController::class => InvokableFactory::class,
             SuperheroController::class => InvokableFactory::class,
             SurvivalController::class => InvokableFactory::class,
+            TankController::class => InvokableFactory::class,
+            ThirdPersonController::class => InvokableFactory::class,
+            TopDownController::class => InvokableFactory::class,
+            TowerDefenseController::class => InvokableFactory::class,
+            TurnBasedController::class => InvokableFactory::class,
+            TwoDimensionsController::class => InvokableFactory::class,
+            VoxelController::class => InvokableFactory::class,
+            ZombieController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
