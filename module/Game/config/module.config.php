@@ -27,6 +27,15 @@ use Game\Controller\Category\PlayerVersusPlayerController;
 use Game\Controller\Category\RacingController;
 use Game\Controller\Category\SailingController;
 use Game\Controller\Category\SandboxController;
+use Game\Controller\Category\ScienceFictionController;
+use Game\Controller\Category\ShooterController;
+use Game\Controller\Category\SideScrollerController;
+use Game\Controller\Category\SocialController;
+use Game\Controller\Category\SpaceController;
+use Game\Controller\Category\SportsController;
+use Game\Controller\Category\StrategyController;
+use Game\Controller\Category\SuperheroController;
+use Game\Controller\Category\SurvivalController;
 use Game\Controller\CategoryController;
 use Game\Controller\GameController;
 use Game\Controller\IndexController;
@@ -354,6 +363,96 @@ return [
                             ],
                         ],
                     ],
+                    'science-fiction' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/science-fiction',
+                            'defaults' => [
+                                'controller' => ScienceFictionController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'shooter' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/shooter',
+                            'defaults' => [
+                                'controller' => ShooterController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'side-scroller' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/side-scroller',
+                            'defaults' => [
+                                'controller' => SideScrollerController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'social' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/social',
+                            'defaults' => [
+                                'controller' => SocialController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'space' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/space',
+                            'defaults' => [
+                                'controller' => SpaceController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'sports' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/sorts',
+                            'defaults' => [
+                                'controller' => SportsController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'strategy' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/strategy',
+                            'defaults' => [
+                                'controller' => StrategyController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'superhero' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/superhero',
+                            'defaults' => [
+                                'controller' => SuperheroController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'survival' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/survival',
+                            'defaults' => [
+                                'controller' => SurvivalController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
                 ],
             ],
             'game' => [
@@ -406,6 +505,15 @@ return [
             RacingController::class => InvokableFactory::class,
             SailingController::class => InvokableFactory::class,
             SandboxController::class => InvokableFactory::class,
+            ScienceFictionController::class => InvokableFactory::class,
+            ShooterController::class => InvokableFactory::class,
+            SideScrollerController::class => InvokableFactory::class,
+            SocialController::class => InvokableFactory::class,
+            SpaceController::class => InvokableFactory::class,
+            SportsController::class => InvokableFactory::class,
+            StrategyController::class => InvokableFactory::class,
+            SuperheroController::class => InvokableFactory::class,
+            SurvivalController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
