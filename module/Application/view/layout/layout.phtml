@@ -24,29 +24,90 @@
         <?= $this->headScript() ?>
     </head>
     <body>
-        <nav class="navbar navbar-expand-md navbar-dark mb-4" role="navigation">
+
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark" role="navigation">
             <div class="container">
-                <div class="navbar-header">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <a class="navbar-brand" href="<?= $this->url('home') ?>">FreeToGame</a>
-                </div>
+                <a class="navbar-brand" href="<?= $this->url('home') ?>">FreeToGame</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
-                        <a class="navbar-brand" href="<?= $this->url('categories') ?>">Categories</a>
-                        <a class="navbar-brand" href="<?= $this->url('platforms') ?>">Platforms</a>
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="<?= $this->url('categories') ?>" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Categories
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="<?= $this->url('categories/action') ?>">Action</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/action-role-playing-game') ?>">Action RPG</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/anime') ?>">Anime</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/battle-royale') ?>">Battle Royale</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/card') ?>">Card</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/fighting') ?>">Fighting</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/first-person') ?>">First Person</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/flight') ?>">Flight</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/horror') ?>">Horror</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/low-specifications') ?>">Low Specs</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/martial-arts') ?>">Martial Arts</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/mmo') ?>">MMO</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/mmofps') ?>">MMO-FPS</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/mmorts') ?>">MMO-RTS</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/mmorpg') ?>">MMO-RPG</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/mmotps') ?>">MMO-TPS</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/military') ?>">Military</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/multiplayer-online-battle-arena') ?>">Online Battle Arena</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/open-world') ?>">Open World</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/permadeath') ?>">Permadeath</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/pve') ?>">PVE</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/pvp') ?>">PVP</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/racing') ?>">Racing</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/sailing') ?>">Sailing</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/sandbox') ?>">Sandbox</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/science-fiction') ?>">Sci-Fi</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/side-scroller') ?>">Side Scroller</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/social') ?>">Social</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/space') ?>">Space</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/sports') ?>">Sports</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/strategy') ?>">Strategy</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/superhero') ?>">Superhero</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/survival') ?>">Survival</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/tank') ?>">Tank</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/third-person') ?>">Third Person</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/top-down') ?>">Top Down</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/tower-defense') ?>">Tower Defense</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/turn-based') ?>">Turn Based</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/two-dimension') ?>">2D</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/voxel') ?>">Voxel</a>
+                                <a class="dropdown-item" href="<?= $this->url('categories/zombie') ?>">Zombie</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="<?= $this->url('categories') ?>">See all</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="<?= $this->url('platforms') ?>" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Platforms
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="<?= $this->url('platforms/browser') ?>">Browser</a>
+                                <a class="dropdown-item" href="<?= $this->url('platforms/pc') ?>">PC</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="<?= $this->url('platforms') ?>">See all</a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <div class="container">
+
+        <div class="container mt-3">
             <?= $this->content ?>
             <hr>
             <footer>
                 <p>Content provided by <a href="https://www.freetogame.com/api-doc">FreeToGame</a>.
             </footer>
         </div>
+
         <?= $this->inlineScript()
             ->prependFile($this->basePath('js/bootstrap.min.js'))
             ->prependFile($this->basePath('js/jquery-3.5.1.min.js')) ?>

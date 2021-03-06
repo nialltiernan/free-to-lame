@@ -15,6 +15,6 @@ class IndexController extends AbstractActionController
         $freeToGame = new Client();
         $popularitySort = new PopularitySort();
 
-        return new ViewModel(['games' => $freeToGame->fetchList(null, $popularitySort)->getData()]);
+        return new ViewModel(['games' => array_slice($freeToGame->fetchList(null, $popularitySort)->getData(), 0, 5)]);
     }
 }
