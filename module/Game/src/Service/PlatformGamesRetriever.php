@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Game\Service;
 
+use Application\Service\EnvironmentMode;
 use FreeToGame\Client as FreeToGame;
 use FreeToGame\Filters\FilterCollection;
 use FreeToGame\Filters\PlatformFilter;
@@ -19,6 +20,12 @@ class PlatformGamesRetriever
 
         $freeToGame = new FreeToGame();
 
-        return $freeToGame->fetchList($filterCollection, $sort)->getData();
+        $games = $freeToGame->fetchList($filterCollection, $sort)->getData();
+
+        if (EnvironmentMode::isLocal()) {
+            $games = array_slice($games, 0, 15);
+        }
+
+        return $games;
     }
 }
