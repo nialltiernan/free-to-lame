@@ -5,7 +5,7 @@
 <ul class="list-unstyled">
     <?php foreach ($this->games as $game): ?>
         <li class="media pb-4 d-flex flex-wrap">
-            <img src="<?= $game['thumbnail'] ?>" class="mr-3 rounded" alt="<?= $game['title'] ?>">
+            <img src="<?= $game['thumbnail'] ?>" class="mr-3 rounded pb-2" alt="<?= $game['title'] ?>">
             <div class="media-body">
                 <h5 class="mt-0 mb-1">
                     <a href="<?= $this->url('game', ['id' => $game['id']]) ?>"><?= $game['title'] ?></a>
