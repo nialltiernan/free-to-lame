@@ -1,0 +1,17 @@
+<h1>Search Results:</h1>
+
+<h2><?= $this->subtitle ?></h2>
+
+<ul class="list-unstyled">
+    <?php foreach ($this->games as $game): ?>
+        <li class="media pb-4">
+            <img src="<?= $game['thumbnail'] ?>" class="mr-3 rounded" alt="<?= $game['title'] ?>">
+            <div class="media-body">
+                <h5 class="mt-0 mb-1">
+                    <a href="<?= $this->url('game', ['id' => $game['id']]) ?>"><?= $game['title'] ?></a>
+                </h5>
+                <p><?= $game['short_description'] ?></p>
+            </div>
+        </li>
+    <?php endforeach; ?>
+</ul>

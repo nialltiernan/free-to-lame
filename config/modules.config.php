@@ -21,4 +21,5 @@ return [
     'Laminas\Validator',
     'Application',
     'Game',
+    'Search',
 ];

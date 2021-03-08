@@ -23,7 +23,8 @@
     "autoload": {
         "psr-4": {
             "Application\\": "module/Application/src/",
-            "Game\\": "module/Game/src"
+            "Game\\": "module/Game/src",
+            "Search\\": "module/Search/src"
         }
     },
     "autoload-dev": {
