@@ -15,9 +15,9 @@ class PixelController extends AbstractActionController
 {
     public function indexAction(): ViewModel
     {
-        $sortBy = $this->request->getPost('sort-by', 'popularity');
+        $sortBy = $this->getRequest()->getPost('sort-by', 'popularity');
 
-        $sort = $this->request->isPost() ? SortFactory::getSort($sortBy) : new PopularitySort();
+        $sort = $this->getRequest()->isPost() ? SortFactory::getSort($sortBy) : new PopularitySort();
 
         $games = CategoryGamesRetriever::execute(new Pixel(), $sort);
 
