@@ -13,5 +13,8 @@
  */
 
 return [
-    // ...
+    'db' => [
+        'driver' => 'Pdo',
+        'dsn' => 'mysql:dbname=free_to_lame;host=localhost'
+    ],
 ];
