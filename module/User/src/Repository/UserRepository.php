@@ -11,6 +11,7 @@ use Laminas\Db\Sql\Sql;
 class UserRepository implements UserRepositoryInterface
 {
 
+    /** @var \Laminas\Db\Adapter\AdapterInterface  */
     private $db;
 
     public function __construct(AdapterInterface $db)
