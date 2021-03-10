@@ -7,7 +7,7 @@ use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Adapter\Driver\ResultInterface;
 use Laminas\Db\ResultSet\HydratingResultSet;
 use Laminas\Db\Sql\Sql;
-use Laminas\Hydrator\ReflectionHydrator;
+use Laminas\Hydrator\ClassMethodsHydrator;
 use User\Exception\UserDoesNotExistException;
 use User\Model\UserModel;
 
@@ -49,7 +49,7 @@ class UserReadRepository implements UserReadRepositoryInterface
 
     private function getHydratedUserObjects(ResultInterface $result): array
     {
-        $resultSet = new HydratingResultSet(new ReflectionHydrator(), new UserModel());
+        $resultSet = new HydratingResultSet(new ClassMethodsHydrator(), new UserModel());
         $resultSet->initialize($result);
 
         $users = [];
@@ -84,7 +84,7 @@ class UserReadRepository implements UserReadRepositoryInterface
 
     private function getHydratedUserObject(ResultInterface $result): UserModel
     {
-        $resultSet = new HydratingResultSet(new ReflectionHydrator(), new UserModel());
+        $resultSet = new HydratingResultSet(new ClassMethodsHydrator(), new UserModel());
         $resultSet->initialize($result);
 
         return $resultSet->current();

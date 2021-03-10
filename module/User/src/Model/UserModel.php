@@ -5,19 +5,22 @@ namespace User\Model;
 
 class UserModel
 {
-    /**
-     * @var string
-     */
+    /** @var int|null */
+    private $id;
+
+    /** @var string */
     private $username;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $password;
-    /**
-     * @var string
-     */
+
+    /** @var string */
     private $email;
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function getUsername(): string
     {
@@ -33,4 +36,26 @@ class UserModel
     {
         return $this->email;
     }
+
+    public function setId($id): void
+    {
+        $this->id = (int) $id;
+    }
+
+    public function setUsername(string $username): void
+    {
+        $this->username = $username;
+    }
+
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
+    }
+
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+
 }

@@ -6,22 +6,27 @@ namespace User\Controller;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use User\Repository\UserReadRepositoryInterface;
+use User\Repository\UserWriteRepositoryInterface;
 
 class UserController extends AbstractActionController
 {
-    /**
-     * @var \User\Repository\UserReadRepositoryInterface
-     */
+    /** @var \User\Repository\UserReadRepositoryInterface */
     private $userReadRepository;
 
-    public function __construct(UserReadRepositoryInterface $userRepository)
+    /** @var \User\Repository\UserWriteRepositoryInterface */
+    private $userWriteRepository;
+
+    public function __construct(UserReadRepositoryInterface $userReadRepository, UserWriteRepositoryInterface $userWriteRepository)
     {
-        $this->userReadRepository = $userRepository;
+        $this->userReadRepository = $userReadRepository;
+        $this->userWriteRepository = $userWriteRepository;
     }
 
     public function indexAction()
     {
         $users = $this->userReadRepository->getAll();
+
+        $newUser = $this->userWriteRepository->create(['username' => 'fasfsda', 'email' =>'fasf', 'password' => 'fasd']);
 
         return new ViewModel(['users' => $users]);
     }

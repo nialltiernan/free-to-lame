@@ -6,13 +6,13 @@ namespace User\Factory;
 use Interop\Container\ContainerInterface;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
-use User\Repository\UserReadRepository;
+use User\Repository\UserWriteRepository;
 
-class UserReadRepositoryFactory implements FactoryInterface
+class UserWriteRepositoryFactory implements FactoryInterface
 {
 
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new UserReadRepository($container->get(AdapterInterface::class));
+        return new UserWriteRepository($container->get(AdapterInterface::class));
     }
 }
