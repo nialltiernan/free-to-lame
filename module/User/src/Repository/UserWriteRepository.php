@@ -5,6 +5,7 @@ namespace User\Repository;
 
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Adapter\Driver\ResultInterface;
+use Laminas\Db\Sql\Delete;
 use Laminas\Db\Sql\Insert;
 use Laminas\Db\Sql\Sql;
 use Laminas\Db\Sql\Update;
@@ -53,6 +54,7 @@ class UserWriteRepository implements UserWriteRepositoryInterface
         if (!$user->getId()) {
             throw new UserDoesNotExistException();
         }
+
         $update = new Update('users');
         $update->set($data);
         $update->where(['id = ?' => $user->getId()]);
@@ -76,5 +78,25 @@ class UserWriteRepository implements UserWriteRepositoryInterface
         }
 
         return $user;
+    }
+
+    public function delete(UserModel $user): bool
+    {
+        if (!$user->getId()) {
+            throw new UserDoesNotExistException();
+        }
+
+        $delete = new Delete('users');
+        $delete->where(['id = ?' => $user->getId()]);
+
+        $sql = new Sql($this->db);
+        $statement = $sql->prepareStatementForSqlObject($delete);
+        $result = $statement->execute();
+
+        if (!$result instanceof ResultInterface) {
+            return false;
+        }
+
+        return true;
     }
 }
