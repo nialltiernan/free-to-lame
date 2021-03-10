@@ -7,7 +7,7 @@ use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Adapter\Driver\ResultInterface;
 use Laminas\Db\ResultSet\HydratingResultSet;
 use Laminas\Db\Sql\Sql;
-use Laminas\Hydrator\ClassMethodsHydrator;
+use Laminas\Hydrator\AbstractHydrator;
 use User\Exception\UserDoesNotExistException;
 use User\Model\UserModel;
 
@@ -16,10 +16,13 @@ class UserReadRepository implements UserReadRepositoryInterface
 
     /** @var \Laminas\Db\Adapter\AdapterInterface  */
     private $db;
+    /** @var \Laminas\Hydrator\AbstractHydrator */
+    private $hydrator;
 
-    public function __construct(AdapterInterface $db)
+    public function __construct(AdapterInterface $db, AbstractHydrator $hydrator)
     {
         $this->db = $db;
+        $this->hydrator = $hydrator;
     }
 
     public function getAll(): array
@@ -49,8 +52,7 @@ class UserReadRepository implements UserReadRepositoryInterface
 
     private function getHydratedUserObjects(ResultInterface $result): array
     {
-        $resultSet = new HydratingResultSet(new ClassMethodsHydrator(), new UserModel());
-        $resultSet->initialize($result);
+        $resultSet = $this->hydrateResultSetWithUserModel($result);
 
         $users = [];
 
@@ -59,6 +61,15 @@ class UserReadRepository implements UserReadRepositoryInterface
         }
 
         return $users;
+    }
+
+    private function hydrateResultSetWithUserModel(ResultInterface $result): HydratingResultSet
+    {
+        $resultSet = new HydratingResultSet($this->hydrator, new UserModel());
+
+        $resultSet->initialize($result);
+
+        return $resultSet;
     }
 
     public function get($id): UserModel
@@ -84,8 +95,7 @@ class UserReadRepository implements UserReadRepositoryInterface
 
     private function getHydratedUserObject(ResultInterface $result): UserModel
     {
-        $resultSet = new HydratingResultSet(new ClassMethodsHydrator(), new UserModel());
-        $resultSet->initialize($result);
+        $resultSet = $this->hydrateResultSetWithUserModel($result);
 
         return $resultSet->current();
     }
