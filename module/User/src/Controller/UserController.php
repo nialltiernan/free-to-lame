@@ -12,16 +12,16 @@ class UserController extends AbstractActionController
     /**
      * @var \User\Repository\UserReadRepositoryInterface
      */
-    private $userRepository;
+    private $userReadRepository;
 
     public function __construct(UserReadRepositoryInterface $userRepository)
     {
-        $this->userRepository = $userRepository;
+        $this->userReadRepository = $userRepository;
     }
 
     public function indexAction()
     {
-        $users = $this->userRepository->getAll();
+        $users = $this->userReadRepository->getAll();
 
         return new ViewModel(['users' => $users]);
     }
