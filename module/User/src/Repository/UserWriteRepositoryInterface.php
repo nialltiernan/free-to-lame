@@ -10,5 +10,5 @@ interface UserWriteRepositoryInterface
 
     public function update(UserModel $user, array $data): UserModel;
 
-    public function delete(UserModel $user): bool;
+    public function delete(int $userId): bool;
 }

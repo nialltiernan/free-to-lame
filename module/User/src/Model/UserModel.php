@@ -17,9 +17,9 @@ class UserModel
     /** @var string */
     private $email;
 
-    public function getId()
+    public function getId(): int
     {
-        return $this->id;
+        return (int) $this->id;
     }
 
     public function getUsername(): string

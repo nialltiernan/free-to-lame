@@ -26,6 +26,13 @@ class UserWriteRepository implements UserWriteRepositoryInterface
 
     public function create(array $data): UserModel
     {
+        $userId = $this->insertUserToDatabase($data);
+
+        return $this->hydratedUserObject($userId, $data);
+    }
+
+    private function insertUserToDatabase(array $data): int
+    {
         $insert = new Insert('users');
         $insert->values($data);
 
@@ -37,15 +44,17 @@ class UserWriteRepository implements UserWriteRepositoryInterface
             throw new RuntimeException('Database error occurred during user insert');
         }
 
-        $id = $result->getGeneratedValue();
+        return (int) $result->getGeneratedValue();
+    }
 
+    private function hydratedUserObject($id, $data): UserModel
+    {
         $user = new UserModel();
 
         $user->setId($id);
         $user->setEmail($data['email']);
         $user->setUsername($data['username']);
-        $user->setPassword($data['password']);
-
+        $user->setPassword($data['username']);
         return $user;
     }
 
@@ -55,9 +64,18 @@ class UserWriteRepository implements UserWriteRepositoryInterface
             throw new UserDoesNotExistException();
         }
 
+        $this->updateUserInDatabase($user->getId(), $data);
+
+        $this->rehydrateUserObject($user, $data);
+
+        return $user;
+    }
+
+    private function updateUserInDatabase(int $userId, array $data): void
+    {
         $update = new Update('users');
         $update->set($data);
-        $update->where(['id = ?' => $user->getId()]);
+        $update->where(['id = ?' => $userId]);
 
         $sql = new Sql($this->db);
         $statement = $sql->prepareStatementForSqlObject($update);
@@ -66,7 +84,10 @@ class UserWriteRepository implements UserWriteRepositoryInterface
         if (!$result instanceof ResultInterface) {
             throw new RuntimeException('Database error occurred during user update');
         }
+    }
 
+    private function rehydrateUserObject(UserModel $user, array $data): void
+    {
         if (isset($data['email'])) {
             $user->setEmail($data['email']);
         }
@@ -76,27 +97,26 @@ class UserWriteRepository implements UserWriteRepositoryInterface
         if (isset($data['password'])) {
             $user->setPassword($data['password']);
         }
-
-        return $user;
     }
 
-    public function delete(UserModel $user): bool
+    public function delete(int $userId): bool
     {
-        if (!$user->getId()) {
+        if (!$userId) {
             throw new UserDoesNotExistException();
         }
 
+        $result = $this->deleteUserFromDatabase($userId);
+
+        return $result instanceof ResultInterface;
+    }
+
+    private function deleteUserFromDatabase(int $userId): ResultInterface
+    {
         $delete = new Delete('users');
-        $delete->where(['id = ?' => $user->getId()]);
+        $delete->where(['id = ?' => $userId]);
 
         $sql = new Sql($this->db);
         $statement = $sql->prepareStatementForSqlObject($delete);
-        $result = $statement->execute();
-
-        if (!$result instanceof ResultInterface) {
-            return false;
-        }
-
-        return true;
+        return $statement->execute();
     }
 }
