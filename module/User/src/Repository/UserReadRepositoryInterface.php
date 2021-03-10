@@ -4,7 +4,7 @@ namespace User\Repository;
 
 use User\Model\UserModel;
 
-interface UserRepositoryInterface
+interface UserReadRepositoryInterface
 {
     public function getAll(): array;
 

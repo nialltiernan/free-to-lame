@@ -11,7 +11,7 @@ use Laminas\Hydrator\ReflectionHydrator;
 use User\Exception\UserDoesNotExistException;
 use User\Model\UserModel;
 
-class UserRepository implements UserRepositoryInterface
+class UserReadRepository implements UserReadRepositoryInterface
 {
 
     /** @var \Laminas\Db\Adapter\AdapterInterface  */

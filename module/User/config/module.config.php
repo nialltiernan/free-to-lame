@@ -3,17 +3,17 @@
 use Laminas\Router\Http\Literal;
 use User\Controller\UserController;
 use User\Factory\UserControllerFactory;
-use User\Factory\UserRepositoryFactory;
-use User\Repository\UserRepository;
-use User\Repository\UserRepositoryInterface;
+use User\Factory\UserReadRepositoryFactory;
+use User\Repository\UserReadRepository;
+use User\Repository\UserReadRepositoryInterface;
 
 return [
     'service_manager' => [
         'aliases' => [
-            UserRepositoryInterface::class => UserRepository::class,
+            UserReadRepositoryInterface::class => UserReadRepository::class,
         ],
         'factories' => [
-            UserRepository::class => UserRepositoryFactory::class,
+            UserReadRepository::class => UserReadRepositoryFactory::class,
         ]
     ],
     'router' => [

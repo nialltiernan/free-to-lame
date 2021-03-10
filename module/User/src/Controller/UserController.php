@@ -5,16 +5,16 @@ namespace User\Controller;
 
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
-use User\Repository\UserRepositoryInterface;
+use User\Repository\UserReadRepositoryInterface;
 
 class UserController extends AbstractActionController
 {
     /**
-     * @var \User\Repository\UserRepositoryInterface
+     * @var \User\Repository\UserReadRepositoryInterface
      */
     private $userRepository;
 
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(UserReadRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
     }
