@@ -20,7 +20,8 @@
         "laminas/laminas-view": "^2.12",
         "laminas/laminas-i18n": "^2.11",
         "robmorgan/phinx": "^0.12.5",
-        "laminas/laminas-db": "^2.12"
+        "laminas/laminas-db": "^2.12",
+        "laminas/laminas-hydrator": "^3.0"
     },
     "autoload": {
         "psr-4": {
