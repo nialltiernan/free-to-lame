@@ -30,7 +30,7 @@ class UserRepository implements UserRepositoryInterface
             return [];
         }
 
-        return $this->getHydratedUserObjectArray($result);
+        return $this->getHydratedUserObjects($result);
     }
 
     private function isEmptyResult(ResultInterface $result): bool
@@ -47,7 +47,7 @@ class UserRepository implements UserRepositoryInterface
         return $statement->execute();
     }
 
-    private function getHydratedUserObjectArray(ResultInterface $result): array
+    private function getHydratedUserObjects(ResultInterface $result): array
     {
         $resultSet = new HydratingResultSet(new ReflectionHydrator(), new UserModel());
         $resultSet->initialize($result);
