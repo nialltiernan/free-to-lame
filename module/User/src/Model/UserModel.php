@@ -56,6 +56,4 @@ class UserModel
     {
         $this->email = $email;
     }
-
-
 }

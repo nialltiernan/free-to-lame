@@ -20,9 +20,9 @@ final class CreateUsers extends AbstractMigration
     {
         $users = $this->table('users');
         $users
-            ->addColumn('username', 'string', ['limit' => 20])
+            ->addColumn('username', 'string', ['limit' => 20]) // TODO make unique
             ->addColumn('password', 'string', ['limit' => 40])
-            ->addColumn('email', 'string', ['limit' => 100])
+            ->addColumn('email', 'string', ['limit' => 100]) // TODO make unique
             ->create();
     }
 }

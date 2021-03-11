@@ -1,7 +1,9 @@
 <?php
 
 use Laminas\Router\Http\Literal;
+use User\Controller\AuthController;
 use User\Controller\UserController;
+use User\Factory\AuthControllerFactory;
 use User\Factory\UserControllerFactory;
 use User\Factory\UserReadRepositoryFactory;
 use User\Factory\UserWriteRepositoryFactory;
@@ -33,11 +35,23 @@ return [
                     ],
                 ],
             ],
+            'register' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/register',
+                    'defaults' => [
+                        'controller' => AuthController::class,
+                        'action'     => 'register',
+                    ],
+                ],
+            ],
+
         ],
     ],
     'controllers' => [
         'factories' => [
-            UserController::class => UserControllerFactory::class
+            UserController::class => UserControllerFactory::class,
+            AuthController::class => AuthControllerFactory::class
         ],
     ],
     'view_manager' => [
