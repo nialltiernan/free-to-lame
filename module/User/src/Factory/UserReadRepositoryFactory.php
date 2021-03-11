@@ -14,6 +14,10 @@ class UserReadRepositoryFactory implements FactoryInterface
 
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new UserReadRepository($container->get(AdapterInterface::class), new ClassMethodsHydrator());
+        $adapter = $container->get(AdapterInterface::class);
+
+        $hydrator = new ClassMethodsHydrator();
+
+        return new UserReadRepository($adapter, $hydrator);
     }
 }

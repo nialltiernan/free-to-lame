@@ -6,15 +6,15 @@ namespace User\Factory;
 use Interop\Container\ContainerInterface;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
-use User\Repository\UserWriteRepository;
+use User\Form\RegisterForm;
 
-class UserWriteRepositoryFactory implements FactoryInterface
+class RegisterFormFactory implements FactoryInterface
 {
 
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $adapter = $container->get(AdapterInterface::class);
+        $options['adapter'] = $container->get(AdapterInterface::class);
 
-        return new UserWriteRepository($adapter);
+        return new RegisterForm('register', $options);
     }
 }

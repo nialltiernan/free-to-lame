@@ -4,9 +4,11 @@ use Laminas\Router\Http\Literal;
 use User\Controller\AuthController;
 use User\Controller\UserController;
 use User\Factory\AuthControllerFactory;
+use User\Factory\RegisterFormFactory;
 use User\Factory\UserControllerFactory;
 use User\Factory\UserReadRepositoryFactory;
 use User\Factory\UserWriteRepositoryFactory;
+use User\Form\RegisterForm;
 use User\Repository\UserReadRepository;
 use User\Repository\UserReadRepositoryInterface;
 use User\Repository\UserWriteRepository;
@@ -20,7 +22,8 @@ return [
         ],
         'factories' => [
             UserReadRepository::class => UserReadRepositoryFactory::class,
-            UserWriteRepository::class => UserWriteRepositoryFactory::class
+            UserWriteRepository::class => UserWriteRepositoryFactory::class,
+            RegisterForm::class => RegisterFormFactory::class
         ]
     ],
     'router' => [

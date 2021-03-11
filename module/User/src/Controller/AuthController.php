@@ -14,9 +14,13 @@ class AuthController extends AbstractActionController
     /** @var \User\Repository\UserWriteRepositoryInterface */
     private $userWriteRepository;
 
-    public function __construct(UserWriteRepositoryInterface $userWriteRepository)
+    /** @var \User\Form\RegisterForm */
+    private $registerForm;
+
+    public function __construct(UserWriteRepositoryInterface $userWriteRepository, RegisterForm $registerForm)
     {
         $this->userWriteRepository = $userWriteRepository;
+        $this->registerForm = $registerForm;
     }
 
     /**
@@ -24,7 +28,7 @@ class AuthController extends AbstractActionController
      */
     public function registerAction()
     {
-        $form = new RegisterForm('register');
+        $form = $this->registerForm;
 
         if ($this->getRequest()->isGet()) {
             return new ViewModel(['form' => $form]);

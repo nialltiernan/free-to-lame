@@ -10,21 +10,26 @@ use Laminas\Form\Element\Text;
 use Laminas\Form\Form;
 use Laminas\InputFilter\Input;
 use Laminas\InputFilter\InputFilter;
+use Laminas\Validator\Db\NoRecordExists;
 use Laminas\Validator\EmailAddress;
 use Laminas\Validator\StringLength;
 
 class RegisterForm extends Form
 {
+    /** @var \Laminas\InputFilter\InputFilterInterface */
     private $inputFilter;
+
+    /** @var \Laminas\Db\Adapter\AdapterInterface */
+    private $adapter;
 
     public function __construct($name = null, $options = [])
     {
         parent::__construct($name, $options);
 
         $this->inputFilter = new InputFilter();
+        $this->adapter = $options['adapter'];
 
         $this->setAttribute('action', 'register');
-
         $this->addUsername();
         $this->addEmail();
         $this->addPassword();
@@ -35,49 +40,93 @@ class RegisterForm extends Form
 
     private function addUsername()
     {
-        $username = new Text('username');
-        $username->setLabel('Username');
-        $username->setAttributes(['class' => 'form-control', 'id' => 'username', 'placeholder' => 'Username']);
-        $username->setLabelAttributes(['class' => 'visually-hidden', 'for' => 'username']);
-        $this->add($username);
+        $this->addUsernameInput();
+        $this->addUsernameInputFilter();
+    }
 
-        $username = new Input('username'); // TODO check if exists in DB
-        $username->getValidatorChain()->attach(new StringLength(2));
+    private function addUsernameInput(): void
+    {
+        $input = new Text('username');
 
-        $this->inputFilter->add($username);
+        $input->setLabel('Username');
+        $input->setAttributes(['class' => 'form-control', 'id' => 'username', 'placeholder' => 'Username']);
+        $input->setLabelAttributes(['class' => 'visually-hidden', 'for' => 'username']);
+
+        $this->add($input);
+    }
+
+    private function addUsernameInputFilter(): void
+    {
+        $inputFilter = new Input('username');
+
+        $inputFilter->getValidatorChain()->attach(new StringLength(2));
+
+        $noRecordExists = new NoRecordExists(['table' => 'users', 'field' => 'username', 'adapter' => $this->adapter]);
+        $noRecordExists->setMessage('Username already taken');
+        $inputFilter->getValidatorChain()->attach($noRecordExists);
+
+        $this->inputFilter->add($inputFilter);
     }
 
     private function addEmail()
     {
-        $email = new Email('email');
-        $email->setLabel('Email');
-        $email->setAttributes(['class' => 'form-control', 'id' => 'email', 'placeholder' => 'Email']);
-        $email->setLabelAttributes(['class' => 'visually-hidden', 'for' => 'email']);
-        $this->add($email);
+        $this->addEmailInput();
+        $this->addEmailInputFilter();
+    }
 
-        $email = new Input('email'); // TODO check if exists in DB
-        $email->getValidatorChain()->attach(new EmailAddress());
+    private function addEmailInput(): void
+    {
+        $input = new Email('email');
 
-        $this->inputFilter->add($email);
+        $input->setLabel('Email');
+        $input->setAttributes(['class' => 'form-control', 'id' => 'email', 'placeholder' => 'Email']);
+        $input->setLabelAttributes(['class' => 'visually-hidden', 'for' => 'email']);
+
+        $this->add($input);
+    }
+
+    private function addEmailInputFilter(): void
+    {
+        $inputFilter = new Input('email');
+
+        $inputFilter->getValidatorChain()->attach(new EmailAddress());
+
+        $noRecordExists = new NoRecordExists(['table' => 'users', 'field' => 'email', 'adapter' => $this->adapter]);
+        $noRecordExists->setMessage('Email address already taken');
+        $inputFilter->getValidatorChain()->attach($noRecordExists);
+
+        $this->inputFilter->add($inputFilter);
     }
 
     private function addPassword()
     {
-        $password = new Password('password');
-        $password->setLabel('Password');
-        $password->setAttributes(['class' => 'form-control', 'id' => 'password', 'placeholder' => 'Password']);
-        $password->setLabelAttributes(['class' => 'visually-hidden', 'for' => 'password']);
-        $this->add($password);
+        $this->addPasswordInput();
+        $this->addPasswordInputFilter();
+    }
 
-        $password = new Input('password');
-        $password->getValidatorChain()->attach(new StringLength(8));
+    private function addPasswordInput(): void
+    {
+        $input = new Password('password');
 
-        $this->inputFilter->add($password);
+        $input->setLabel('Password');
+        $input->setAttributes(['class' => 'form-control', 'id' => 'password', 'placeholder' => 'Password']);
+        $input->setLabelAttributes(['class' => 'visually-hidden', 'for' => 'password']);
+
+        $this->add($input);
+    }
+
+    private function addPasswordInputFilter(): void
+    {
+        $inputFilter = new Input('password');
+        $inputFilter->getValidatorChain()->attach(new StringLength(8));
+
+        $this->inputFilter->add($inputFilter);
     }
 
     private function addSubmit()
     {
         $submit = new Submit('submit');
+
         $submit->setValue('Register');
         $submit->setAttribute('class', 'btn btn-primary');
 
