@@ -57,15 +57,15 @@ class RegisterForm extends Form
 
     private function addUsernameInputFilter(): void
     {
-        $inputFilter = new Input('username');
+        $filter = new Input('username');
 
-        $inputFilter->getValidatorChain()->attach(new StringLength(2));
+        $filter->getValidatorChain()->attach(new StringLength(2));
 
         $noRecordExists = new NoRecordExists(['table' => 'users', 'field' => 'username', 'adapter' => $this->adapter]);
         $noRecordExists->setMessage('Username already taken');
-        $inputFilter->getValidatorChain()->attach($noRecordExists);
+        $filter->getValidatorChain()->attach($noRecordExists);
 
-        $this->inputFilter->add($inputFilter);
+        $this->inputFilter->add($filter);
     }
 
     private function addEmail()
@@ -87,15 +87,15 @@ class RegisterForm extends Form
 
     private function addEmailInputFilter(): void
     {
-        $inputFilter = new Input('email');
+        $filter = new Input('email');
 
-        $inputFilter->getValidatorChain()->attach(new EmailAddress());
+        $filter->getValidatorChain()->attach(new EmailAddress());
 
         $noRecordExists = new NoRecordExists(['table' => 'users', 'field' => 'email', 'adapter' => $this->adapter]);
         $noRecordExists->setMessage('Email address already taken');
-        $inputFilter->getValidatorChain()->attach($noRecordExists);
+        $filter->getValidatorChain()->attach($noRecordExists);
 
-        $this->inputFilter->add($inputFilter);
+        $this->inputFilter->add($filter);
     }
 
     private function addPassword()
