@@ -1,0 +1,31 @@
+<?php
+/**
+ * @var \Laminas\Form\Form $form
+ * @var string $message
+ */
+?>
+<style>
+    ul {
+        color: red;
+    }
+</style>
+
+<h1>Login</h1>
+<h2><?= $this->message ?></h2>
+
+<?php $form->prepare() ?>
+<?= $this->form()->openTag($this->form) ?>
+
+<div class="form-group">
+    <?= $this->formRow($form->get('username')) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formRow($form->get('password')) ?>
+</div>
+
+<?= $this->formRow($form->get('submit')) ?>
+
+<?= $this->form()->closeTag() ?>
+
+

@@ -4,15 +4,19 @@ use Laminas\Router\Http\Literal;
 use User\Controller\AuthController;
 use User\Controller\UserController;
 use User\Factory\AuthControllerFactory;
+use User\Factory\AuthenticationServiceFactory;
+use User\Factory\LoginFormFactory;
 use User\Factory\RegisterFormFactory;
 use User\Factory\UserControllerFactory;
 use User\Factory\UserReadRepositoryFactory;
 use User\Factory\UserWriteRepositoryFactory;
+use User\Form\LoginForm;
 use User\Form\RegisterForm;
 use User\Repository\UserReadRepository;
 use User\Repository\UserReadRepositoryInterface;
 use User\Repository\UserWriteRepository;
 use User\Repository\UserWriteRepositoryInterface;
+use User\Service\AuthenticationService;
 
 return [
     'service_manager' => [
@@ -23,7 +27,9 @@ return [
         'factories' => [
             UserReadRepository::class => UserReadRepositoryFactory::class,
             UserWriteRepository::class => UserWriteRepositoryFactory::class,
-            RegisterForm::class => RegisterFormFactory::class
+            RegisterForm::class => RegisterFormFactory::class,
+            LoginForm::class => LoginFormFactory::class,
+            AuthenticationService::class => AuthenticationServiceFactory::class
         ]
     ],
     'router' => [
@@ -48,7 +54,16 @@ return [
                     ],
                 ],
             ],
-
+            'login' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/login',
+                    'defaults' => [
+                        'controller' => AuthController::class,
+                        'action'     => 'login',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [

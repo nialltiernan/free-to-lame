@@ -6,8 +6,10 @@ namespace User\Factory;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use User\Controller\AuthController;
+use User\Form\LoginForm;
 use User\Form\RegisterForm;
 use User\Repository\UserWriteRepositoryInterface;
+use User\Service\AuthenticationService;
 
 class AuthControllerFactory implements FactoryInterface
 {
@@ -18,6 +20,10 @@ class AuthControllerFactory implements FactoryInterface
 
         $registerForm = $container->get(RegisterForm::class);
 
-        return new AuthController($userWriteRepository, $registerForm);
+        $loginForm = $container->get(LoginForm::class);
+
+        $authService = $container->get(AuthenticationService::class);
+
+        return new AuthController($userWriteRepository, $registerForm, $loginForm, $authService);
     }
 }
