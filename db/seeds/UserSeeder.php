@@ -17,13 +17,13 @@ class UserSeeder extends AbstractSeed
     {
         $user1 = [
             'username' => 'nellyt',
-            'password' => 'pass',
+            'password' => password_hash('password', PASSWORD_DEFAULT),
             'email' => 'nialltiernan93@gmail.com',
         ];
 
         $user2 = [
             'username' => 'john',
-            'password' => 'johndoe',
+            'password' => password_hash('johndoe', PASSWORD_DEFAULT),
             'email' => 'johndoe@gmail.com',
         ];
 
