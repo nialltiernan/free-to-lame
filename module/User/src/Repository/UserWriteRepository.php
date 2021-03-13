@@ -26,9 +26,22 @@ class UserWriteRepository implements UserWriteRepositoryInterface
 
     public function create(array $data): UserModel
     {
+        $data = $this->prepareData($data);
+
         $userId = $this->insertUserToDatabase($data);
 
         return $this->hydratedUserObject($userId, $data);
+    }
+
+    private function prepareData(array $data): array
+    {
+        if (isset($data['submit'])) {
+            unset($data['submit']);
+        }
+
+        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+        return $data;
     }
 
     private function insertUserToDatabase(array $data): int
@@ -63,6 +76,8 @@ class UserWriteRepository implements UserWriteRepositoryInterface
         if (!$user->getId()) {
             throw new UserDoesNotExistException();
         }
+
+        $data = $this->prepareData($data);
 
         $this->updateUserInDatabase($user->getId(), $data);
 

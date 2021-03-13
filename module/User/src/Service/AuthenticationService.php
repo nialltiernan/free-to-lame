@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace User\Service;
 
-use Laminas\Authentication\Adapter\DbTable\CredentialTreatmentAdapter;
+use Laminas\Authentication\Adapter\DbTable\CallbackCheckAdapter;
 use Laminas\Db\Adapter\Adapter;
 use User\Exception\CouldNotAuthenticateUserException;
+use User\Model\UserModel;
 use User\Repository\UserReadRepositoryInterface;
 
 class AuthenticationService
@@ -22,11 +23,23 @@ class AuthenticationService
         $this->userReadRepository = $userReadRepository;
     }
 
-    public function execute(string $username, string $password)
+    /**
+     * @param string $username
+     * @param string $password
+     * @return \User\Model\UserModel
+     * @throws \User\Exception\CouldNotAuthenticateUserException
+     */
+    public function execute(string $username, string $password): UserModel
     {
-        $authAdapter = new CredentialTreatmentAdapter($this->adapter);
+        $authAdapter = new CallbackCheckAdapter($this->adapter);
 
-        $authAdapter->setTableName('users')->setIdentityColumn('username')->setCredentialColumn('password');
+        $authAdapter
+            ->setTableName('users')
+            ->setIdentityColumn('username')
+            ->setCredentialColumn('password')
+            ->setCredentialValidationCallback(function($hash, $password) {
+                return password_verify($password, $hash);
+            });
 
         $authAdapter->setIdentity($username)->setCredential($password);
 

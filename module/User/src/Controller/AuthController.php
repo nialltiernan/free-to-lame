@@ -55,10 +55,7 @@ class AuthController extends AbstractActionController
             return new ViewModel(['form' => $this->registerForm]);
         }
 
-        $data = $params->toArray();
-        unset($data['submit']);
-
-        $this->userWriteRepository->create($data);
+        $this->userWriteRepository->create($params->toArray());
 
         return $this->redirect()->toRoute('home');
     }
