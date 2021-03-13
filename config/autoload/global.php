@@ -12,9 +12,15 @@
  * file.
  */
 
+use Laminas\Session\Container;
+use Laminas\Session\Storage\SessionArrayStorage;
+
 return [
     'db' => [
         'driver' => 'Pdo',
         'dsn' => 'mysql:dbname=free_to_lame;host=localhost'
     ],
+    'session_containers' => [ Container::class ],
+    'session_storage' => [ 'type' => SessionArrayStorage::class ],
+    'session_config'  => [],
 ];

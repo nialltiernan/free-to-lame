@@ -24,7 +24,8 @@
         "laminas/laminas-hydrator": "^3.0",
         "laminas/laminas-inputfilter": "^2.11",
         "laminas/laminas-validator": "^2.14",
-        "laminas/laminas-authentication": "^2.7"
+        "laminas/laminas-authentication": "^2.7",
+        "laminas/laminas-session": "^2.10"
     },
     "autoload": {
         "psr-4": {

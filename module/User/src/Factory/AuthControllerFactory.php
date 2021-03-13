@@ -22,8 +22,8 @@ class AuthControllerFactory implements FactoryInterface
 
         $loginForm = $container->get(LoginForm::class);
 
-        $authService = $container->get(AuthenticationService::class);
+        $authenticationService = $container->get(AuthenticationService::class);
 
-        return new AuthController($userWriteRepository, $registerForm, $loginForm, $authService);
+        return new AuthController($userWriteRepository, $registerForm, $loginForm, $authenticationService);
     }
 }

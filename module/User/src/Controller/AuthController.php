@@ -78,7 +78,7 @@ class AuthController extends AbstractActionController
         }
 
         try {
-            $user = $this->authenticationService->execute($params['username'], $params['password']);
+            $user = $this->authenticationService->authenticateUser($params['username'], $params['password']);
         } catch (CouldNotAuthenticateUserException $e) {
             return new ViewModel(['form' => $this->loginForm, 'message' => 'Failed to log in']);
         }

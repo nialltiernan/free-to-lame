@@ -5,6 +5,7 @@ namespace User\Service;
 
 use Laminas\Authentication\Adapter\DbTable\CallbackCheckAdapter;
 use Laminas\Db\Adapter\Adapter;
+use Laminas\Session\Container as Session;
 use User\Exception\CouldNotAuthenticateUserException;
 use User\Model\UserModel;
 use User\Repository\UserReadRepositoryInterface;
@@ -17,10 +18,14 @@ class AuthenticationService
     /** @var \User\Repository\UserReadRepositoryInterface */
     private $userReadRepository;
 
-    public function __construct(Adapter $adapter, UserReadRepositoryInterface $userReadRepository)
+    /** @var \Laminas\Session\Container */
+    private $session;
+
+    public function __construct(Adapter $adapter, UserReadRepositoryInterface $userReadRepository, Session $session)
     {
         $this->adapter = $adapter;
         $this->userReadRepository = $userReadRepository;
+        $this->session = $session;
     }
 
     /**
@@ -29,7 +34,7 @@ class AuthenticationService
      * @return \User\Model\UserModel
      * @throws \User\Exception\CouldNotAuthenticateUserException
      */
-    public function execute(string $username, string $password): UserModel
+    public function authenticateUser(string $username, string $password): UserModel
     {
         $authAdapter = new CallbackCheckAdapter($this->adapter);
 
@@ -51,6 +56,20 @@ class AuthenticationService
 
         $userRow = $authAdapter->getResultRowObject();
 
-        return $this->userReadRepository->get((int) $userRow->id);
+        $user = $this->userReadRepository->get((int)$userRow->id);
+
+        $this->session->user = $user;
+
+        return $user;
+    }
+
+    public function isUserGuest(): bool
+    {
+        return is_null($this->session->user);
+    }
+
+    public function isUserLoggedIn(): bool
+    {
+        return !$this->isUserGuest();
     }
 }
