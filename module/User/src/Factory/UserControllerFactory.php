@@ -14,10 +14,10 @@ class UserControllerFactory implements FactoryInterface
 
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $userReadRepository = $container->get(UserReadRepositoryInterface::class);
+        $readRepository = $container->get(UserReadRepositoryInterface::class);
 
-        $userWriteRepository = $container->get(UserWriteRepositoryInterface::class);
+        $writeRepository = $container->get(UserWriteRepositoryInterface::class);
 
-        return new UserController($userReadRepository, $userWriteRepository);
+        return new UserController($readRepository, $writeRepository);
     }
 }

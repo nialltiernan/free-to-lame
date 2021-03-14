@@ -16,14 +16,14 @@ class LoginForm extends Form
     private $inputFilter;
 
     /** @var \Laminas\Db\Adapter\AdapterInterface */
-    private $adapter;
+    private $db;
 
     public function __construct($name = null, $options = [])
     {
         parent::__construct($name, $options);
 
         $this->inputFilter = new InputFilter();
-        $this->adapter = $options['adapter'];
+        $this->db = $options['db'];
 
         $this->setAttribute('action', 'login');
         $this->addUsername();

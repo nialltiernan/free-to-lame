@@ -20,14 +20,14 @@ class RegisterForm extends Form
     private $inputFilter;
 
     /** @var \Laminas\Db\Adapter\AdapterInterface */
-    private $adapter;
+    private $db;
 
     public function __construct($name = null, $options = [])
     {
         parent::__construct($name, $options);
 
         $this->inputFilter = new InputFilter();
-        $this->adapter = $options['adapter'];
+        $this->db = $options['db'];
 
         $this->setAttribute('action', 'register');
         $this->addUsername();
@@ -61,7 +61,7 @@ class RegisterForm extends Form
 
         $filter->getValidatorChain()->attach(new StringLength(2));
 
-        $noRecordExists = new NoRecordExists(['table' => 'users', 'field' => 'username', 'adapter' => $this->adapter]);
+        $noRecordExists = new NoRecordExists(['table' => 'users', 'field' => 'username', 'adapter' => $this->db]);
         $noRecordExists->setMessage('Username already taken');
         $filter->getValidatorChain()->attach($noRecordExists);
 
@@ -91,7 +91,7 @@ class RegisterForm extends Form
 
         $filter->getValidatorChain()->attach(new EmailAddress());
 
-        $noRecordExists = new NoRecordExists(['table' => 'users', 'field' => 'email', 'adapter' => $this->adapter]);
+        $noRecordExists = new NoRecordExists(['table' => 'users', 'field' => 'email', 'adapter' => $this->db]);
         $noRecordExists->setMessage('Email address already taken');
         $filter->getValidatorChain()->attach($noRecordExists);
 

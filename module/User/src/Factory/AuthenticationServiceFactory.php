@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace User\Factory;
 
 use Interop\Container\ContainerInterface;
-use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Adapter\AdapterInterface as DatabaseAdapter;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\Session\Container as Session;
 use User\Repository\UserReadRepositoryInterface;
@@ -15,12 +15,12 @@ class AuthenticationServiceFactory implements FactoryInterface
 
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $adapter = $container->get(AdapterInterface::class);
+        $db = $container->get(DatabaseAdapter::class);
 
         $userReadRepository = $container->get(UserReadRepositoryInterface::class);
 
         $session = $container->get(Session::class);
 
-        return new AuthenticationService($adapter, $userReadRepository, $session);
+        return new AuthenticationService($db, $userReadRepository, $session);
     }
 }

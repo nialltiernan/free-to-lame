@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace User\Model;
 
-class UserModel
+class User
 {
     /** @var int|null */
     private $id;

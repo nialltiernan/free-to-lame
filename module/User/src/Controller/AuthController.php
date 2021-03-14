@@ -13,7 +13,7 @@ class AuthController extends AbstractActionController
 {
 
     /** @var \User\Repository\UserWriteRepositoryInterface */
-    private $userWriteRepository;
+    private $writeRepository;
 
     /** @var \User\Form\RegisterForm */
     private $registerForm;
@@ -22,11 +22,11 @@ class AuthController extends AbstractActionController
     private $loginForm;
 
     public function __construct(
-        UserWriteRepositoryInterface $userWriteRepository,
+        UserWriteRepositoryInterface $writeRepository,
         RegisterForm $registerForm,
         LoginForm $loginForm
     ) {
-        $this->userWriteRepository = $userWriteRepository;
+        $this->writeRepository = $writeRepository;
         $this->registerForm = $registerForm;
         $this->loginForm = $loginForm;
     }
@@ -48,7 +48,7 @@ class AuthController extends AbstractActionController
             return new ViewModel(['form' => $this->registerForm]);
         }
 
-        $this->userWriteRepository->create($params->toArray());
+        $this->writeRepository->create($params->toArray());
 
         return $this->redirect()->toRoute('home');
     }

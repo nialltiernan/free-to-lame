@@ -10,8 +10,9 @@ use Laminas\Db\Sql\Insert;
 use Laminas\Db\Sql\Sql;
 use Laminas\Db\Sql\Update;
 use RuntimeException;
+use User\Exception\CouldNotCreateUserException;
 use User\Exception\UserDoesNotExistException;
-use User\Model\UserModel;
+use User\Model\User;
 
 class UserWriteRepository implements UserWriteRepositoryInterface
 {
@@ -24,7 +25,7 @@ class UserWriteRepository implements UserWriteRepositoryInterface
         $this->db = $db;
     }
 
-    public function create(array $data): UserModel
+    public function create(array $data): User
     {
         $data = $this->prepareData($data);
 
@@ -54,15 +55,15 @@ class UserWriteRepository implements UserWriteRepositoryInterface
         $result = $statement->execute();
 
         if (!$result instanceof ResultInterface) {
-            throw new RuntimeException('Database error occurred during user insert');
+            throw new CouldNotCreateUserException();
         }
 
         return (int) $result->getGeneratedValue();
     }
 
-    private function hydratedUserObject($id, $data): UserModel
+    private function hydratedUserObject($id, $data): User
     {
-        $user = new UserModel();
+        $user = new User();
 
         $user->setId($id);
         $user->setEmail($data['email']);
@@ -71,7 +72,7 @@ class UserWriteRepository implements UserWriteRepositoryInterface
         return $user;
     }
 
-    public function update(UserModel $user, array $data): UserModel
+    public function update(User $user, array $data): User
     {
         if (!$user->getId()) {
             throw new UserDoesNotExistException();
@@ -101,7 +102,7 @@ class UserWriteRepository implements UserWriteRepositoryInterface
         }
     }
 
-    private function rehydrateUserObject(UserModel $user, array $data): void
+    private function rehydrateUserObject(User $user, array $data): void
     {
         if (isset($data['email'])) {
             $user->setEmail($data['email']);

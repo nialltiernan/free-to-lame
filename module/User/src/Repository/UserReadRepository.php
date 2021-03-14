@@ -9,7 +9,7 @@ use Laminas\Db\ResultSet\HydratingResultSet;
 use Laminas\Db\Sql\Sql;
 use Laminas\Hydrator\AbstractHydrator;
 use User\Exception\UserDoesNotExistException;
-use User\Model\UserModel;
+use User\Model\User;
 
 class UserReadRepository implements UserReadRepositoryInterface
 {
@@ -65,14 +65,14 @@ class UserReadRepository implements UserReadRepositoryInterface
 
     private function hydrateResultSetWithUserModel(ResultInterface $result): HydratingResultSet
     {
-        $resultSet = new HydratingResultSet($this->hydrator, new UserModel());
+        $resultSet = new HydratingResultSet($this->hydrator, new User());
 
         $resultSet->initialize($result);
 
         return $resultSet;
     }
 
-    public function get($id): UserModel
+    public function get($id): User
     {
         $result = $this->getUserResult($id);
 
@@ -93,7 +93,7 @@ class UserReadRepository implements UserReadRepositoryInterface
         return $statement->execute();
     }
 
-    private function getHydratedUserObject(ResultInterface $result): UserModel
+    private function getHydratedUserObject(ResultInterface $result): User
     {
         $resultSet = $this->hydrateResultSetWithUserModel($result);
 

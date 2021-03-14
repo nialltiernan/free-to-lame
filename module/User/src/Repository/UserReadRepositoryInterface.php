@@ -2,11 +2,11 @@
 
 namespace User\Repository;
 
-use User\Model\UserModel;
+use User\Model\User;
 
 interface UserReadRepositoryInterface
 {
     public function getAll(): array;
 
-    public function get($id): UserModel;
+    public function get($id): User;
 }

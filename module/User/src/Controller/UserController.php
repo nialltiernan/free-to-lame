@@ -11,22 +11,22 @@ use User\Repository\UserWriteRepositoryInterface;
 class UserController extends AbstractActionController
 {
     /** @var \User\Repository\UserReadRepositoryInterface */
-    private $userReadRepository;
+    private $readRepository;
 
     /** @var \User\Repository\UserWriteRepositoryInterface */
-    private $userWriteRepository;
+    private $writeRepository;
 
-    public function __construct(UserReadRepositoryInterface $userReadRepository, UserWriteRepositoryInterface $userWriteRepository)
+    public function __construct(UserReadRepositoryInterface $readRepository, UserWriteRepositoryInterface $writeRepository)
     {
-        $this->userReadRepository = $userReadRepository;
-        $this->userWriteRepository = $userWriteRepository;
+        $this->readRepository = $readRepository;
+        $this->writeRepository = $writeRepository;
     }
 
     public function indexAction()
     {
-        $users = $this->userReadRepository->getAll();
+        $users = $this->readRepository->getAll();
 
-        $newUser = $this->userWriteRepository->create(['username' => 'fasfsda', 'email' =>'fasf', 'password' => 'fasd']);
+        $newUser = $this->writeRepository->create(['username' => 'fasfsda', 'email' =>'fasf', 'password' => 'fasd']);
 
         return new ViewModel(['users' => $users]);
     }

@@ -15,12 +15,12 @@ class AuthControllerFactory implements FactoryInterface
 
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $userWriteRepository = $container->get(UserWriteRepositoryInterface::class);
+        $writeRepository = $container->get(UserWriteRepositoryInterface::class);
 
         $registerForm = $container->get(RegisterForm::class);
 
         $loginForm = $container->get(LoginForm::class);
 
-        return new AuthController($userWriteRepository, $registerForm, $loginForm);
+        return new AuthController($writeRepository, $registerForm, $loginForm);
     }
 }

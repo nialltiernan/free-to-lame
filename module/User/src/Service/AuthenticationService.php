@@ -8,7 +8,7 @@ use Laminas\Authentication\AuthenticationServiceInterface;
 use Laminas\Authentication\Result;
 use Laminas\Db\Adapter\Adapter as DatabaseAdapter;
 use Laminas\Session\Container as Session;
-use User\Model\UserModel;
+use User\Model\User;
 use User\Repository\UserReadRepositoryInterface;
 
 class AuthenticationService implements AuthenticationServiceInterface
@@ -30,7 +30,7 @@ class AuthenticationService implements AuthenticationServiceInterface
     /** @var string */
     private $password;
 
-    /** @var \User\Model\UserModel | null */
+    /** @var \User\Model\User | null */
     private $identity;
 
     public function __construct(DatabaseAdapter $db, UserReadRepositoryInterface $userReadRepository, Session $session)
@@ -70,7 +70,7 @@ class AuthenticationService implements AuthenticationServiceInterface
         return $result;
     }
 
-    private function getAuthenticatedUser(CallbackCheckAdapter $authenticator): UserModel
+    private function getAuthenticatedUser(CallbackCheckAdapter $authenticator): User
     {
         $userRow = $authenticator->getResultRowObject();
 
@@ -79,10 +79,10 @@ class AuthenticationService implements AuthenticationServiceInterface
 
     public function hasIdentity(): bool
     {
-        return $this->identity instanceof UserModel;
+        return $this->identity instanceof User;
     }
 
-    public function getIdentity(): ?UserModel
+    public function getIdentity(): ?User
     {
         return $this->identity;
     }
