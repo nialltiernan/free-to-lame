@@ -1,5 +1,6 @@
 <?php
 
+use Laminas\Authentication\AuthenticationService as LaminasAuthenticationService;
 use Laminas\Router\Http\Literal;
 use User\Controller\AuthController;
 use User\Controller\UserController;
@@ -23,6 +24,10 @@ return [
         'aliases' => [
             UserReadRepositoryInterface::class => UserReadRepository::class,
             UserWriteRepositoryInterface::class => UserWriteRepository::class,
+            LaminasAuthenticationService::class => AuthenticationService::SERVICE_NAME
+        ],
+        'invokables' => [
+            AuthenticationService::SERVICE_NAME => AuthenticationService::class,
         ],
         'factories' => [
             UserReadRepository::class => UserReadRepositoryFactory::class,

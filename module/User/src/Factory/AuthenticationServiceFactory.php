@@ -6,6 +6,7 @@ namespace User\Factory;
 use Interop\Container\ContainerInterface;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\Session\Container as Session;
 use User\Repository\UserReadRepositoryInterface;
 use User\Service\AuthenticationService;
 
@@ -18,6 +19,8 @@ class AuthenticationServiceFactory implements FactoryInterface
 
         $userReadRepository = $container->get(UserReadRepositoryInterface::class);
 
-        return new AuthenticationService($adapter, $userReadRepository);
+        $session = $container->get(Session::class);
+
+        return new AuthenticationService($adapter, $userReadRepository, $session);
     }
 }

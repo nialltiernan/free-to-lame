@@ -4,16 +4,19 @@ declare(strict_types=1);
 namespace User\Service;
 
 use Laminas\Authentication\Adapter\DbTable\CallbackCheckAdapter;
-use Laminas\Db\Adapter\Adapter;
+use Laminas\Authentication\AuthenticationServiceInterface;
+use Laminas\Authentication\Result;
+use Laminas\Db\Adapter\Adapter as DatabaseAdapter;
 use Laminas\Session\Container as Session;
-use User\Exception\CouldNotAuthenticateUserException;
 use User\Model\UserModel;
 use User\Repository\UserReadRepositoryInterface;
 
-class AuthenticationService
+class AuthenticationService implements AuthenticationServiceInterface
 {
+    public const SERVICE_NAME = 'UserAuthenticationService';
+
     /** @var \Laminas\Db\Adapter\Adapter */
-    private $adapter;
+    private $db;
 
     /** @var \User\Repository\UserReadRepositoryInterface */
     private $userReadRepository;
@@ -21,24 +24,34 @@ class AuthenticationService
     /** @var \Laminas\Session\Container */
     private $session;
 
-    public function __construct(Adapter $adapter, UserReadRepositoryInterface $userReadRepository, Session $session)
+    /** @var string */
+    private $username;
+
+    /** @var string */
+    private $password;
+
+    /** @var \User\Model\UserModel | null */
+    private $identity;
+
+    public function __construct(DatabaseAdapter $db, UserReadRepositoryInterface $userReadRepository, Session $session)
     {
-        $this->adapter = $adapter;
+        $this->db = $db;
         $this->userReadRepository = $userReadRepository;
         $this->session = $session;
+        $this->identity = null;
     }
 
-    /**
-     * @param string $username
-     * @param string $password
-     * @return \User\Model\UserModel
-     * @throws \User\Exception\CouldNotAuthenticateUserException
-     */
-    public function authenticateUser(string $username, string $password): UserModel
+    public function setCredentials(string $username, string $password)
     {
-        $authAdapter = new CallbackCheckAdapter($this->adapter);
+        $this->username = $username;
+        $this->password = $password;
+    }
 
-        $authAdapter
+    public function authenticate(): Result
+    {
+        $authenticator = new CallbackCheckAdapter($this->db);
+
+        $authenticator
             ->setTableName('users')
             ->setIdentityColumn('username')
             ->setCredentialColumn('password')
@@ -46,30 +59,36 @@ class AuthenticationService
                 return password_verify($password, $hash);
             });
 
-        $authAdapter->setIdentity($username)->setCredential($password);
+        $authenticator->setIdentity($this->username)->setCredential($this->password);
 
-        $result = $authAdapter->authenticate();
+        $result = $authenticator->authenticate();
 
-        if (!$result->isValid()) {
-            throw new CouldNotAuthenticateUserException();
+        if ($result->isValid()) {
+            $this->identity = $this->getAuthenticatedUser($authenticator);
         }
 
-        $userRow = $authAdapter->getResultRowObject();
-
-        $user = $this->userReadRepository->get((int)$userRow->id);
-
-        $this->session->user = $user;
-
-        return $user;
+        return $result;
     }
 
-    public function isUserGuest(): bool
+    private function getAuthenticatedUser(CallbackCheckAdapter $authenticator): UserModel
     {
-        return is_null($this->session->user);
+        $userRow = $authenticator->getResultRowObject();
+
+        return $this->userReadRepository->get($userRow->id);
     }
 
-    public function isUserLoggedIn(): bool
+    public function hasIdentity(): bool
     {
-        return !$this->isUserGuest();
+        return $this->identity instanceof UserModel;
+    }
+
+    public function getIdentity(): ?UserModel
+    {
+        return $this->identity;
+    }
+
+    public function clearIdentity()
+    {
+        $this->identity = null;
     }
 }

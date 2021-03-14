@@ -25,7 +25,8 @@
         "laminas/laminas-inputfilter": "^2.11",
         "laminas/laminas-validator": "^2.14",
         "laminas/laminas-authentication": "^2.7",
-        "laminas/laminas-session": "^2.10"
+        "laminas/laminas-session": "^2.10",
+        "laminas/laminas-mvc-plugin-identity": "^1.1"
     },
     "autoload": {
         "psr-4": {
