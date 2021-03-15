@@ -3,11 +3,13 @@ declare(strict_types=1);
 
 namespace User\Controller;
 
+use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use User\Form\LoginForm;
 use User\Form\RegisterForm;
 use User\Repository\UserWriteRepositoryInterface;
+use User\Service\AuthenticationService;
 
 class AuthController extends AbstractActionController
 {
@@ -70,8 +72,7 @@ class AuthController extends AbstractActionController
             return new ViewModel(['form' => $this->loginForm, 'message' => 'Invalid input']);
         }
 
-        /** @var \User\Service\AuthenticationService $authenticator */
-        $authenticator = $this->plugin('identity')->getAuthenticationService();
+        $authenticator = $this->getAuthenticationService();
 
         $authenticator->setCredentials($params['username'], $params['password']);
         $authenticator->authenticate();
@@ -84,5 +85,19 @@ class AuthController extends AbstractActionController
         }
 
         return new ViewModel(['form' => $this->loginForm, 'message' => $message]);
+    }
+
+    private function getAuthenticationService(): AuthenticationService
+    {
+        return $this->plugin('identity')->getAuthenticationService();
+    }
+
+    public function logoutAction(): Response
+    {
+        $authenticator = $this->getAuthenticationService();
+
+        $authenticator->clearIdentity();
+
+        return $this->redirect()->toRoute('home');
     }
 }

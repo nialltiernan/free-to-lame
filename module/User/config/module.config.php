@@ -5,6 +5,7 @@ use Laminas\Router\Http\Literal;
 use User\Controller\AuthController;
 use User\Controller\UserController;
 use User\Factory\AuthControllerFactory;
+use User\Factory\AuthenticationHelperFactory;
 use User\Factory\AuthenticationServiceFactory;
 use User\Factory\LoginFormFactory;
 use User\Factory\RegisterFormFactory;
@@ -69,6 +70,16 @@ return [
                     ],
                 ],
             ],
+            'logout' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/logout',
+                    'defaults' => [
+                        'controller' => AuthController::class,
+                        'action'     => 'logout',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
@@ -82,4 +93,9 @@ return [
             __DIR__ . '/../view',
         ],
     ],
+    'view_helpers' => [
+        'factories' => [
+            'authentication' => AuthenticationHelperFactory::class
+        ]
+    ]
 ];

@@ -26,7 +26,6 @@ class UserController extends AbstractActionController
     {
         $users = $this->readRepository->getAll();
 
-        $newUser = $this->writeRepository->create(['username' => 'fasfsda', 'email' =>'fasf', 'password' => 'fasd']);
 
         return new ViewModel(['users' => $users]);
     }

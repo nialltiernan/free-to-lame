@@ -38,7 +38,7 @@ class AuthenticationService implements AuthenticationServiceInterface
         $this->db = $db;
         $this->userReadRepository = $userReadRepository;
         $this->session = $session;
-        $this->identity = null;
+        $this->identity = $this->session->user ?? null;
     }
 
     public function setCredentials(string $username, string $password)
@@ -64,7 +64,10 @@ class AuthenticationService implements AuthenticationServiceInterface
         $result = $authenticator->authenticate();
 
         if ($result->isValid()) {
-            $this->identity = $this->getAuthenticatedUser($authenticator);
+            $user = $this->getAuthenticatedUser($authenticator);
+
+            $this->identity = $user;
+            $this->session->user = $user;
         }
 
         return $result;
@@ -90,5 +93,6 @@ class AuthenticationService implements AuthenticationServiceInterface
     public function clearIdentity()
     {
         $this->identity = null;
+        $this->session->user = null;
     }
 }
