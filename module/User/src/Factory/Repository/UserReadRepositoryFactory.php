@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace User\Factory;
+namespace User\Factory\Repository;
 
 use Interop\Container\ContainerInterface;
 use Laminas\Db\Adapter\AdapterInterface as DatabaseAdapter;
