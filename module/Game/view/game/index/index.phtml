@@ -1,3 +1,15 @@
+<?php
+
+use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
+
+/** @var \Laminas\Mvc\Plugin\FlashMessenger\View\Helper\FlashMessenger $flashMessenger */
+$flashMessenger = $this->flashMessenger();
+?>
+
+<?= $flashMessenger->render(FlashMessenger::NAMESPACE_SUCCESS, ['alert', 'alert-success']) ?>
+
+<?= $flashMessenger->render(FlashMessenger::NAMESPACE_INFO, ['alert', 'alert-primary']) ?>
+
 <section class="pb-2 text-center container">
     <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
