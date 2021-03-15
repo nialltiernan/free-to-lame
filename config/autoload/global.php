@@ -16,6 +16,9 @@ use Laminas\Session\Container;
 use Laminas\Session\Storage\SessionArrayStorage;
 
 return [
+    'navigation' => [
+        'default' => [],
+    ],
     'db' => [
         'driver' => 'Pdo',
         'dsn' => 'mysql:dbname=free_to_lame;host=localhost'
