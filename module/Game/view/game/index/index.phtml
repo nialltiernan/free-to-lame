@@ -6,9 +6,9 @@ use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
 $flashMessenger = $this->flashMessenger();
 ?>
 
-<?= $flashMessenger->render(FlashMessenger::NAMESPACE_SUCCESS, ['alert', 'alert-success']) ?>
+<?= $flashMessenger->render(FlashMessenger::NAMESPACE_SUCCESS, ['alert', 'alert-success', 'list-unstyled', 'text-center']) ?>
 
-<?= $flashMessenger->render(FlashMessenger::NAMESPACE_INFO, ['alert', 'alert-primary']) ?>
+<?= $flashMessenger->render(FlashMessenger::NAMESPACE_INFO, ['alert', 'alert-primary', 'list-unstyled', 'text-center']) ?>
 
 <section class="pb-2 text-center container">
     <div class="row py-lg-5">
