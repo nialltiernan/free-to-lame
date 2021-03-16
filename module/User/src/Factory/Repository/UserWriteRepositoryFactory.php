@@ -29,7 +29,6 @@ class UserWriteRepositoryFactory implements FactoryInterface
         $sharedEvents = new SharedEventManager();
 
         $callback = call_user_func([UserCreatedEventListener::class, 'logEvent']);
-
         $sharedEvents->attach(UserCreatedEvent::class, 'fire', $callback);
 
         $createdEvent = new UserCreatedEvent();
