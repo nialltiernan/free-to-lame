@@ -28,7 +28,9 @@
         "laminas/laminas-session": "^2.10",
         "laminas/laminas-mvc-plugin-identity": "^1.1",
         "laminas/laminas-navigation": "^2.10",
-        "laminas/laminas-mvc-plugin-flashmessenger": "^1.2"
+        "laminas/laminas-mvc-plugin-flashmessenger": "^1.2",
+        "laminas/laminas-log": "^2.13",
+        "ccampbell/chromephp": "^4.1"
     },
     "autoload": {
         "psr-4": {
