@@ -58,7 +58,9 @@ class AuthController extends AbstractActionController
         }
 
         $this->writeRepository->create($params->toArray());
+        $this->authenticate($params['username'], $params['password']);
         $this->flashMessenger->addSuccessMessage('Account created successfully!');
+
         return $this->redirect()->toRoute('home');
     }
 
