@@ -41,7 +41,7 @@ class UserController extends AbstractActionController
         $logger = new Logger();
 
         $chrome = new ChromePhp();
-        $file = new Stream('/home/niall/Projects/free-to-lame/data/debug.log');
+        $file = new Stream('data/debug.log');
 
         $logger->addWriter($chrome);
         $logger->addWriter($file);

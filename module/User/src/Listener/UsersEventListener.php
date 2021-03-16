@@ -14,7 +14,7 @@ class UsersEventListener
     {
         return function (Event $event) {
             $logger = new Logger();
-            $file = new Stream('/home/niall/Projects/free-to-lame/data/debug.log');
+            $file = new Stream('data/debug.log');
             $logger->addWriter($file);
             $logger->log(Logger::DEBUG, 'A new user account was created :D');
         };
