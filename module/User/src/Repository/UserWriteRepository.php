@@ -36,9 +36,11 @@ class UserWriteRepository implements UserWriteRepositoryInterface
 
         $userId = $this->insertUserToDatabase($data);
 
-        $this->createdEvent->fire();
+        $user = $this->hydratedUserObject($userId, $data);
 
-        return $this->hydratedUserObject($userId, $data);
+        $this->createdEvent->fire($user);
+
+        return $user;
     }
 
     private function prepareData(array $data): array

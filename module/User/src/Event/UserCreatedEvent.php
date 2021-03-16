@@ -6,6 +6,7 @@ namespace User\Event;
 use Laminas\EventManager\EventManager;
 use Laminas\EventManager\EventManagerAwareInterface;
 use Laminas\EventManager\EventManagerInterface;
+use User\Model\User;
 
 class UserCreatedEvent implements EventManagerAwareInterface
 {
@@ -29,8 +30,8 @@ class UserCreatedEvent implements EventManagerAwareInterface
         return $this->eventManager;
     }
 
-    public function fire()
+    public function fire(User $user)
     {
-        $this->getEventManager()->trigger(__FUNCTION__, $this);
+        $this->getEventManager()->trigger(__FUNCTION__, $this, $user);
     }
 }
