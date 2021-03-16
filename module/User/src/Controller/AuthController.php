@@ -3,13 +3,16 @@ declare(strict_types=1);
 
 namespace User\Controller;
 
+use Laminas\Authentication\AuthenticationServiceInterface;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
+use Laminas\Mvc\Plugin\Identity\Identity;
 use Laminas\View\Model\ViewModel;
 use User\Form\LoginForm;
 use User\Form\RegisterForm;
 use User\Repository\UserWriteRepositoryInterface;
+use User\Service\AuthenticationService;
 
 class AuthController extends AbstractActionController
 {
@@ -26,9 +29,6 @@ class AuthController extends AbstractActionController
     /** @var \Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger  */
     private $flashMessenger;
 
-    /** @var \User\Service\AuthenticationService */
-    private $authenticationService;
-
     public function __construct(
         UserWriteRepositoryInterface $writeRepository,
         RegisterForm $registerForm,
@@ -38,7 +38,6 @@ class AuthController extends AbstractActionController
         $this->registerForm = $registerForm;
         $this->loginForm = $loginForm;
         $this->flashMessenger = $this->plugin(FlashMessenger::class);
-        $this->authenticationService = $this->plugin('identity')->getAuthenticationService();
     }
 
     /**
@@ -82,10 +81,10 @@ class AuthController extends AbstractActionController
             return new ViewModel(['form' => $this->loginForm, 'message' => 'Invalid input']);
         }
 
-        $this->authenticate($params['username'], $params['password']);
+        $authenticationService = $this->authenticate($params['username'], $params['password']);
 
-        if ($this->authenticationService->hasIdentity()) {
-            $user = $this->authenticationService->getIdentity();
+        if ($authenticationService->hasIdentity()) {
+            $user = $authenticationService->getIdentity();
 
             $this->flashMessenger->addSuccessMessage('You have logged in, ' . $user->getUsername());
 
@@ -95,18 +94,29 @@ class AuthController extends AbstractActionController
         return new ViewModel(['form' => $this->loginForm, 'message' => 'Failed to log in']);
     }
 
-    private function authenticate(string $username, string $password)
+    private function authenticate(string $username, string $password): AuthenticationServiceInterface
     {
-        $this->authenticationService->setCredentials($username, $password);
-        $this->authenticationService->authenticate();
+        $authenticationService = $this->getAuthenticationService();
+
+        $authenticationService->setCredentials($username, $password);
+        $authenticationService->authenticate();
+
+        return $authenticationService;
+    }
+
+    private function getAuthenticationService(): AuthenticationService
+    {
+        /** @var \Laminas\Mvc\Plugin\Identity\Identity $identity */
+        $identity = $this->plugin(Identity::class);
+
+        return $identity->getAuthenticationService();
     }
 
     public function logoutAction(): Response
     {
-        /** @var \User\Service\AuthenticationService $authenticator */
-        $authenticator = $this->plugin('identity')->getAuthenticationService();
+        $authenticationService = $this->getAuthenticationService();
 
-        $authenticator->clearIdentity();
+        $authenticationService->clearIdentity();
 
         $this->flashMessenger->addInfoMessage('You have logged out');
 
