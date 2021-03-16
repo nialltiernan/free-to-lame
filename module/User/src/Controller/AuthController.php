@@ -50,19 +50,15 @@ class AuthController extends AbstractActionController
         }
 
         $params = $this->getRequest()->getPost();
-
         $this->registerForm->setData($params);
 
         if (!$this->registerForm->isValid()) {
             $this->flashMessenger->addErrorMessage('Invalid input');
-
             return new ViewModel(['form' => $this->registerForm]);
         }
 
         $this->writeRepository->create($params->toArray());
-
         $this->flashMessenger->addSuccessMessage('Account created successfully!');
-
         return $this->redirect()->toRoute('home');
     }
 
@@ -76,12 +72,10 @@ class AuthController extends AbstractActionController
         }
 
         $params = $this->getRequest()->getPost();
-
         $this->loginForm->setData($params);
 
         if (!$this->loginForm->isValid()) {
             $this->flashMessenger->addErrorMessage('Invalid input');
-
             return new ViewModel(['form' => $this->loginForm]);
         }
 
@@ -89,14 +83,11 @@ class AuthController extends AbstractActionController
 
         if ($authenticationService->hasIdentity()) {
             $user = $authenticationService->getIdentity();
-
             $this->flashMessenger->addSuccessMessage('You have logged in, ' . $user->getUsername());
-
             return $this->redirect()->toRoute('home');
         }
 
         $this->flashMessenger->addErrorMessage('Invalid credentials');
-
         return new ViewModel(['form' => $this->loginForm]);
     }
 
@@ -114,18 +105,15 @@ class AuthController extends AbstractActionController
     {
         /** @var \Laminas\Mvc\Plugin\Identity\Identity $identity */
         $identity = $this->plugin(Identity::class);
-
         return $identity->getAuthenticationService();
     }
 
     public function logoutAction(): Response
     {
         $authenticationService = $this->getAuthenticationService();
-
         $authenticationService->clearIdentity();
 
         $this->flashMessenger->addInfoMessage('You have logged out');
-
         return $this->redirect()->toRoute('home');
     }
 }
