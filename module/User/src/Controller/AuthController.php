@@ -10,7 +10,6 @@ use Laminas\View\Model\ViewModel;
 use User\Form\LoginForm;
 use User\Form\RegisterForm;
 use User\Repository\UserWriteRepositoryInterface;
-use User\Service\AuthenticationService;
 
 class AuthController extends AbstractActionController
 {
@@ -24,6 +23,12 @@ class AuthController extends AbstractActionController
     /** @var \User\Form\LoginForm */
     private $loginForm;
 
+    /** @var \Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger  */
+    private $flashMessenger;
+
+    /** @var \User\Service\AuthenticationService */
+    private $authenticationService;
+
     public function __construct(
         UserWriteRepositoryInterface $writeRepository,
         RegisterForm $registerForm,
@@ -32,6 +37,8 @@ class AuthController extends AbstractActionController
         $this->writeRepository = $writeRepository;
         $this->registerForm = $registerForm;
         $this->loginForm = $loginForm;
+        $this->flashMessenger = $this->plugin(FlashMessenger::class);
+        $this->authenticationService = $this->plugin('identity')->getAuthenticationService();
     }
 
     /**
@@ -53,7 +60,7 @@ class AuthController extends AbstractActionController
 
         $this->writeRepository->create($params->toArray());
 
-        $this->flashSuccessMessage('Account created successfully!');
+        $this->flashMessenger->addSuccessMessage('Account created successfully!');
 
         return $this->redirect()->toRoute('home');
     }
@@ -75,12 +82,12 @@ class AuthController extends AbstractActionController
             return new ViewModel(['form' => $this->loginForm, 'message' => 'Invalid input']);
         }
 
-        $authenticator = $this->login($params['username'], $params['password']);
+        $this->authenticate($params['username'], $params['password']);
 
-        if ($authenticator->hasIdentity()) {
-            $user = $authenticator->getIdentity();
+        if ($this->authenticationService->hasIdentity()) {
+            $user = $this->authenticationService->getIdentity();
 
-            $this->flashSuccessMessage('You have logged in, ' . $user->getUsername());
+            $this->flashMessenger->addSuccessMessage('You have logged in, ' . $user->getUsername());
 
             return $this->redirect()->toRoute('home');
         }
@@ -88,41 +95,20 @@ class AuthController extends AbstractActionController
         return new ViewModel(['form' => $this->loginForm, 'message' => 'Failed to log in']);
     }
 
-    private function login(string $username, string $password): AuthenticationService
+    private function authenticate(string $username, string $password)
     {
-        $authenticator = $this->getAuthenticationService();
-
-        $authenticator->setCredentials($username, $password);
-        $authenticator->authenticate();
-
-        return $authenticator;
-    }
-
-    private function getAuthenticationService(): AuthenticationService
-    {
-        return $this->plugin('identity')->getAuthenticationService();
-    }
-
-    private function flashSuccessMessage(string $message)
-    {
-        $flash = $this->getFlashMessenger();
-        $flash->addSuccessMessage($message);
-    }
-
-    private function getFlashMessenger(): FlashMessenger
-    {
-        return $this->plugin('flashMessenger');
+        $this->authenticationService->setCredentials($username, $password);
+        $this->authenticationService->authenticate();
     }
 
     public function logoutAction(): Response
     {
-        $authenticator = $this->getAuthenticationService();
+        /** @var \User\Service\AuthenticationService $authenticator */
+        $authenticator = $this->plugin('identity')->getAuthenticationService();
 
         $authenticator->clearIdentity();
 
-        $flash = $this->getFlashMessenger();
-
-        $flash->addInfoMessage('You have logged out');
+        $this->flashMessenger->addInfoMessage('You have logged out');
 
         return $this->redirect()->toRoute('home');
     }
