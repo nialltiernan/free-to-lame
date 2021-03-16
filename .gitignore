@@ -5,3 +5,4 @@ data/cache/*
 !data/cache/.gitkeep
 .phpunit.result.cache
 data/*.log
+public/.well-known/
