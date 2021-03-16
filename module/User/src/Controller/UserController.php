@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace User\Controller;
 
+use Laminas\EventManager\Event;
 use Laminas\EventManager\EventManager;
 use Laminas\EventManager\SharedEventManager;
 use Laminas\Log\Logger;
@@ -68,14 +69,14 @@ class UserController extends AbstractActionController
 
     public static function listener1(): \Closure
     {
-        return function ($event) {
+        return function (Event $event) {
             print ('Shared event 1 for ' . get_class($event->getTarget()) . '::' . $event->getName() . '()<br>');
         };
     }
 
     public static function listener2(): \Closure
     {
-        return function ($event) {
+        return function (Event $event) {
             print ('Shared event 2 for ' . get_class($event->getTarget()) . '::' . $event->getName() . '()<br>');
         };
     }
