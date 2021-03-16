@@ -10,6 +10,6 @@ echo '#### Installing composer packages ####'
 composer install --optimize-autoloader --no-dev
 
 echo '#### Removing config cache ####'
-rm data/cache/*.php
+rm -f data/cache/*.php
 
 echo '#### Deployment successful ####'
