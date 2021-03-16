@@ -10,6 +10,7 @@ use Laminas\Db\Sql\Insert;
 use Laminas\Db\Sql\Sql;
 use Laminas\Db\Sql\Update;
 use RuntimeException;
+use User\Event\UserCreatedEvent;
 use User\Exception\CouldNotCreateUserException;
 use User\Exception\UserDoesNotExistException;
 use User\Model\User;
@@ -20,9 +21,13 @@ class UserWriteRepository implements UserWriteRepositoryInterface
     /** @var \Laminas\Db\Adapter\AdapterInterface  */
     private $db;
 
-    public function __construct(AdapterInterface $db)
+    /** @var \User\Event\UserCreatedEvent */
+    private $createdEvent;
+
+    public function __construct(AdapterInterface $db, UserCreatedEvent $createdEvent)
     {
         $this->db = $db;
+        $this->createdEvent = $createdEvent;
     }
 
     public function create(array $data): User
@@ -30,6 +35,8 @@ class UserWriteRepository implements UserWriteRepositoryInterface
         $data = $this->prepareData($data);
 
         $userId = $this->insertUserToDatabase($data);
+
+        $this->createdEvent->fire();
 
         return $this->hydratedUserObject($userId, $data);
     }

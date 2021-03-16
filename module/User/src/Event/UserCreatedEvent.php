@@ -7,8 +7,9 @@ use Laminas\EventManager\EventManager;
 use Laminas\EventManager\EventManagerAwareInterface;
 use Laminas\EventManager\EventManagerInterface;
 
-class ExampleEvent implements EventManagerAwareInterface
+class UserCreatedEvent implements EventManagerAwareInterface
 {
+    /** @var EventManagerInterface */
     private $eventManager;
 
     /**
@@ -28,9 +29,8 @@ class ExampleEvent implements EventManagerAwareInterface
         return $this->eventManager;
     }
 
-    public function doIt()
+    public function fire()
     {
-        print('Just fucking DO IT <br>');
         $this->getEventManager()->trigger(__FUNCTION__, $this);
     }
 }
