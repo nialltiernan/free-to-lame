@@ -7,7 +7,7 @@ use Application\Service\Logger;
 use Closure;
 use Laminas\EventManager\Event;
 
-class UsersEventListener
+class UserCreatedEventListener
 {
     public static function logEvent(): Closure
     {

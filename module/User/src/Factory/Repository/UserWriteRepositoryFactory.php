@@ -9,7 +9,7 @@ use Laminas\EventManager\EventManager;
 use Laminas\EventManager\SharedEventManager;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use User\Event\UserCreatedEvent;
-use User\Listener\UsersEventListener;
+use User\Listener\UserCreatedEventListener;
 use User\Repository\UserWriteRepository;
 
 class UserWriteRepositoryFactory implements FactoryInterface
@@ -28,7 +28,7 @@ class UserWriteRepositoryFactory implements FactoryInterface
     {
         $sharedEvents = new SharedEventManager();
 
-        $sharedEvents->attach(UserCreatedEvent::class, 'fire', call_user_func([UsersEventListener::class, 'logEvent']));
+        $sharedEvents->attach(UserCreatedEvent::class, 'fire', call_user_func([UserCreatedEventListener::class, 'logEvent']));
 
         $createdEvent = new UserCreatedEvent();
         $createdEvent->setEventManager(new EventManager($sharedEvents));
