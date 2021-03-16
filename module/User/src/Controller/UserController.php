@@ -57,17 +57,27 @@ class UserController extends AbstractActionController
     private function sharedEvents(): void
     {
         $sharedEvents = new SharedEventManager();
-        $sharedEvents->attach(ExampleEvent::class, 'doIt', function ($event) {
-            print ('Shared event 1 for ' . get_class($event->getTarget()) . '::' . $event->getName() . '()<br>');
-        });
 
-        $sharedEvents->attach(ExampleEvent::class, 'doIt', function ($event) {
-            print ('Shared event 2 for ' . get_class($event->getTarget()) . '::' . $event->getName() . '()<br>');
-        });
+        $sharedEvents->attach(ExampleEvent::class, 'doIt', call_user_func([self::class, 'listener1']));
+        $sharedEvents->attach(ExampleEvent::class, 'doIt', call_user_func([self::class, 'listener2']));
 
         $example = new ExampleEvent();
         $example->setEventManager(new EventManager($sharedEvents));
         $example->doIt();
+    }
+
+    public static function listener1(): \Closure
+    {
+        return function ($event) {
+            print ('Shared event 1 for ' . get_class($event->getTarget()) . '::' . $event->getName() . '()<br>');
+        };
+    }
+
+    public static function listener2(): \Closure
+    {
+        return function ($event) {
+            print ('Shared event 2 for ' . get_class($event->getTarget()) . '::' . $event->getName() . '()<br>');
+        };
     }
 
 }
