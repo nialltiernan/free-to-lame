@@ -1,14 +1,21 @@
-<?php
-/**
- * @var \Laminas\Form\Form $form
- * @var string $message
- */
-?>
 <style>
     ul {
         color: red;
     }
 </style>
+
+<?php
+/**
+ * @var \Laminas\Form\Form $form
+ * @var \Laminas\Mvc\Plugin\FlashMessenger\View\Helper\FlashMessenger $flashMessenger
+ */
+
+use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
+
+$flashMessenger = $this->flashMessenger();
+?>
+
+<?= $flashMessenger->render(FlashMessenger::NAMESPACE_ERROR, ['alert', 'alert-danger', 'list-unstyled', 'text-center']) ?>
 
 <h1>Register</h1>
 

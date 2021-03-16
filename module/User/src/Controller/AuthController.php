@@ -54,6 +54,8 @@ class AuthController extends AbstractActionController
         $this->registerForm->setData($params);
 
         if (!$this->registerForm->isValid()) {
+            $this->flashMessenger->addErrorMessage('Invalid input');
+
             return new ViewModel(['form' => $this->registerForm]);
         }
 
@@ -70,7 +72,7 @@ class AuthController extends AbstractActionController
     public function loginAction()
     {
         if ($this->getRequest()->isGet()) {
-            return new ViewModel(['form' => $this->loginForm, 'message' => 'Login below']);
+            return new ViewModel(['form' => $this->loginForm]);
         }
 
         $params = $this->getRequest()->getPost();
@@ -78,7 +80,9 @@ class AuthController extends AbstractActionController
         $this->loginForm->setData($params);
 
         if (!$this->loginForm->isValid()) {
-            return new ViewModel(['form' => $this->loginForm, 'message' => 'Invalid input']);
+            $this->flashMessenger->addErrorMessage('Invalid input');
+
+            return new ViewModel(['form' => $this->loginForm]);
         }
 
         $authenticationService = $this->authenticate($params['username'], $params['password']);
@@ -91,7 +95,9 @@ class AuthController extends AbstractActionController
             return $this->redirect()->toRoute('home');
         }
 
-        return new ViewModel(['form' => $this->loginForm, 'message' => 'Failed to log in']);
+        $this->flashMessenger->addErrorMessage('Invalid credentials');
+
+        return new ViewModel(['form' => $this->loginForm]);
     }
 
     private function authenticate(string $username, string $password): AuthenticationServiceInterface
