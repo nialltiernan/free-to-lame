@@ -12,7 +12,7 @@ use FreeToGame\Sort\Sort;
 
 class PlatformGamesRetriever
 {
-    public static function execute(Platform $platform, Sort $sort)
+    public static function execute(Platform $platform, Sort $sort): array
     {
         $filterCollection = new FilterCollection();
 

@@ -13,11 +13,8 @@ use User\Repository\UserWriteRepositoryInterface;
 
 class UserController extends AbstractActionController
 {
-    /** @var \User\Repository\UserReadRepositoryInterface */
-    private $readRepository;
-
-    /** @var \User\Repository\UserWriteRepositoryInterface */
-    private $writeRepository;
+    private UserReadRepositoryInterface $readRepository;
+    private UserWriteRepositoryInterface $writeRepository;
 
     public function __construct(UserReadRepositoryInterface $readRepository, UserWriteRepositoryInterface $writeRepository)
     {

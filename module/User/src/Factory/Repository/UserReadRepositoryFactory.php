@@ -12,7 +12,7 @@ use User\Repository\UserReadRepository;
 class UserReadRepositoryFactory implements FactoryInterface
 {
 
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): UserReadRepository
     {
         $db = $container->get(DatabaseAdapter::class);
 

@@ -17,17 +17,10 @@ use User\Service\AuthenticationService;
 class AuthController extends AbstractActionController
 {
 
-    /** @var \User\Repository\UserWriteRepositoryInterface */
-    private $writeRepository;
-
-    /** @var \User\Form\RegisterForm */
-    private $registerForm;
-
-    /** @var \User\Form\LoginForm */
-    private $loginForm;
-
-    /** @var \Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger  */
-    private $flashMessenger;
+    private UserWriteRepositoryInterface $writeRepository;
+    private RegisterForm $registerForm;
+    private LoginForm $loginForm;
+    private FlashMessenger $flashMessenger;
 
     public function __construct(
         UserWriteRepositoryInterface $writeRepository,

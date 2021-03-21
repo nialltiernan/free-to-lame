@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace User\Repository;
 
-use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Adapter\AdapterInterface as DatabaseAdapter;
 use Laminas\Db\Adapter\Driver\ResultInterface;
 use Laminas\Db\Sql\Delete;
 use Laminas\Db\Sql\Insert;
@@ -18,13 +18,10 @@ use User\Model\User;
 class UserWriteRepository implements UserWriteRepositoryInterface
 {
 
-    /** @var \Laminas\Db\Adapter\AdapterInterface  */
-    private $db;
+    private DatabaseAdapter $db;
+    private UserCreatedEvent $createdEvent;
 
-    /** @var \User\Event\UserCreatedEvent */
-    private $createdEvent;
-
-    public function __construct(AdapterInterface $db, UserCreatedEvent $createdEvent)
+    public function __construct(DatabaseAdapter $db, UserCreatedEvent $createdEvent)
     {
         $this->db = $db;
         $this->createdEvent = $createdEvent;
@@ -81,6 +78,12 @@ class UserWriteRepository implements UserWriteRepositoryInterface
         return $user;
     }
 
+    /**
+     * @param \User\Model\User $user
+     * @param array $data
+     * @return \User\Model\User
+     * @throws \User\Exception\UserDoesNotExistException
+     */
     public function update(User $user, array $data): User
     {
         if (!$user->getId()) {
@@ -124,6 +127,11 @@ class UserWriteRepository implements UserWriteRepositoryInterface
         }
     }
 
+    /**
+     * @param int $userId
+     * @return bool
+     * @throws \User\Exception\UserDoesNotExistException
+     */
     public function delete(int $userId): bool
     {
         if (!$userId) {

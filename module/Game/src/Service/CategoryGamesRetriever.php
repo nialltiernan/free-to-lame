@@ -12,7 +12,7 @@ use FreeToGame\Sort\Sort;
 
 class CategoryGamesRetriever
 {
-    public static function execute(SearchTerm $searchTerm, Sort $sort)
+    public static function execute(SearchTerm $searchTerm, Sort $sort): array
     {
         $filterCollection = new FilterCollection();
 

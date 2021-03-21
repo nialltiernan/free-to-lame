@@ -13,7 +13,7 @@ use User\Repository\UserWriteRepositoryInterface;
 class AuthControllerFactory implements FactoryInterface
 {
 
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): AuthController
     {
         $writeRepository = $container->get(UserWriteRepositoryInterface::class);
 

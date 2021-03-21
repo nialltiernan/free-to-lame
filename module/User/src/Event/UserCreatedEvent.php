@@ -10,8 +10,7 @@ use User\Model\User;
 
 class UserCreatedEvent implements EventManagerAwareInterface
 {
-    /** @var EventManagerInterface */
-    private $eventManager;
+    private EventManagerInterface $eventManager;
 
     /**
      * @inheritDoc

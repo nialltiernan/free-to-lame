@@ -11,7 +11,7 @@ use User\Form\LoginForm;
 class LoginFormFactory implements FactoryInterface
 {
 
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): LoginForm
     {
         $options['db'] = $container->get(DatabaseAdapter::class);
 

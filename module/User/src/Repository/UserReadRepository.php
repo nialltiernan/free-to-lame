@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace User\Repository;
 
-use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Adapter\AdapterInterface as DatabaseAdapter;
 use Laminas\Db\Adapter\Driver\ResultInterface;
 use Laminas\Db\ResultSet\HydratingResultSet;
 use Laminas\Db\Sql\Sql;
@@ -14,12 +14,10 @@ use User\Model\User;
 class UserReadRepository implements UserReadRepositoryInterface
 {
 
-    /** @var \Laminas\Db\Adapter\AdapterInterface  */
-    private $db;
-    /** @var \Laminas\Hydrator\AbstractHydrator */
-    private $hydrator;
+    private DatabaseAdapter $db;
+    private AbstractHydrator $hydrator;
 
-    public function __construct(AdapterInterface $db, AbstractHydrator $hydrator)
+    public function __construct(DatabaseAdapter $db, AbstractHydrator $hydrator)
     {
         $this->db = $db;
         $this->hydrator = $hydrator;

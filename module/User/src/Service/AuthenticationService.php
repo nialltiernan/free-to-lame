@@ -15,23 +15,12 @@ class AuthenticationService implements AuthenticationServiceInterface
 {
     public const SERVICE_NAME = 'UserAuthenticationService';
 
-    /** @var \Laminas\Db\Adapter\Adapter */
-    private $db;
-
-    /** @var \User\Repository\UserReadRepositoryInterface */
-    private $userReadRepository;
-
-    /** @var \Laminas\Session\Container */
-    private $session;
-
-    /** @var string */
-    private $username;
-
-    /** @var string */
-    private $password;
-
-    /** @var \User\Model\User | null */
-    private $identity;
+    private DatabaseAdapter $db;
+    private UserReadRepositoryInterface $userReadRepository;
+    private Session $session;
+    private string $username;
+    private string $password;
+    private ?User $identity;
 
     public function __construct(DatabaseAdapter $db, UserReadRepositoryInterface $userReadRepository, Session $session)
     {

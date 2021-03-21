@@ -8,8 +8,7 @@ use User\Service\AuthenticationService;
 
 class AuthenticationHelper extends AbstractHelper
 {
-    /** @var \User\Service\AuthenticationService */
-    private $service;
+    private AuthenticationService $service;
 
     public function __construct(AuthenticationService $service)
     {

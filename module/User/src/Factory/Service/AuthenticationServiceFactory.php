@@ -13,7 +13,7 @@ use User\Service\AuthenticationService;
 class AuthenticationServiceFactory implements FactoryInterface
 {
 
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): AuthenticationService
     {
         $db = $container->get(DatabaseAdapter::class);
 

@@ -5,17 +5,10 @@ namespace User\Model;
 
 class User
 {
-    /** @var int|null */
-    private $id;
-
-    /** @var string */
-    private $username;
-
-    /** @var string */
-    private $password;
-
-    /** @var string */
-    private $email;
+    private ?int $id;
+    private string $username;
+    private string $password;
+    private string $email;
 
     public function getId(): int
     {

@@ -3,20 +3,19 @@ declare(strict_types=1);
 
 namespace User\Form;
 
+use Laminas\Db\Adapter\AdapterInterface as DatabaseAdapter;
 use Laminas\Form\Element\Password;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
 use Laminas\Form\Form;
 use Laminas\InputFilter\Input;
 use Laminas\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilterInterface;
 
 class LoginForm extends Form
 {
-    /** @var \Laminas\InputFilter\InputFilterInterface */
-    private $inputFilter;
-
-    /** @var \Laminas\Db\Adapter\AdapterInterface */
-    private $db;
+    private InputFilterInterface $inputFilter;
+    private DatabaseAdapter $db;
 
     public function __construct($name = null, $options = [])
     {
