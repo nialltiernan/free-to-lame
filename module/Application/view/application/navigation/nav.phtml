@@ -75,6 +75,9 @@
 
                 if ($auth->hasIdentity()): ?>
                     <li class="nav-item">
+                        <a class="nav-link" href="<?= $this->url('account', ['userId' => $auth->getAuthenticatedUserId()]) ?>">Account</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="<?= $this->url('logout') ?>">Logout</a>
                     </li>
                 <?php else: ?>

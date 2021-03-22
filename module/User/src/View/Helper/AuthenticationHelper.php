@@ -19,4 +19,13 @@ class AuthenticationHelper extends AbstractHelper
     {
         return $this->service->hasIdentity();
     }
+
+    public function getAuthenticatedUserId(): ?int
+    {
+        if (!$this->service->hasIdentity()) {
+            return null;
+        }
+
+        return $this->service->getIdentity()->getId();
+    }
 }
