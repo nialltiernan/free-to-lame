@@ -6,3 +6,4 @@ data/cache/*
 .phpunit.result.cache
 data/*.log
 public/.well-known/
+config/autoload/global.php
