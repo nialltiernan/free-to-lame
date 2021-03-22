@@ -72,7 +72,7 @@ class LoginForm extends Form
     {
         $submit = new Submit('submit');
 
-        $submit->setValue('Register');
+        $submit->setValue('Login');
         $submit->setAttribute('class', 'btn btn-primary');
 
         $this->add($submit);
