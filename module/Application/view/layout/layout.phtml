@@ -23,7 +23,12 @@
         ?>
 
         <!-- Scripts -->
-        <?= $this->headScript() ?>
+        <?= $this->headScript()
+            ->prependFile($this->basePath('js/bootstrap.min.js'))
+            ->prependFile($this->basePath('js/jquery-3.5.1.min.js'))
+            ->prependFile($this->basePath('js/virtual-select/virtual-select.min.js'))
+            ->prependFile($this->basePath('js/virtual-select/tooltip.min.js'))
+        ?>
     </head>
     <body>
 
@@ -39,11 +44,7 @@
         </div>
 
         <?= $this->inlineScript()
-            ->prependFile($this->basePath('js/bootstrap.min.js'))
-            ->prependFile($this->basePath('js/jquery-3.5.1.min.js'))
-            ->prependFile($this->basePath('js/virtual-select/virtual-select.min.js'))
-            ->prependFile($this->basePath('js/virtual-select/tooltip.min.js'))
+                ->prependFile($this->basePath('js/search-bar.js'))
         ?>
     </body>
-    <script src="<?= $this->basePath('js/search-bar.js') ?>"></script>
 </html>
