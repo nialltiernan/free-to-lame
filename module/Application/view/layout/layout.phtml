@@ -18,16 +18,16 @@
         <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
             ->prependStylesheet($this->basePath('css/style.css'))
             ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
-            ->prependStylesheet($this->basePath('js/virtual-select/virtual-select.min.css'))
-            ->prependStylesheet($this->basePath('js/virtual-select/tooltip.min.css'))
+            ->prependStylesheet($this->basePath('js/lib/virtual-select/virtual-select.min.css'))
+            ->prependStylesheet($this->basePath('js/lib/virtual-select/tooltip.min.css'))
         ?>
 
         <!-- Scripts -->
         <?= $this->headScript()
-            ->prependFile($this->basePath('js/bootstrap.min.js'))
-            ->prependFile($this->basePath('js/jquery-3.5.1.min.js'))
-            ->prependFile($this->basePath('js/virtual-select/virtual-select.min.js'))
-            ->prependFile($this->basePath('js/virtual-select/tooltip.min.js'))
+            ->prependFile($this->basePath('js/lib/bootstrap.min.js'))
+            ->prependFile($this->basePath('js/lib/jquery-3.5.1.min.js'))
+            ->prependFile($this->basePath('js/lib/virtual-select/virtual-select.min.js'))
+            ->prependFile($this->basePath('js/lib/virtual-select/tooltip.min.js'))
         ?>
     </head>
     <body>
