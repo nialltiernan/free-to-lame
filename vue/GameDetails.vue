@@ -41,9 +41,9 @@ export default {
       releaseDate: '',
       description: '',
 
-      screenshots: null,
+      screenshots: [],
 
-      systemRequirements: null
+      systemRequirements: {}
     }
   },
   methods: {
