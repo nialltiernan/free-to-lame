@@ -3,8 +3,7 @@
     <div class="row g-0 rounded overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
       <div class="col p-4 d-flex flex-column position-static">
         <DetailsDescriptionTitle :title="title" :genre="genre" :platform="platform" :publisher="publisher"
-                           :developer="developer" :releaseDate="releaseDate"
-                           :description="description"/>
+                                 :developer="developer" :releaseDate="releaseDate"/>
 
         <p>{{ description }}</p>
       </div>
