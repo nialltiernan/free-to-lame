@@ -7,3 +7,5 @@ data/cache/*
 data/*.log
 public/.well-known/
 config/autoload/global.php
+node_modules/
+public/dist/

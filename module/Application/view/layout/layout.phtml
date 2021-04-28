@@ -18,6 +18,7 @@
         <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
             ->prependStylesheet($this->basePath('css/style.css'))
             ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+            ->prependStylesheet($this->basePath('dist/vue.css'))
             ->prependStylesheet($this->basePath('js/lib/virtual-select/virtual-select.min.css'))
             ->prependStylesheet($this->basePath('js/lib/virtual-select/tooltip.min.css'))
         ?>
@@ -44,7 +45,8 @@
         </div>
 
         <?= $this->inlineScript()
-                ->prependFile($this->basePath('js/search-bar.js'))
+            ->prependFile($this->basePath('js/search-bar.js'))
+            ->prependFile($this->basePath('dist/vue.js'))
         ?>
     </body>
 </html>

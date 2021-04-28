@@ -5,29 +5,24 @@ namespace Game\Controller;
 
 use FreeToGame\Client;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
 
 class GameController extends AbstractActionController
 {
     public function detailsAction(): ViewModel
     {
+        return new ViewModel(['gameId' => $this->params()->fromRoute('id')]);
+    }
+
+    public function detailsJsonAction(): JsonModel
+    {
         $gameId = (int) $this->params()->fromRoute('id');
 
         $freeToGame = new Client();
 
-        $game = $freeToGame->fetchDetails($gameId)->getData();
+        $data = $freeToGame->fetchDetails($gameId)->getData();
 
-        return new ViewModel(['game' => $game, 'hasSystemRequirements' => $this->hasSystemRequirements($game)]);
-    }
-
-    private function hasSystemRequirements(array $game): bool
-    {
-        $requirements = $game['minimum_system_requirements'];
-
-        return $requirements['os'] ||
-            $requirements['processor'] ||
-            $requirements['memory'] ||
-            $requirements['graphics'] ||
-            $requirements['storage'];
+        return new JsonModel(['data' => $data]);
     }
 }

@@ -1,0 +1,40 @@
+{
+  "name": "free-to-lame",
+  "version": "1.0.0",
+  "description": "Learn Laminas and Vue",
+  "main": "vue/main.js",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nialltiernan/free-to-lame.git"
+  },
+  "keywords": [
+    "laminas",
+    "vue",
+    "free",
+    "games"
+  ],
+  "author": "Niall Tiernan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nialltiernan/free-to-lame/issues"
+  },
+  "homepage": "https://github.com/nialltiernan/free-to-lame#readme",
+  "dependencies": {
+    "vue": "^3.0.11",
+    "vue-loader": "^16.2.0"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.0.11",
+    "css-loader": "^5.2.4",
+    "file-loader": "^6.2.0",
+    "mini-css-extract-plugin": "^1.5.0",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.35.1",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}

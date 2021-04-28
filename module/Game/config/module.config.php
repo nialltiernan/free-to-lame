@@ -555,6 +555,19 @@ return [
                         'action' => 'details'
                     ]
                 ]
+            ],
+            'gameJson' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/game-json/:id',
+                    'constraints' => [
+                        'id' => '[0-9]+'
+                    ],
+                    'defaults' => [
+                        'controller' => GameController::class,
+                        'action' => 'detailsJson'
+                    ]
+                ]
             ]
         ],
     ],
