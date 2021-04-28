@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <DetailsThumbnail :thumbnail-source="thumbnailSource" :play-url="playUrl"/>
+    <DetailsThumbnail :source="thumbnailSource" :play-url="playUrl"/>
     <DetailsDescriptionMain :title="title" :genre="genre" :platform="platform" :publisher="publisher"
                             :developer="developer"
                             :releaseDate="releaseDate" :description="description"/>
@@ -33,16 +33,13 @@ export default {
       thumbnailSource: '',
       playUrl: '',
       title: '',
-
       genre: '',
       platform: '',
       publisher: '',
       developer: '',
       releaseDate: '',
       description: '',
-
       screenshots: [],
-
       systemRequirements: {}
     }
   },

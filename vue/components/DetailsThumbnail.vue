@@ -2,7 +2,7 @@
   <div class="col-md-6">
     <div class="row g-0 rounded overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
       <div class="col p-4 d-flex flex-column position-static">
-        <img :src="thumbnailSource" class="rounded mx-auto img-thumbnail" alt="ThumbnailImage">
+        <img :src="source" class="rounded mx-auto img-thumbnail" alt="ThumbnailImage">
         <form method="GET" :action="playUrl" class="mx-auto mt-3">
           <input type="submit" class="btn btn-primary py-2 px-4" value="Play now!">
         </form>
@@ -15,7 +15,7 @@
 export default {
   name: 'DetailsThumbnail',
   props: {
-    thumbnailSource: {
+    source: {
       type: String,
       required: true
     },
