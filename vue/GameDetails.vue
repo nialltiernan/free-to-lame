@@ -67,9 +67,9 @@ export default {
       this.releaseDate = data.release_date;
       this.description = data.description;
 
-      this.screenshots = data.screenshots;
+      this.screenshots = data.screenshots ?? [];
 
-      this.systemRequirements = data.minimum_system_requirements;
+      this.systemRequirements = data.minimum_system_requirements ?? {};
     },
   },
   created() {
