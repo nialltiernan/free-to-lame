@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     async fetchData() {
-      const url = 'http://lame.local/game-json/' + this.gameId;
+      const url = BASE_URL + '/game-json/' + this.gameId;
 
       let response = await fetch(url);
 
