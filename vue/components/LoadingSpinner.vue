@@ -1,12 +1,18 @@
 <template>
   <section class="text-center">
-    <it-loading :radius="64"></it-loading>
+    <it-loading :radius="radius"></it-loading>
   </section>
 </template>
 
 <script>
 export default {
-  name: 'LoadingSpinner'
+  name: 'LoadingSpinner',
+  props: {
+    radius : {
+      type: Number,
+      default: 32
+    }
+  }
 }
 </script>
 

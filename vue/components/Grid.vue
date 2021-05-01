@@ -1,5 +1,5 @@
 <template>
-  <div v-if="areGamesLoaded" class="album py-2 bg-light">
+  <div v-if="isLoaded" class="album py-2 bg-light">
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div v-for="game in games" :key="game.id">
@@ -9,7 +9,11 @@
     </div>
   </div>
 
-  <LoadingSpinner v-else />
+  <div v-else>
+    <br><br>
+    <LoadingSpinner :radius="64" />
+    <br><br>
+  </div>
 </template>
 
 <script>
@@ -29,8 +33,8 @@ export default {
     },
   },
   computed: {
-    areGamesLoaded() {
-      return this.games.length
+    isLoaded() {
+      return this.games.length;
     }
   }
 }

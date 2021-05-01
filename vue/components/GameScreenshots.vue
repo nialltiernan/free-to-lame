@@ -1,5 +1,5 @@
 <template>
-  <div id="carouselExampleIndicators" class="carousel slide mt-5" data-ride="carousel">
+  <div v-if="isLoaded" id="carouselExampleIndicators" class="carousel slide mt-5" data-ride="carousel">
     <ol class="carousel-indicators">
       <li v-for="screenshot in screenshots" :key="screenshot.id" data-target="#carouselExampleIndicators"
           :data-slide-to="screenshot.id" :class="{ active: isActive(screenshot.id) }">
@@ -20,11 +20,16 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
+
+  <LoadingSpinner v-else :radius="64" />
 </template>
 
 <script>
+import LoadingSpinner from './LoadingSpinner.vue';
+
 export default {
   name: 'GameScreenshots',
+  components: { LoadingSpinner },
   props: {
     screenshots: {
       type: Array,
@@ -34,6 +39,11 @@ export default {
   methods: {
     isActive(screenshotId) {
       return screenshotId === this.screenshots[0].id;
+    }
+  },
+  computed: {
+    isLoaded() {
+      return this.screenshots.length;
     }
   }
 }
