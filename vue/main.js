@@ -1,11 +1,11 @@
 import { createApp } from 'vue'
 
-import GameDetails from './GameDetails.vue'
+import AppGame from './AppGame.vue'
 
-let container = document.getElementById('vueGameDetails');
+let container = document.getElementById('vueAppGame');
 
 let props = {
     gameId: container.dataset.gameid
 };
 
-createApp(GameDetails, props).mount(container)
+createApp(AppGame, props).mount(container)

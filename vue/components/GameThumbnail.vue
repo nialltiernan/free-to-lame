@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'DetailsThumbnail',
+  name: 'GameThumbnail',
   props: {
     source: {
       type: String,

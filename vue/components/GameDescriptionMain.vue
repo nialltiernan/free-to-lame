@@ -2,7 +2,7 @@
   <div class="col-md-6">
     <div class="row g-0 rounded overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
       <div class="col p-4 d-flex flex-column position-static">
-        <DetailsDescriptionTitle :title="title" :genre="genre" :platform="platform" :publisher="publisher"
+        <GameDescriptionTitle :title="title" :genre="genre" :platform="platform" :publisher="publisher"
                                  :developer="developer" :releaseDate="releaseDate"/>
 
         <p>{{ description }}</p>
@@ -12,12 +12,12 @@
 </template>
 
 <script>
-import DetailsDescriptionTitle from './DetailsDescriptionTitle.vue';
+import GameDescriptionTitle from './GameDescriptionTitle.vue';
 
 export default {
-  components: {DetailsDescriptionTitle},
+  components: {GameDescriptionTitle},
 
-  name: 'DetailsDescriptionMain',
+  name: 'GameDescriptionMain',
   props: {
     title: {
       type: String,

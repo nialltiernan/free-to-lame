@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: 'DetailsScreenshots',
+  name: 'GameScreenshots',
   props: {
     screenshots: {
       type: Array,

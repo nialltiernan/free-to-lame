@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'DetailsDescriptionTitle',
+  name: 'GameDescriptionTitle',
   props: {
     title: {
       type: String,

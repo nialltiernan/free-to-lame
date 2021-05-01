@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: 'DetailsSystemRequirements',
+  name: 'GameSystemRequirements',
   props: {
     requirements: {
       type: Object,
