@@ -21,7 +21,11 @@
     </a>
   </div>
 
-  <LoadingSpinner v-else :radius="64" />
+  <div v-else>
+    <br><br>
+    <LoadingSpinner :radius="64" />
+    <br><br>
+  </div>
 </template>
 
 <script>
