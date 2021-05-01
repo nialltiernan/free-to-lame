@@ -10,13 +10,12 @@ $flashMessenger = $this->flashMessenger();
 
 <?= $flashMessenger->render(FlashMessenger::NAMESPACE_INFO, ['alert', 'alert-primary', 'list-unstyled', 'text-center']) ?>
 
-<section class="pb-2 text-center container">
-    <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">Free to play games</h1>
-            <p class="lead text-muted">Most popular games that are free to play right now</p>
-        </div>
-    </div>
-</section>
+<?= $this
+    ->headLink()
+    ->prependStylesheet($this->basePath('dist/vue-app.css'))
+?>
 
-<?= $this->partial('partials/grid', ['games' => $this->games]) ?>
+<div id="vueApp"></div>
+
+<?= $this->inlineScript()->prependFile($this->basePath('dist/vue-app.js')) ?>
+

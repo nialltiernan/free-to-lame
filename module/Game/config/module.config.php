@@ -67,6 +67,16 @@ return [
                     ],
                 ],
             ],
+            'homepageJson' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/json',
+                    'defaults' => [
+                        'controller' => IndexController::class,
+                        'action'     => 'indexJson',
+                    ],
+                ],
+            ],
             'platforms' => [
                 'type'    => Literal::class,
                 'options' => [

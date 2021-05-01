@@ -1,3 +1,8 @@
+<?= $this
+    ->headLink()
+    ->prependStylesheet($this->basePath('dist/vue-game.css'))
+?>
+
 <div id="vueAppGame" data-gameId=<?= $this->gameId ?>></div>
 
 <?= $this->inlineScript()->prependFile($this->basePath('dist/vue-game.js')) ?>

@@ -6,6 +6,7 @@ require('dotenv').config()
 
 module.exports = {
     entry: {
+        app: './vue/main.js',
         game: './vue/main-game.js',
     },
     mode: 'development',
@@ -34,7 +35,7 @@ module.exports = {
     plugins: [
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
-            filename: 'vue.css'
+            filename: 'vue-[name].css'
         }),
         new webpack.DefinePlugin({
             BASE_URL: JSON.stringify(process.env.BASE_URL)
