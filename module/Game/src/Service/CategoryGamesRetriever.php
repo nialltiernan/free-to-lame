@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Game\Service;
 
-use Application\Service\EnvironmentMode;
+use Application\Service\LimitResultsInDevelopment;
 use FreeToGame\Client as FreeToGame;
 use FreeToGame\Filters\CategoryFilter;
 use FreeToGame\Filters\FilterCollection;
@@ -22,10 +22,6 @@ class CategoryGamesRetriever
 
         $games = $freeToGame->fetchList($filterCollection, $sort)->getData();
 
-        if (EnvironmentMode::isLocal()) {
-            $games = array_slice($games, 0, 15);
-        }
-
-        return $games;
+        return LimitResultsInDevelopment::execute($games);
     }
 }

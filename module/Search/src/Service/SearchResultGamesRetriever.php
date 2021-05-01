@@ -25,7 +25,7 @@ class SearchResultGamesRetriever
 
         $games = $freeToGame->fetchList($filterCollection)->getData();
 
-        if (EnvironmentMode::isLocal()) {
+        if (EnvironmentMode::isDevelopment()) {
             $games = array_slice($games, 0, 15);
         }
 

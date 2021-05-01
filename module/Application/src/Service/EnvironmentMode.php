@@ -10,7 +10,7 @@ class EnvironmentMode
         return getenv('APP_ENV') === 'production';
     }
 
-    public static function isLocal(): bool
+    public static function isDevelopment(): bool
     {
         return !self::isProduction();
     }
