@@ -6,7 +6,7 @@
                             :releaseDate="releaseDate" :description="description"/>
   </div>
   <GameScreenshots :screenshots="screenshots"/>
-  <GameSystemRequirements :requirements="systemRequirements"/>
+  <GameSystemRequirements v-if="hasRequirements" :requirements="systemRequirements"/>
 </template>
 
 <script>
@@ -71,6 +71,14 @@ export default {
 
       this.systemRequirements = data.minimum_system_requirements ?? {};
     },
+  },
+  computed: {
+    hasRequirements() {
+      for (let requirement in this.systemRequirements) {
+        return true;
+      }
+      return false;
+    }
   },
   created() {
     this.fetchData()

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="requirements" class="mt-5">
+  <div class="mt-5">
     <h2>System requirements</h2>
 
     <table class="table">
