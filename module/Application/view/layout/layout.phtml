@@ -44,9 +44,6 @@
             </footer>
         </div>
 
-        <?= $this->inlineScript()
-            ->prependFile($this->basePath('js/search-bar.js'))
-            ->prependFile($this->basePath('dist/vue.js'))
-        ?>
+        <?= $this->inlineScript()->prependFile($this->basePath('js/search-bar.js')) ?>
     </body>
 </html>

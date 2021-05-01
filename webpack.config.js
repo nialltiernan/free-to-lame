@@ -5,11 +5,14 @@ const { VueLoaderPlugin } = require('vue-loader');
 require('dotenv').config()
 
 module.exports = {
-    entry: './vue/main.js',
+    entry: {
+        game: './vue/main-game.js',
+    },
     mode: 'development',
     output: {
         path: path.resolve(__dirname, './public/dist'),
-        filename: 'vue.js'
+        filename: 'vue-[name].js',
+        clean: true
     },
     module: {
         rules: [
