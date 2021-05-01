@@ -10,12 +10,8 @@ $flashMessenger = $this->flashMessenger();
 
 <?= $flashMessenger->render(FlashMessenger::NAMESPACE_INFO, ['alert', 'alert-primary', 'list-unstyled', 'text-center']) ?>
 
-<?= $this
-    ->headLink()
-    ->prependStylesheet($this->basePath('dist/vue-app.css'))
-?>
+<?= $this->headLink()->prependStylesheet($this->basePath('dist/vue-app.css')) ?>
 
 <div id="vueApp"></div>
 
 <?= $this->inlineScript()->prependFile($this->basePath('dist/vue-app.js')) ?>
-

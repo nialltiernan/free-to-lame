@@ -25,6 +25,7 @@
   "homepage": "https://github.com/nialltiernan/free-to-lame#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
+    "equal-vue": "^0.74.0",
     "vue": "^3.0.11",
     "vue-loader": "^16.2.0"
   },
@@ -33,6 +34,7 @@
     "css-loader": "^5.2.4",
     "file-loader": "^6.2.0",
     "mini-css-extract-plugin": "^1.5.0",
+    "style-loader": "^2.0.0",
     "url-loader": "^4.1.1",
     "webpack": "^5.35.1",
     "webpack-cli": "^4.6.0",

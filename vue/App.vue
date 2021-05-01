@@ -8,15 +8,18 @@
     </div>
   </section>
 
-  <Grid :games="games"/>
+  <Grid v-if="areGamesLoaded" :games="games"/>
+  <LoadingSpinner v-else />
 </template>
 
 <script>
 import Grid from './components/Grid.vue';
+import LoadingSpinner from './components/LoadingSpinner.vue';
 
 export default {
   components: {
-    Grid
+    Grid,
+    LoadingSpinner
   },
   data() {
     return {
@@ -36,6 +39,11 @@ export default {
 
       this.games = await response.json();
     },
+  },
+  computed: {
+    areGamesLoaded() {
+      return this.games.length
+    }
   },
   created() {
     this.fetchData()
