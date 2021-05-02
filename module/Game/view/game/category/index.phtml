@@ -3,4 +3,4 @@
 <?php /** @var string $category */ ?>
 <div id="vueAppCategory" data-category=<?= $category ?>></div>
 
-<?= $this->inlineScript()->prependFile($this->basePath('dist/vue-category.js')) ?>
+<script src="<?= $this->basePath('dist/vue-category.js') ?>"></script>

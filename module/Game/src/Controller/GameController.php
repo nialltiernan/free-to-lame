@@ -23,6 +23,6 @@ class GameController extends AbstractActionController
 
         $data = $freeToGame->fetchDetails($gameId)->getData();
 
-        return new JsonModel(['data' => $data]);
+        return (new JsonModel(['data' => $data]))->setTemplate('json/index.phtml');
     }
 }

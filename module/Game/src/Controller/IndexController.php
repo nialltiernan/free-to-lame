@@ -17,6 +17,6 @@ class IndexController extends AbstractActionController
 
     public function indexJsonAction(): ViewModel
     {
-        return new JsonModel(['data' => IndexGamesRetriever::execute()]);
+        return (new JsonModel(['data' => IndexGamesRetriever::execute()]))->setTemplate('json/index.phtml');
     }
 }
