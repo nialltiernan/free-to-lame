@@ -14,47 +14,49 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="<?= $this->url('categories') ?>">See all</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="<?= $this->url('categories/action') ?>">Action</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/action-role-playing-game') ?>">Action RPG</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/anime') ?>">Anime</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/battle-royale') ?>">Battle Royale</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/card') ?>">Card</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/fighting') ?>">Fighting</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/first-person') ?>">First Person</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/flight') ?>">Flight</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/horror') ?>">Horror</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/low-specifications') ?>">Low Specs</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/martial-arts') ?>">Martial Arts</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/mmo') ?>">MMO</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/mmofps') ?>">MMO-FPS</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/mmorts') ?>">MMO-RTS</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/mmorpg') ?>">MMO-RPG</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/mmotps') ?>">MMO-TPS</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/military') ?>">Military</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/multiplayer-online-battle-arena') ?>">Online Battle Arena</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/open-world') ?>">Open World</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/permadeath') ?>">Permadeath</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/pve') ?>">PVE</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/pvp') ?>">PVP</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/racing') ?>">Racing</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/sailing') ?>">Sailing</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/sandbox') ?>">Sandbox</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/science-fiction') ?>">Sci-Fi</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/side-scroller') ?>">Side Scroller</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/social') ?>">Social</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/space') ?>">Space</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/sports') ?>">Sports</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/strategy') ?>">Strategy</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/superhero') ?>">Superhero</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/survival') ?>">Survival</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/tank') ?>">Tank</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/third-person') ?>">Third Person</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/top-down') ?>">Top Down</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/tower-defense') ?>">Tower Defense</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/turn-based') ?>">Turn Based</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/two-dimension') ?>">2D</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/voxel') ?>">Voxel</a>
-                        <a class="dropdown-item" href="<?= $this->url('categories/zombie') ?>">Zombie</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'action']) ?>">Action</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'action-role-playing-game']) ?>">Action RPG</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'anime']) ?>">Anime</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'battle-royale']) ?>">Battle Royale</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'card']) ?>">Card</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'fighting']) ?>">Fighting</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'first-person']) ?>">First Person</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'flight']) ?>">Flight</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'horror']) ?>">Horror</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'low-specifications']) ?>">Low Specs</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'martial-arts']) ?>">Martial Arts</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'mmo']) ?>">MMO</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'mmofps']) ?>">MMO-FPS</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'mmorts']) ?>">MMO-RTS</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'mmorpg']) ?>">MMO-RPG</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'mmotps']) ?>">MMO-TPS</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'military']) ?>">Military</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'multiplayer-online-battle-arena']) ?>">Online Battle Arena</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'open-world']) ?>">Open World</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'permadeath']) ?>">Permadeath</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'pixel']) ?>">Pixel</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'pve']) ?>">PVE</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'pvp']) ?>">PVP</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'racing']) ?>">Racing</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'sailing']) ?>">Sailing</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'sandbox']) ?>">Sandbox</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'science-fiction']) ?>">Sci-Fi</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'shooter']) ?>">Shooter</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'side-scroller']) ?>">Side Scroller</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'social']) ?>">Social</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'space']) ?>">Space</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'sports']) ?>">Sports</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'strategy']) ?>">Strategy</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'superhero']) ?>">Superhero</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'survival']) ?>">Survival</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'tank']) ?>">Tank</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'third-person']) ?>">Third Person</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'top-down']) ?>">Top Down</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'tower-defense']) ?>">Tower Defense</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'turn-based']) ?>">Turn Based</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'two-dimension']) ?>">2D</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'voxel']) ?>">Voxel</a>
+                        <a class="dropdown-item" href="<?= $this->url('category', ['category' => 'zombie']) ?>">Zombie</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">

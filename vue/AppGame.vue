@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     async fetchData() {
-      const url = BASE_URL + '/game-json/' + this.gameId;
+      const url = BASE_URL + '/game/' + this.gameId + '/json';
 
       let response = await fetch(url);
 

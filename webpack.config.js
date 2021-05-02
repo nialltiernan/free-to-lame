@@ -8,6 +8,7 @@ module.exports = {
     entry: {
         app: './vue/main.js',
         game: './vue/main-game.js',
+        category: './vue/main-category.js',
     },
     mode: 'development',
     output: {
