@@ -3,8 +3,6 @@
 use Game\Controller\CategoryController;
 use Game\Controller\GameController;
 use Game\Controller\IndexController;
-use Game\Controller\Platform\BrowserController;
-use Game\Controller\Platform\PcController;
 use Game\Controller\PlatformController;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
@@ -36,10 +34,13 @@ return [
                     ]
                 ]
             ],
-            'platforms' => [
-                'type'    => Literal::class,
+            'platform' => [
+                'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/platforms',
+                    'route'    => '/platform/:platform',
+                    'constraints' => [
+                        'platform' => '[-a-z]+'
+                    ],
                     'defaults' => [
                         'controller' => PlatformController::class,
                         'action'     => 'index',
@@ -47,25 +48,25 @@ return [
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
-                    'browser' => [
+                    'json' => [
                         'type' => Literal::class,
                         'options' => [
-                            'route' => '/browser',
+                            'route' => '/json',
                             'defaults' => [
-                                'controller' => BrowserController::class,
-                                'action' => 'index',
+                                'controller' => PlatformController::class,
+                                'action' => 'indexJson',
                             ],
                         ],
-                    ],
-                    'pc' => [
-                        'type' => Literal::class,
-                        'options' => [
-                            'route' => '/pc',
-                            'defaults' => [
-                                'controller' => PcController::class,
-                                'action' => 'index',
-                            ],
-                        ],
+                    ]
+                ],
+            ],
+            'platforms' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/platforms',
+                    'defaults' => [
+                        'controller' => PlatformController::class,
+                        'action'     => 'list',
                     ],
                 ],
             ],
@@ -138,8 +139,6 @@ return [
             IndexController::class => InvokableFactory::class,
             PlatformController::class => InvokableFactory::class,
             GameController::class => InvokableFactory::class,
-            BrowserController::class => InvokableFactory::class,
-            PcController::class => InvokableFactory::class,
             CategoryController::class => InvokableFactory::class,
         ],
     ],

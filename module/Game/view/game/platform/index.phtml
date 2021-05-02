@@ -1,10 +1,6 @@
-<h1 class="mb-4">Platforms</h1>
+<?= $this->headLink()->prependStylesheet($this->basePath('dist/vue-platform.css')) ?>
 
-<div class="row">
-    <div class="col shadow-sm">
-        <h2><a href="<?= $this->url('platforms/browser') ?>">Browser</a></h2>
-    </div>
-    <div class="col shadow-sm">
-        <h2><a href="<?= $this->url('platforms/pc') ?>">PC</a></h2>
-    </div>
-</div>
+<?php /** @var string $platform */ ?>
+<div id="vueAppPlatform" data-platform=<?= $this->platform ?>></div>
+
+<script src="<?= $this->basePath('dist/vue-platform.js') ?>"></script>
