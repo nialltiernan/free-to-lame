@@ -2,6 +2,7 @@
 
 use Account\Controller\AccountController;
 use Account\Factory\Controller\AccountControllerFactory;
+use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 
 return [
@@ -19,6 +20,19 @@ return [
                         'action'     => 'index',
                     ],
                 ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'json' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/json',
+                            'defaults' => [
+                                'controller' => AccountController::class,
+                                'action' => 'indexJson',
+                            ],
+                        ],
+                    ]
+                ]
             ],
             'account-delete' => [
                 'type'    => Segment::class,

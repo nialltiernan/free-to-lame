@@ -1,22 +1,5 @@
-<?php
+<?= $this->headLink()->prependStylesheet($this->basePath('dist/vue-account.css')) ?>
 
-$this->headTitle('Account Overview');
+<div id="vueAppAccount" data-user=<?= $this->userId ?>></div>
 
-?>
-
-<h1>Account Overview</h1>
-
-<table class="table mt-5">
-    <tbody>
-        <tr>
-            <td>Username</td>
-            <td><?= $this->user->getUsername() ?></td>
-        </tr>
-        <tr>
-            <td>Email</td>
-            <td><?= $this->user->getEmail() ?></td>
-        </tr>
-    </tbody>
-</table>
-
-<a href="<?= $this->url('account-delete', ['userId' => $this->user->getId()]) ?>"  class="btn btn-danger">Delete account</a>
+<script src="<?= $this->basePath('dist/vue-account.js') ?>"></script>

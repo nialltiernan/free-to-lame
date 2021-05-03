@@ -10,6 +10,7 @@ module.exports = {
         game: './vue/main-game.js',
         category: './vue/main-category.js',
         platform: './vue/main-platform.js',
+        account: './vue/main-account.js',
     },
     mode: 'development',
     output: {

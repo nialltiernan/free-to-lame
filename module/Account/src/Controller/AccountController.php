@@ -5,6 +5,7 @@ namespace Account\Controller;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
 use Laminas\Mvc\Plugin\Identity\Identity;
+use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
 use User\Exception\UserDoesNotExistException;
 use User\Repository\UserReadRepositoryInterface;
@@ -23,17 +24,23 @@ class AccountController extends AbstractActionController
         $this->writeRepository = $writeRepository;
     }
 
-    public function indexAction()
+    public function indexAction(): ViewModel
+    {
+        return new ViewModel(['userId' => (int) $this->params()->fromRoute('userId')]);
+    }
+
+    public function indexJsonAction(): JsonModel
     {
         $userId = (int) $this->params()->fromRoute('userId');
 
         try {
             $user = $this->readRepository->get($userId);
-        } catch (UserDoesNotExistException $e) {
-            return $this->redirect()->toRoute('home');
+            $data = ['id' => $user->getId(), 'username' => $user->getUsername(), 'email' => $user->getEmail()];
+        } catch (UserDoesNotExistException $exception) {
+            $data = [];
         }
 
-        return new ViewModel(['user' => $user]);
+        return new JsonModel(['data' => $data]);
     }
 
     public function deleteAction()
