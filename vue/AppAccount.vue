@@ -19,6 +19,8 @@
     <LoadingSpinner :radius="46" />
   </div>
 
+  <it-divider />
+
   <AccountDelete :user-id="userId"/>
 </template>
 

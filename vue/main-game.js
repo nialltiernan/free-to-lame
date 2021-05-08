@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 
 import Loading from 'equal-vue'
 import '../node_modules/equal-vue/dist/style.css'
