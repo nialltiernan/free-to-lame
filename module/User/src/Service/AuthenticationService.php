@@ -84,4 +84,9 @@ class AuthenticationService implements AuthenticationServiceInterface
         $this->identity = null;
         $this->session->user = null;
     }
+
+    public function updateUser(User $user)
+    {
+        $this->session->user = $user;
+    }
 }

@@ -23,7 +23,7 @@
 
   <div v-else>
     <br><br>
-    <LoadingSpinner :radius="64" />
+    <LoadingSpinner :radius="64" :color="color" />
     <br><br>
   </div>
 </template>

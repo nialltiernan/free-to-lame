@@ -16,10 +16,10 @@ interface UserWriteRepositoryInterface
     /**
      * @param \User\Model\User $user
      * @param array $data
-     * @return bool
+     * @return User
      * @throws \User\Exception\UserDoesNotExistException
      */
-    public function update(User $user, array $data): bool;
+    public function update(User $user, array $data): User;
 
     /**
      * @param int $userId

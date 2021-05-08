@@ -9,13 +9,13 @@
   </div>
 
   <h1>
-    <it-avatar size="70px" :color="color"/>
+    <it-avatar size="70px" :color="selectedColor"/>
     My Account
   </h1>
   <h2>
     Welcome,
     <span v-if="isLoaded" class="d-inline-block">{{ username }}</span>
-    <span v-else class="d-inline-block"><it-loading :radius="15" :stroke="4" :color="color"/> </span>
+    <span v-else class="d-inline-block"><it-loading :radius="15" :stroke="4" :color="selectedColor"/> </span>
   </h2>
 
   <form v-if="isLoaded" @submit.prevent="updateAccount">
@@ -78,7 +78,8 @@ export default {
       username: '',
       email: '',
       success: false,
-      fail: false
+      fail: false,
+      selectedColor: this.color
     }
   },
   methods: {
@@ -96,17 +97,17 @@ export default {
 
       this.username = data.username;
       this.email = data.email;
-      this.color = data.color;
+      this.selectedColor = data.color;
     },
-    updateFavoriteColor(val) {
-      this.color = val.hex;
+    updateFavoriteColor(color) {
+      this.selectedColor = color.hex;
     },
     async updateAccount() {
       const url = BASE_URL + '/account/' + this.userId + '/update';
 
       let user = {
         username: this.username,
-        color: this.color
+        color: this.selectedColor
       };
 
       let response = await fetch(url, {

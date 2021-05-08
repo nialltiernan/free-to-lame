@@ -90,11 +90,15 @@ class AccountController extends AbstractActionController
 
         /** @var \Laminas\Mvc\Plugin\Identity\Identity $identity */
         $identity = $this->plugin(Identity::class);
+        /** @var \User\Service\AuthenticationService $authenticationService */
+        $authenticationService = $identity->getAuthenticationService();
+
         /** @var \User\Model\User $user */
-        $user = $identity->getAuthenticationService()->getIdentity();
+        $user = $authenticationService->getIdentity();
 
         try {
-            $this->writeRepository->update($user, $data);
+            $user = $this->writeRepository->update($user, $data);
+            $authenticationService->updateUser($user);
         } catch (UserDoesNotExistException $e) {
             return (new Response)
                 ->setStatusCode(Response::STATUS_CODE_500)

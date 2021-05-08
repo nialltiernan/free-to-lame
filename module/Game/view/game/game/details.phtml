@@ -1,5 +1,5 @@
 <?= $this->headLink()->prependStylesheet($this->basePath('dist/vue-game.css')) ?>
 
-<div id="vueAppGame" data-gameId=<?= $this->gameId ?>></div>
+<div id="vueAppGame" data-color="<?= $this->color ?>" data-gameId=<?= $this->gameId ?>></div>
 
 <script src="<?= $this->basePath('dist/vue-game.js') ?>"></script>

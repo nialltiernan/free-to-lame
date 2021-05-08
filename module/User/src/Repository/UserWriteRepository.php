@@ -82,7 +82,7 @@ class UserWriteRepository implements UserWriteRepositoryInterface
         return $user;
     }
 
-    public function update(User $user, array $data): bool
+    public function update(User $user, array $data): User
     {
         if (!$user->getId()) {
             throw new UserDoesNotExistException();
@@ -92,7 +92,9 @@ class UserWriteRepository implements UserWriteRepositoryInterface
 
         $this->updateUserInDatabase($user->getId(), $data);
 
-        return true;
+        $this->rehydrateUserObject($user, $data);
+
+        return $user;
     }
 
     private function updateUserInDatabase(int $userId, array $data): void
@@ -107,6 +109,22 @@ class UserWriteRepository implements UserWriteRepositoryInterface
 
         if (!$result instanceof ResultInterface) {
             throw new RuntimeException('Database error occurred during user update');
+        }
+    }
+
+    private function rehydrateUserObject(User $user, array $data): void
+    {
+        if (isset($data['email'])) {
+            $user->setEmail($data['email']);
+        }
+        if (isset($data['username'])) {
+            $user->setUsername($data['username']);
+        }
+        if (isset($data['password'])) {
+            $user->setPassword($data['password']);
+        }
+        if (isset($data['color'])) {
+            $user->setColor($data['color']);
         }
     }
 
