@@ -2,7 +2,9 @@
 
 use Laminas\Authentication\AuthenticationService as LaminasAuthenticationService;
 use Laminas\Router\Http\Literal;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 use User\Controller\AuthController;
+use User\Controller\Plugin\UserColorPlugin;
 use User\Controller\UserController;
 use User\Factory\Controller\AuthControllerFactory;
 use User\Factory\View\Helper\AuthenticationHelperFactory;
@@ -88,6 +90,15 @@ return [
             AuthController::class => AuthControllerFactory::class
         ],
     ],
+
+    'controller_plugins' => [
+        'factories' => [
+            UserColorPlugin::class => InvokableFactory::class,
+        ],
+        'aliases' => [
+            UserColorPlugin::NAME => UserColorPlugin::class,
+        ]
+    ],
     'view_manager' => [
         'template_path_stack' => [
             __DIR__ . '/../view',
@@ -97,5 +108,5 @@ return [
         'factories' => [
             'authentication' => AuthenticationHelperFactory::class
         ]
-    ]
+    ],
 ];

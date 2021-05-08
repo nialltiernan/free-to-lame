@@ -11,6 +11,7 @@ use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Mvc\Plugin\Identity\Identity;
 use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
+use User\Controller\Plugin\UserColorPlugin;
 
 class PlatformController extends AbstractActionController
 {
@@ -18,7 +19,7 @@ class PlatformController extends AbstractActionController
     {
         return new ViewModel([
             'platform' => $this->params()->fromRoute('platform'),
-            'color' => $this->getLoadingColor()
+            'color' => $this->getColor()
         ]);
     }
 
@@ -40,17 +41,10 @@ class PlatformController extends AbstractActionController
         return new ViewModel();
     }
 
-    private function getLoadingColor(): string
+    private function getColor(): string
     {
-        /** @var \Laminas\Mvc\Plugin\Identity\Identity $identity */
-        $identity = $this->plugin(Identity::class);
-
-        if ($identity->getAuthenticationService()->hasIdentity()){
-            /** @var \User\Model\User $user */
-            $user = $identity->getAuthenticationService()->getIdentity();
-            return $user->getColor();
-        }
-
-        return 'blue';
+        /** @var \User\Controller\Plugin\UserColorPlugin $colorPlugin */
+        $colorPlugin = $this->plugin(UserColorPlugin::NAME);
+        return $colorPlugin->getColor($this->plugin(Identity::class));
     }
 }
