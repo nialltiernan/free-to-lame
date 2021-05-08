@@ -31,23 +31,19 @@ return [
                                 'action' => 'indexJson',
                             ],
                         ],
-                    ]
+                    ],
+                    'account-delete' => [
+                        'type'    => Segment::class,
+                        'options' => [
+                            'route'    => '/delete',
+                            'defaults' => [
+                                'controller' => AccountController::class,
+                                'action'     => 'delete',
+                            ],
+                        ],
+                    ],
                 ]
             ],
-            'account-delete' => [
-                'type'    => Segment::class,
-                'options' => [
-                    'route'    => '/account/delete/:userId',
-                    'constraints' => [
-                        'useId'     => '[0-9]+',
-                    ],
-                    'defaults' => [
-                        'controller' => AccountController::class,
-                        'action'     => 'delete',
-                    ],
-                ],
-            ],
-
         ],
     ],
     'controllers' => [

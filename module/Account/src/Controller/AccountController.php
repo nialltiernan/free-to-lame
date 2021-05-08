@@ -2,6 +2,7 @@
 
 namespace Account\Controller;
 
+use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
 use Laminas\Mvc\Plugin\Identity\Identity;
@@ -24,13 +25,24 @@ class AccountController extends AbstractActionController
         $this->writeRepository = $writeRepository;
     }
 
-    public function indexAction(): ViewModel
+    /**
+     * @return \Laminas\Http\Response|\Laminas\View\Model\ViewModel
+     */
+    public function indexAction()
     {
+        if (!$this->hasUserAccess()) {
+            return $this->redirect()->toRoute('home');
+        }
+
         return new ViewModel(['userId' => (int) $this->params()->fromRoute('userId')]);
     }
 
     public function indexJsonAction(): JsonModel
     {
+        if (!$this->hasUserAccess()) {
+            return new JsonModel();
+        }
+
         $userId = (int) $this->params()->fromRoute('userId');
 
         try {
@@ -43,36 +55,45 @@ class AccountController extends AbstractActionController
         return new JsonModel(['data' => $data]);
     }
 
-    public function deleteAction()
+    public function deleteAction(): Response
     {
-        if ($this->getRequest()->isGet()) {
-            return new ViewModel();
-        }
-
-        $userId = (int) $this->params()->fromRoute('userId');
-
-        if ($this->getRequest()->getPost('delete') === 'Yes') {
-            $this->logoutUser();
-            $this->writeRepository->delete($userId);
-            $this->flashAccountDeletedMessage();
-
+        if (!$this->hasUserAccess()) {
             return $this->redirect()->toRoute('home');
         }
 
-        return $this->redirect()->toRoute('account', ['userId' => $userId]);
+        $this->logoutUser();
+        $this->writeRepository->delete((int) $this->params()->fromRoute('userId'));
+        $this->flashAccountDeletedMessage();
+
+        return $this->redirect()->toRoute('home');
     }
 
-    public function logoutUser(): void
+    private function logoutUser(): void
     {
         /** @var \Laminas\Mvc\Plugin\Identity\Identity $identity */
         $identity = $this->plugin(Identity::class);
         $identity->getAuthenticationService()->clearIdentity();
     }
 
-    public function flashAccountDeletedMessage(): void
+    private function flashAccountDeletedMessage(): void
     {
         /** @var \Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger $flashMessenger */
         $flashMessenger = $this->plugin(FlashMessenger::class);
         $flashMessenger->addInfoMessage('Account deleted');
+    }
+
+    private function hasUserAccess(): bool
+    {
+        /** @var \Laminas\Mvc\Plugin\Identity\Identity $identity */
+        $identity = $this->plugin(Identity::class);
+
+        if (!$identity->getAuthenticationService()->hasIdentity()) {
+            return false;
+        }
+
+        /** @var \User\Model\User $user */
+        $user = $identity->getAuthenticationService()->getIdentity();
+
+        return $user->getId() === (int) $this->params()->fromRoute('userId');
     }
 }

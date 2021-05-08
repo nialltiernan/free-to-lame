@@ -12,7 +12,6 @@ use Laminas\View\Model\ViewModel;
 use User\Form\LoginForm;
 use User\Form\RegisterForm;
 use User\Repository\UserWriteRepositoryInterface;
-use User\Service\AuthenticationService;
 
 class AuthController extends AbstractActionController
 {
@@ -96,7 +95,7 @@ class AuthController extends AbstractActionController
         return $authenticationService;
     }
 
-    private function getAuthenticationService(): AuthenticationService
+    private function getAuthenticationService(): AuthenticationServiceInterface
     {
         /** @var \Laminas\Mvc\Plugin\Identity\Identity $identity */
         $identity = $this->plugin(Identity::class);

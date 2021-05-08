@@ -19,13 +19,18 @@
     <LoadingSpinner :radius="46" />
   </div>
 
+  <AccountDelete :user-id="userId"/>
 </template>
 
 <script>
 import LoadingSpinner from './components/LoadingSpinner.vue';
+import AccountDelete from './components/AccountDelete.vue';
 
 export default {
-  components: { LoadingSpinner },
+  components: {
+    LoadingSpinner,
+    AccountDelete
+  },
   props: {
     userId: {
       type: String,
