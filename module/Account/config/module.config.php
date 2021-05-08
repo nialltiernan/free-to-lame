@@ -32,13 +32,23 @@ return [
                             ],
                         ],
                     ],
-                    'account-delete' => [
+                    'update' => [
+                        'type'    => Segment::class,
+                        'options' => [
+                            'route'    => '/update',
+                            'defaults' => [
+                                'controller' => AccountController::class,
+                                'action'     => 'updateUser',
+                            ],
+                        ],
+                    ],
+                    'delete' => [
                         'type'    => Segment::class,
                         'options' => [
                             'route'    => '/delete',
                             'defaults' => [
                                 'controller' => AccountController::class,
-                                'action'     => 'delete',
+                                'action'     => 'deleteUser',
                             ],
                         ],
                     ],

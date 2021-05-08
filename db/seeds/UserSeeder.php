@@ -15,16 +15,20 @@ class UserSeeder extends AbstractSeed
      */
     public function run()
     {
+        $limeGreen = '#32cd32';
         $user1 = [
             'username' => 'nellyt',
             'password' => password_hash('password', PASSWORD_DEFAULT),
             'email' => 'nialltiernan93@gmail.com',
+            'color' => '' . $limeGreen . '',
         ];
 
         $user2 = [
             'username' => 'john',
             'password' => password_hash('johndoe', PASSWORD_DEFAULT),
             'email' => 'johndoe@gmail.com',
+            'color' => '#ff0000',
+
         ];
 
         $data = [$user1, $user2];

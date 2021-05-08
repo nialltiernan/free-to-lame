@@ -1,6 +1,6 @@
 import {createApp} from 'vue'
 
-import {Divider, Loading, Modal} from 'equal-vue'
+import {Avatar, ColorPicker, Divider, Icon, Input, Loading, Modal} from 'equal-vue'
 import '../node_modules/equal-vue/dist/style.css'
 
 import AppAccount from './AppAccount.vue'
@@ -11,4 +11,12 @@ let props = {
     userId: container.dataset.user
 };
 
-createApp(AppAccount, props).use(Divider, Loading, Modal).mount(container)
+createApp(AppAccount, props)
+    .use(Avatar)
+    .use(ColorPicker)
+    .use(Divider)
+    .use(Icon)
+    .use(Input)
+    .use(Loading)
+    .use(Modal)
+    .mount(container)

@@ -9,6 +9,7 @@ class User
     private string $username;
     private string $password;
     private string $email;
+    private string $color;
 
     public function getId(): int
     {
@@ -30,6 +31,11 @@ class User
         return $this->email;
     }
 
+    public function getColor(): string
+    {
+        return $this->color;
+    }
+
     public function setId($id): void
     {
         $this->id = (int) $id;
@@ -48,5 +54,10 @@ class User
     public function setEmail(string $email): void
     {
         $this->email = $email;
+    }
+
+    public function setColor(string $color): void
+    {
+        $this->color = $color;
     }
 }

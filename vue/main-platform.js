@@ -11,4 +11,7 @@ let props = {
     platform: container.dataset.platform
 };
 
-createApp(AppPlatform, props).use(Loading, Select).mount(container)
+createApp(AppPlatform, props)
+    .use(Loading)
+    .use(Select)
+    .mount(container)

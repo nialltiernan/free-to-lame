@@ -46,7 +46,9 @@ class UserWriteRepository implements UserWriteRepositoryInterface
             unset($data['submit']);
         }
 
-        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+        if (isset($data['password'])) {
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+        }
 
         return $data;
     }
@@ -75,16 +77,12 @@ class UserWriteRepository implements UserWriteRepositoryInterface
         $user->setEmail($data['email']);
         $user->setUsername($data['username']);
         $user->setPassword($data['username']);
+        $user->setColor($data['color']);
+
         return $user;
     }
 
-    /**
-     * @param \User\Model\User $user
-     * @param array $data
-     * @return \User\Model\User
-     * @throws \User\Exception\UserDoesNotExistException
-     */
-    public function update(User $user, array $data): User
+    public function update(User $user, array $data): bool
     {
         if (!$user->getId()) {
             throw new UserDoesNotExistException();
@@ -94,9 +92,7 @@ class UserWriteRepository implements UserWriteRepositoryInterface
 
         $this->updateUserInDatabase($user->getId(), $data);
 
-        $this->rehydrateUserObject($user, $data);
-
-        return $user;
+        return true;
     }
 
     private function updateUserInDatabase(int $userId, array $data): void
@@ -114,24 +110,6 @@ class UserWriteRepository implements UserWriteRepositoryInterface
         }
     }
 
-    private function rehydrateUserObject(User $user, array $data): void
-    {
-        if (isset($data['email'])) {
-            $user->setEmail($data['email']);
-        }
-        if (isset($data['username'])) {
-            $user->setUsername($data['username']);
-        }
-        if (isset($data['password'])) {
-            $user->setPassword($data['password']);
-        }
-    }
-
-    /**
-     * @param int $userId
-     * @return bool
-     * @throws \User\Exception\UserDoesNotExistException
-     */
     public function delete(int $userId): bool
     {
         if (!$userId) {

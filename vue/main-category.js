@@ -11,4 +11,7 @@ let props = {
     category: container.dataset.category
 };
 
-createApp(AppCategory, props).use(Loading, Select).mount(container)
+createApp(AppCategory, props)
+    .use(Loading)
+    .use(Select)
+    .mount(container)

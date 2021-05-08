@@ -47,7 +47,12 @@ class AccountController extends AbstractActionController
 
         try {
             $user = $this->readRepository->get($userId);
-            $data = ['id' => $user->getId(), 'username' => $user->getUsername(), 'email' => $user->getEmail()];
+            $data = [
+                'id' => $user->getId(),
+                'username' => $user->getUsername(),
+                'email' => $user->getEmail(),
+                'color' => $user->getColor(),
+            ];
         } catch (UserDoesNotExistException $exception) {
             $data = [];
         }
@@ -55,7 +60,7 @@ class AccountController extends AbstractActionController
         return new JsonModel(['data' => $data]);
     }
 
-    public function deleteAction(): Response
+    public function deleteUserAction(): Response
     {
         if (!$this->hasUserAccess()) {
             return $this->redirect()->toRoute('home');
@@ -66,6 +71,34 @@ class AccountController extends AbstractActionController
         $this->flashAccountDeletedMessage();
 
         return $this->redirect()->toRoute('home');
+    }
+
+    public function updateUserAction(): Response
+    {
+        if (!$this->hasUserAccess()) {
+            return (new Response)->setStatusCode(Response::STATUS_CODE_401);
+        }
+
+        if (!$this->getRequest()->isPost()) {
+            return (new Response)->setStatusCode(Response::STATUS_CODE_405);
+        }
+
+        $data = json_decode($this->getRequest()->getContent(), true);
+
+        /** @var \Laminas\Mvc\Plugin\Identity\Identity $identity */
+        $identity = $this->plugin(Identity::class);
+        /** @var \User\Model\User $user */
+        $user = $identity->getAuthenticationService()->getIdentity();
+
+        try {
+            $this->writeRepository->update($user, $data);
+        } catch (UserDoesNotExistException $e) {
+            return (new Response)
+                ->setStatusCode(Response::STATUS_CODE_500)
+                ->setReasonPhrase($e->getMessage());
+        }
+
+        return (new Response)->setStatusCode(Response::STATUS_CODE_201);
     }
 
     private function logoutUser(): void
