@@ -11,7 +11,7 @@
 
   <div v-else>
     <br><br>
-    <LoadingSpinner :radius="64" />
+    <LoadingSpinner :radius="64" :color="color" />
     <br><br>
   </div>
 </template>
@@ -31,6 +31,10 @@ export default {
       type: Array,
       required: true
     },
+    color: {
+      type: String,
+      default: 'blue'
+    }
   },
   computed: {
     isLoaded() {

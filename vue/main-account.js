@@ -8,7 +8,8 @@ import AppAccount from './AppAccount.vue'
 let container = document.getElementById('vueAppAccount');
 
 let props = {
-    userId: container.dataset.user
+    userId: container.dataset.user,
+    color: container.dataset.color
 };
 
 createApp(AppAccount, props)

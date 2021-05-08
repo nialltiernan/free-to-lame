@@ -8,7 +8,8 @@ import AppPlatform from './AppPlatform.vue'
 let container = document.getElementById('vueAppPlatform');
 
 let props = {
-    platform: container.dataset.platform
+    platform: container.dataset.platform,
+    color: container.dataset.color
 };
 
 createApp(AppPlatform, props)

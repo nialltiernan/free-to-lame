@@ -12,6 +12,6 @@ $flashMessenger = $this->flashMessenger();
 
 <?= $this->headLink()->prependStylesheet($this->basePath('dist/vue-app.css')) ?>
 
-<div id="vueApp"></div>
+<div id="vueApp" data-color="<?= $this->color ?>"></div>
 
 <script src="<?= $this->basePath('dist/vue-app.js') ?>"></script>

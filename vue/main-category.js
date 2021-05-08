@@ -8,7 +8,8 @@ import AppCategory from './AppCategory.vue'
 let container = document.getElementById('vueAppCategory');
 
 let props = {
-    category: container.dataset.category
+    category: container.dataset.category,
+    color: container.dataset.color
 };
 
 createApp(AppCategory, props)

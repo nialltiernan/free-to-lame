@@ -39,6 +39,10 @@ export default {
       type: Array,
       required: true
     },
+    color: {
+      type: String,
+      required: true
+    }
   },
   methods: {
     isActive(screenshotId) {

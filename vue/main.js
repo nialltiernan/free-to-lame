@@ -5,4 +5,10 @@ import '../node_modules/equal-vue/dist/style.css'
 
 import App from './App.vue'
 
-createApp(App).use(Loading).mount(document.getElementById('vueApp'))
+let container = document.getElementById('vueApp');
+
+let props = {
+    color: container.dataset.color
+};
+
+createApp(App, props).use(Loading).mount(container)

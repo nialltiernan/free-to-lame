@@ -11,7 +11,7 @@
 
     <div v-else>
       <br><br><br><br>
-      <LoadingSpinner />
+      <LoadingSpinner :color="color"/>
     </div>
   </div>
 </template>
@@ -28,6 +28,10 @@ export default {
       required: true
     },
     playUrl: {
+      type: String,
+      required: true
+    },
+    color: {
       type: String,
       required: true
     }

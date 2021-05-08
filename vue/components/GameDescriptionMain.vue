@@ -15,7 +15,7 @@
 
     <div v-else>
       <br><br><br><br>
-      <LoadingSpinner />
+      <LoadingSpinner :color="color"/>
     </div>
   </div>
 </template>
@@ -59,6 +59,10 @@ export default {
       type: String,
       required: true
     },
+    color: {
+      type: String,
+      required: true
+    }
   },
   data() {
     return {

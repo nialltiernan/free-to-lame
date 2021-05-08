@@ -1,6 +1,5 @@
 <?= $this->headLink()->prependStylesheet($this->basePath('dist/vue-category.css')) ?>
 
-<?php /** @var string $category */ ?>
-<div id="vueAppCategory" data-category=<?= $category ?>></div>
+<div id="vueAppCategory" data-color="<?= $this->color ?>" data-category=<?= $this->category ?>></div>
 
 <script src="<?= $this->basePath('dist/vue-category.js') ?>"></script>

@@ -8,7 +8,8 @@ import AppGame from './AppGame.vue'
 let container = document.getElementById('vueAppGame');
 
 let props = {
-    gameId: container.dataset.gameid
+    gameId: container.dataset.gameid,
+    color: container.dataset.color
 };
 
 createApp(AppGame, props).use(Loading).mount(container)

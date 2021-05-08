@@ -1,11 +1,11 @@
 <template>
   <div class="row">
-    <GameThumbnail :source="thumbnailSource" :play-url="playUrl"/>
+    <GameThumbnail :source="thumbnailSource" :play-url="playUrl" :color="color"/>
     <GameDescriptionMain :title="title" :genre="genre" :platform="platform" :publisher="publisher"
-                            :developer="developer"
+                            :developer="developer" :color="color"
                             :releaseDate="releaseDate" :description="description"/>
   </div>
-  <GameScreenshots :screenshots="screenshots"/>
+  <GameScreenshots :screenshots="screenshots" :color="color"/>
   <GameSystemRequirements v-if="hasRequirements" :requirements="systemRequirements"/>
 </template>
 
@@ -24,6 +24,10 @@ export default {
   },
   props: {
     gameId: {
+      type: String,
+      required: true
+    },
+    color: {
       type: String,
       required: true
     }

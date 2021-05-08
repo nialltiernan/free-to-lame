@@ -1,6 +1,5 @@
 <?= $this->headLink()->prependStylesheet($this->basePath('dist/vue-platform.css')) ?>
 
-<?php /** @var string $platform */ ?>
-<div id="vueAppPlatform" data-platform=<?= $this->platform ?>></div>
+<div id="vueAppPlatform" data-color="<?= $this->color ?>" data-platform=<?= $this->platform ?>></div>
 
 <script src="<?= $this->basePath('dist/vue-platform.js') ?>"></script>

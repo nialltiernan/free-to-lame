@@ -6,7 +6,7 @@
       <it-select placeholder="Sort by" v-model="sortByValue" :options="sortByOptions" @change="reloadData"/>
     </div>
   </div>
-  <Grid :games="games"/>
+  <Grid :games="games" :color="color"/>
 </template>
 
 <script>
@@ -16,6 +16,10 @@ export default {
   components: {Grid},
   props: {
     platform: {
+      type: String,
+      required: true
+    },
+    color: {
       type: String,
       required: true
     }

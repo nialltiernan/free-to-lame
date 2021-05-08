@@ -1,6 +1,6 @@
 <template>
   <section class="text-center">
-    <it-loading :radius="radius"></it-loading>
+    <it-loading :radius="radius" :color="color"></it-loading>
   </section>
 </template>
 
@@ -11,6 +11,10 @@ export default {
     radius : {
       type: Number,
       default: 32
+    },
+    color: {
+      type: String,
+      default: 'blue'
     }
   }
 }

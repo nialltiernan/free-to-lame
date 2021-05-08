@@ -13,7 +13,6 @@ use User\Model\User;
 
 class UserReadRepository implements UserReadRepositoryInterface
 {
-
     private DatabaseAdapter $db;
     private AbstractHydrator $hydrator;
 

@@ -15,7 +15,7 @@
   <h2>
     Welcome,
     <span v-if="isLoaded" class="d-inline-block">{{ username }}</span>
-    <span v-else class="d-inline-block"><it-loading :radius="15" :stroke="4"></it-loading> </span>
+    <span v-else class="d-inline-block"><it-loading :radius="15" :stroke="4" :color="color"/> </span>
   </h2>
 
   <form v-if="isLoaded" @submit.prevent="updateAccount">
@@ -46,7 +46,7 @@
 
   <div v-else>
     <br>
-    <LoadingSpinner :radius="46"/>
+    <LoadingSpinner :radius="46" :color="color"/>
   </div>
 
   <it-divider/>
@@ -67,13 +67,16 @@ export default {
     userId: {
       type: String,
       required: true
+    },
+    color: {
+      type: String,
+      required: true
     }
   },
   data() {
     return {
       username: '',
       email: '',
-      color: 'grey',
       success: false,
       fail: false
     }

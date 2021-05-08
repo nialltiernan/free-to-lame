@@ -34,7 +34,10 @@ class AccountController extends AbstractActionController
             return $this->redirect()->toRoute('home');
         }
 
-        return new ViewModel(['userId' => (int) $this->params()->fromRoute('userId')]);
+        return new ViewModel([
+            'userId' => (int) $this->params()->fromRoute('userId'),
+            'color' => $this->getLoadingColor()
+        ]);
     }
 
     public function indexJsonAction(): JsonModel
@@ -128,5 +131,19 @@ class AccountController extends AbstractActionController
         $user = $identity->getAuthenticationService()->getIdentity();
 
         return $user->getId() === (int) $this->params()->fromRoute('userId');
+    }
+
+    private function getLoadingColor(): string
+    {
+        /** @var \Laminas\Mvc\Plugin\Identity\Identity $identity */
+        $identity = $this->plugin(Identity::class);
+
+        if ($identity->getAuthenticationService()->hasIdentity()){
+            /** @var \User\Model\User $user */
+            $user = $identity->getAuthenticationService()->getIdentity();
+            return $user->getColor();
+        }
+
+        return 'blue';
     }
 }

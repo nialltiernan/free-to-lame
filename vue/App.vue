@@ -8,7 +8,7 @@
     </div>
   </section>
 
-  <Grid :games="games"/>
+  <Grid :games="games" :color="color"/>
 </template>
 
 <script>
@@ -16,6 +16,12 @@ import Grid from './components/Grid.vue';
 
 export default {
   components: { Grid },
+  props: {
+    color: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       games: [],
@@ -36,7 +42,7 @@ export default {
     },
   },
   created() {
-    this.fetchData()
+    this.fetchData();
   }
 }
 </script>
