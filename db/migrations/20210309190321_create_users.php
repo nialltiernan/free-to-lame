@@ -23,7 +23,7 @@ final class CreateUsers extends AbstractMigration
             ->addColumn('username', 'string', ['limit' => 20])
             ->addColumn('email', 'string', ['limit' => 100])
             ->addColumn('password', 'string', ['limit' => 255])
-            ->addColumn('color', 'string', ['limit' => 7])
+            ->addColumn('color', 'string', ['default' => '#ff0000' ,'limit' => 7])
             ->addIndex(['username'], ['unique' => true])
             ->addIndex(['email'], ['unique' => true])
             ->create();
