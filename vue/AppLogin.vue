@@ -1,9 +1,4 @@
 <template>
-
-  <div v-if="invalidCredentials" class="alert alert-danger" role="alert">
-    Invalid credentials <button class="badge badge-secondary" @click="invalidCredentials = false">close</button>
-  </div>
-
   <h1>Login</h1>
 
   <form @submit.prevent="login">
@@ -30,7 +25,6 @@ export default {
     return {
       username: '',
       password: '',
-      invalidCredentials: false,
     }
   },
   methods: {
@@ -53,15 +47,23 @@ export default {
 
       if (response.status === 200) {
         window.location.href = BASE_URL;
+        return;
       }
 
       if (response.status === 401) {
-        this.invalidCredentials = true
-      } else if (!response.ok) {
-        alert('HTTP-Error: ' + response.status);
-        console.log(response.statusText);
+        this.showInvalidCredentialsMessage();
+        return;
       }
+
+      alert('HTTP-Error: ' + response.status);
+      console.log(response.statusText);
     },
+    showInvalidCredentialsMessage() {
+      this.$Notification.warning({
+        title: 'Invalid credentials',
+        text: 'You cannot log in because you have entered invalid credentials'
+      })
+    }
   },
 }
 </script>

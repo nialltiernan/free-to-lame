@@ -1,13 +1,4 @@
 <template>
-
-  <div v-if="success" class="alert alert-success" role="alert">
-    Account updated! <button class="badge badge-secondary" @click="success = false">close</button>
-  </div>
-
-  <div v-if="fail" class="alert alert-danger" role="alert">
-    Failed to update account! <button class="badge badge-secondary" @click="fail = false">close</button>
-  </div>
-
   <h1>
     <it-avatar size="70px" :color="selectedColor"/>
     My Account
@@ -77,8 +68,7 @@ export default {
     return {
       username: '',
       email: '',
-      success: false,
-      fail: false,
+      isLoaded: false,
       selectedColor: this.color
     }
   },
@@ -98,6 +88,8 @@ export default {
       this.username = data.username;
       this.email = data.email;
       this.selectedColor = data.color;
+
+      this.isLoaded = true;
     },
     updateFavoriteColor(color) {
       this.selectedColor = color.hex;
@@ -119,19 +111,25 @@ export default {
         body: JSON.stringify(user)
       });
 
-      if (!response.ok) {
-        alert('HTTP-Error: ' + response.status);
-        console.log(response.statusText);
-        this.fail = true
+      if (response.ok) {
+        this.showAccountUpdatedMessage();
         return;
       }
 
-      this.success = true;
+      this.showErrorMessage();
+      console.log(response.statusText);
     },
-  },
-  computed: {
-    isLoaded() {
-      return this.username !== '';
+    showAccountUpdatedMessage() {
+      this.$Notification.success({
+        title: 'Account updated',
+        text: 'You have updated your preferences'
+      })
+    },
+    showErrorMessage() {
+      this.$Notification.danger({
+        title: 'Oops!',
+        text: 'Something has gone wrong'
+      })
     }
   },
   created() {
