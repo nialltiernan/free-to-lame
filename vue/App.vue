@@ -8,14 +8,14 @@
     </div>
   </section>
 
-  <Grid :games="games" :color="color"/>
+  <GameGrid :games="games" :color="color"/>
 </template>
 
 <script>
-import Grid from './components/Grid.vue';
+import GameGrid from './components/GameGrid.vue';
 
 export default {
-  components: { Grid },
+  components: { GameGrid },
   props: {
     color: {
       type: String,

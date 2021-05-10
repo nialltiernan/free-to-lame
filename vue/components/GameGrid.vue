@@ -21,7 +21,7 @@ import GameCard from './GameCard.vue';
 import LoadingSpinner from './LoadingSpinner.vue';
 
 export default {
-  name: 'Grid',
+  name: 'GameGrid',
   components: {
     GameCard,
     LoadingSpinner
