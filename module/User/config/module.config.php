@@ -2,10 +2,13 @@
 
 use Laminas\Authentication\AuthenticationService as LaminasAuthenticationService;
 use Laminas\Router\Http\Literal;
+use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
+use User\Controller\AccountController;
 use User\Controller\AuthController;
 use User\Controller\Plugin\UserColorPlugin;
 use User\Controller\UserController;
+use User\Factory\Controller\AccountControllerFactory;
 use User\Factory\Controller\AuthControllerFactory;
 use User\Factory\View\Helper\AuthenticationHelperFactory;
 use User\Factory\Service\AuthenticationServiceFactory;
@@ -82,15 +85,61 @@ return [
                     ],
                 ],
             ],
+            'account' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/account/:userId',
+                    'constraints' => [
+                        'useId'     => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => AccountController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'json' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/json',
+                            'defaults' => [
+                                'controller' => AccountController::class,
+                                'action' => 'indexJson',
+                            ],
+                        ],
+                    ],
+                    'update' => [
+                        'type'    => Segment::class,
+                        'options' => [
+                            'route'    => '/update',
+                            'defaults' => [
+                                'controller' => AccountController::class,
+                                'action'     => 'updateUser',
+                            ],
+                        ],
+                    ],
+                    'delete' => [
+                        'type'    => Segment::class,
+                        'options' => [
+                            'route'    => '/delete',
+                            'defaults' => [
+                                'controller' => AccountController::class,
+                                'action'     => 'deleteUser',
+                            ],
+                        ],
+                    ],
+                ]
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
             UserController::class => UserControllerFactory::class,
-            AuthController::class => AuthControllerFactory::class
+            AuthController::class => AuthControllerFactory::class,
+            AccountController::class => AccountControllerFactory::class
         ],
     ],
-
     'controller_plugins' => [
         'factories' => [
             UserColorPlugin::class => InvokableFactory::class,

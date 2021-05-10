@@ -1,10 +1,10 @@
 <?php
 
-namespace Account\Factory\Controller;
+namespace User\Factory\Controller;
 
-use Account\Controller\AccountController;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use User\Controller\AccountController;
 use User\Repository\UserReadRepositoryInterface;
 use User\Repository\UserWriteRepositoryInterface;
 

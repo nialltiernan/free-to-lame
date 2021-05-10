@@ -29,5 +29,4 @@ return [
     'Game',
     'Search',
     'User',
-    'Account',
 ];

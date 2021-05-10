@@ -1,6 +1,6 @@
 <?php
 
-namespace Account\Controller;
+namespace User\Controller;
 
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
@@ -61,7 +61,7 @@ class AccountController extends AbstractActionController
             $data = [];
         }
 
-        return new JsonModel(['data' => $data]);
+        return (new JsonModel(['data' => $data]))->setTemplate('json/index.phtml');
     }
 
     public function deleteUserAction(): Response
