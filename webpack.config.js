@@ -11,6 +11,7 @@ module.exports = {
         category: './vue/main-category.js',
         platform: './vue/main-platform.js',
         account: './vue/main-account.js',
+        login: './vue/main-login.js',
     },
     mode: 'development',
     output: {

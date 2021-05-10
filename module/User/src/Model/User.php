@@ -60,4 +60,14 @@ class User
     {
         $this->color = $color;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'username' => $this->username,
+            'email' => $this->email,
+            'color' => $this->color,
+        ];
+    }
 }

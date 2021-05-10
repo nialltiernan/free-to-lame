@@ -17,21 +17,9 @@ $flashMessenger = $this->flashMessenger();
 
 <?= $flashMessenger->render(FlashMessenger::NAMESPACE_ERROR, ['alert', 'alert-danger', 'list-unstyled', 'text-center']) ?>
 
-<h1>Login</h1>
+<?= $this->headLink()->prependStylesheet($this->basePath('dist/vue-login.css')) ?>
 
-<?php $form->prepare() ?>
-<?= $this->form()->openTag($this->form) ?>
+<div id="vueAppLogin"></div>
 
-<div class="form-group">
-    <?= $this->formRow($form->get('username')) ?>
-</div>
-
-<div class="form-group">
-    <?= $this->formRow($form->get('password')) ?>
-</div>
-
-<?= $this->formRow($form->get('submit')) ?>
-
-<?= $this->form()->closeTag() ?>
-
+<script src="<?= $this->basePath('dist/vue-login.js') ?>"></script>
 

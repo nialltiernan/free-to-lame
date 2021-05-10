@@ -8,6 +8,7 @@ use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
 use Laminas\Mvc\Plugin\Identity\Identity;
+use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
 use User\Form\LoginForm;
 use User\Form\RegisterForm;
@@ -65,24 +66,18 @@ class AuthController extends AbstractActionController
             return new ViewModel(['form' => $this->loginForm]);
         }
 
-        $params = $this->getRequest()->getPost();
-        $this->loginForm->setData($params);
-
-        if (!$this->loginForm->isValid()) {
-            $this->flashMessenger->addErrorMessage('Invalid input');
-            return new ViewModel(['form' => $this->loginForm]);
-        }
+        $params = json_decode($this->getRequest()->getContent(), true);
 
         $authenticationService = $this->authenticate($params['username'], $params['password']);
 
         if ($authenticationService->hasIdentity()) {
+            /** @var \User\Model\User $user */
             $user = $authenticationService->getIdentity();
             $this->flashMessenger->addSuccessMessage('You have logged in, ' . $user->getUsername());
-            return $this->redirect()->toRoute('home');
+            return (new JsonModel(['data' => $user->toArray()]))->setTemplate('json/index.phtml');
         }
 
-        $this->flashMessenger->addErrorMessage('Invalid credentials');
-        return new ViewModel(['form' => $this->loginForm]);
+        return (new Response)->setStatusCode(Response::STATUS_CODE_401);
     }
 
     private function authenticate(string $username, string $password): AuthenticationServiceInterface
