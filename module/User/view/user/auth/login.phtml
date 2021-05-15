@@ -1,25 +1,5 @@
-<style>
-    ul {
-        color: red;
-    }
-</style>
-
-<?php
-/**
- * @var \Laminas\Form\Form $form
- * @var \Laminas\Mvc\Plugin\FlashMessenger\View\Helper\FlashMessenger $flashMessenger
- */
-
-use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
-
-$flashMessenger = $this->flashMessenger();
-?>
-
-<?= $flashMessenger->render(FlashMessenger::NAMESPACE_ERROR, ['alert', 'alert-danger', 'list-unstyled', 'text-center']) ?>
-
 <?= $this->headLink()->prependStylesheet($this->basePath('dist/vue-login.css')) ?>
 
 <div id="vueAppLogin"></div>
 
 <script src="<?= $this->basePath('dist/vue-login.js') ?>"></script>
-

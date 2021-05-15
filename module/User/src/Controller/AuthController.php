@@ -63,7 +63,7 @@ class AuthController extends AbstractActionController
     public function loginAction()
     {
         if ($this->getRequest()->isGet()) {
-            return new ViewModel(['form' => $this->loginForm]);
+            return new ViewModel();
         }
 
         $params = json_decode($this->getRequest()->getContent(), true);

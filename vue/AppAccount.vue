@@ -122,9 +122,7 @@ export default {
       });
 
       if (response.ok) {
-        for (let status in this.inputStatus) {
-          this.inputStatus[status] = 'success';
-        }
+        this.setInputStatusSuccess();
         this.showAccountUpdatedMessage();
         return;
       }
@@ -137,6 +135,12 @@ export default {
 
       this.showErrorMessage();
       console.log(response.statusText);
+    },
+
+    setInputStatusSuccess() {
+      for (let status in this.inputStatus) {
+        this.inputStatus[status] = 'success';
+      }
     },
 
     processErrors(errors) {

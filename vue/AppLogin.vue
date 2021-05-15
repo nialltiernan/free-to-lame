@@ -5,13 +5,13 @@
     <div class="form-group">
       <label class="visually-hidden" for="username">Username</label>
       <it-input v-model="username" id="username" class="form-control" type="text" name="username" placeholder="Username"
-                suffix-icon="face"/>
+                :status="inputStatus.username" suffix-icon="face"/>
     </div>
 
     <div class="form-group">
       <label class="visually-hidden" for="password">Password</label>
       <it-input v-model="password" id="password" class="form-control" type="password" name="password"
-                placeholder="Password" suffix-icon="password"/>
+                :status="inputStatus.password" placeholder="Password" suffix-icon="password"/>
     </div>
 
     <input class="btn btn-primary" type="submit" name="submit" value="Login"/>
@@ -25,6 +25,10 @@ export default {
     return {
       username: '',
       password: '',
+      inputStatus: {
+        username: null,
+        password: null
+      },
     }
   },
   methods: {
@@ -49,12 +53,19 @@ export default {
       }
 
       if (response.status === 401) {
+        this.setInputStatusDanger();
         this.showInvalidCredentialsMessage();
         return;
       }
 
       alert('HTTP-Error: ' + response.status);
       console.log(response.statusText);
+    },
+
+    setInputStatusDanger() {
+      for (let status in this.inputStatus) {
+        this.inputStatus[status] = 'danger';
+      }
     },
 
     showInvalidCredentialsMessage() {
