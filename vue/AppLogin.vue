@@ -31,18 +31,16 @@ export default {
     async login() {
       const url = BASE_URL + '/login';
 
-      let credentials = {
-        username: this.username,
-        password: this.password
-      };
-
       let response = await fetch(url, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(credentials)
+        body: JSON.stringify({
+          username: this.username,
+          password: this.password
+        })
       });
 
       if (response.status === 200) {
@@ -58,6 +56,7 @@ export default {
       alert('HTTP-Error: ' + response.status);
       console.log(response.statusText);
     },
+
     showInvalidCredentialsMessage() {
       this.$Notification.warning({
         title: 'Invalid credentials',
