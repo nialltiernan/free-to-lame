@@ -10,6 +10,7 @@ use User\Controller\Plugin\UserColorPlugin;
 use User\Controller\UserController;
 use User\Factory\Controller\AccountControllerFactory;
 use User\Factory\Controller\AuthControllerFactory;
+use User\Factory\Form\UserUpdateFormFactory;
 use User\Factory\View\Helper\AuthenticationHelperFactory;
 use User\Factory\Service\AuthenticationServiceFactory;
 use User\Factory\Form\LoginFormFactory;
@@ -19,6 +20,7 @@ use User\Factory\Repository\UserReadRepositoryFactory;
 use User\Factory\Repository\UserWriteRepositoryFactory;
 use User\Form\LoginForm;
 use User\Form\RegisterForm;
+use User\Form\UserUpdateForm;
 use User\Repository\UserReadRepository;
 use User\Repository\UserReadRepositoryInterface;
 use User\Repository\UserWriteRepository;
@@ -40,6 +42,7 @@ return [
             UserWriteRepository::class => UserWriteRepositoryFactory::class,
             RegisterForm::class => RegisterFormFactory::class,
             LoginForm::class => LoginFormFactory::class,
+            UserUpdateForm::class => UserUpdateFormFactory::class,
             AuthenticationService::class => AuthenticationServiceFactory::class
         ]
     ],

@@ -15,12 +15,15 @@
       <tr>
         <td>Username</td>
         <td>
-          <it-input v-model="username" suffix-icon="face"/>
+          <it-input v-model="username" :status="usernameInput.status" :message="usernameInput.message"
+                    suffix-icon="face"/>
         </td>
       </tr>
       <tr>
         <td>Email</td>
-        <td>{{ email }}</td>
+        <td>
+          <it-input v-model="email" :status="emailInput.status" :message="emailInput.message" suffix-icon="email"/>
+        </td>
       </tr>
       <tr>
         <td>Favourite color</td>
@@ -50,10 +53,7 @@ import LoadingSpinner from './components/LoadingSpinner.vue';
 import AccountDelete from './components/AccountDelete.vue';
 
 export default {
-  components: {
-    LoadingSpinner,
-    AccountDelete
-  },
+  components: {LoadingSpinner, AccountDelete},
   props: {
     userId: {
       type: String,
@@ -69,7 +69,12 @@ export default {
       username: '',
       email: '',
       isLoaded: false,
-      selectedColor: this.color
+      selectedColor: this.color,
+      errors: {},
+      inputStatus: {
+        username: null,
+        email: null
+      },
     }
   },
   methods: {
@@ -91,16 +96,17 @@ export default {
 
       this.isLoaded = true;
     },
+
     updateFavoriteColor(color) {
       this.selectedColor = color.hex;
     },
-    async updateAccount() {
-      const url = BASE_URL + '/account/' + this.userId + '/update';
 
-      let user = {
-        username: this.username,
-        color: this.selectedColor
-      };
+    async updateAccount() {
+      this.errors = {};
+      this.inputStatus.username = null;
+      this.inputStatus.email = null;
+
+      const url = BASE_URL + '/account/' + this.userId + '/update';
 
       let response = await fetch(url, {
         method: 'POST',
@@ -108,29 +114,74 @@ export default {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(user)
+        body: JSON.stringify({
+          username: this.username,
+          email: this.email,
+          color: this.selectedColor
+        })
       });
 
       if (response.ok) {
+        for (let status in this.inputStatus) {
+          this.inputStatus[status] = 'success';
+        }
         this.showAccountUpdatedMessage();
+        return;
+      }
+
+      if (response.status === 400) {
+        this.showValidationFailedMessage();
+        this.processErrors(await response.json())
         return;
       }
 
       this.showErrorMessage();
       console.log(response.statusText);
     },
+
+    processErrors(errors) {
+      for (let input in errors) {
+        let inputErrors = errors[input];
+        for (let inputError in inputErrors) {
+          this.errors[input] = inputErrors[inputError];
+        }
+      }
+    },
+
     showAccountUpdatedMessage() {
       this.$Notification.success({
         title: 'Account updated',
         text: 'You have updated your preferences'
       })
     },
+
+    showValidationFailedMessage() {
+      this.$Notification.warning({
+        title: 'Validation failed',
+        text: 'Please fix the input'
+      })
+    },
+
     showErrorMessage() {
       this.$Notification.danger({
         title: 'Oops!',
         text: 'Something has gone wrong'
       })
     }
+  },
+  computed: {
+    usernameInput() {
+      if ('username' in this.errors) {
+        return {status: 'danger', message: this.errors.username};
+      }
+      return {status: this.inputStatus.username, message: null};
+    },
+    emailInput() {
+      if ('email' in this.errors) {
+        return {status: 'danger', message: this.errors.email};
+      }
+      return {status: this.inputStatus.email, message: null};
+    },
   },
   created() {
     this.fetchData()
