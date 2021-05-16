@@ -12,6 +12,7 @@ module.exports = {
         'category-list': './vue/main-category-list.js',
         platform: './vue/main-platform.js',
         'platform-list': './vue/main-platform-list.js',
+        'search-results': './vue/main-search-results.js',
         account: './vue/main-account.js',
         login: './vue/main-login.js',
         register: './vue/main-register.js',

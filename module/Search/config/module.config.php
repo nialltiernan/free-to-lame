@@ -7,6 +7,16 @@ use Search\Controller\SearchResultsController;
 return [
     'router' => [
         'routes' => [
+            'search' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/search',
+                    'defaults' => [
+                        'controller' => SearchResultsController::class,
+                        'action'     => 'indexJson',
+                    ],
+                ],
+            ],
             'search-results' => [
                 'type'    => Literal::class,
                 'options' => [

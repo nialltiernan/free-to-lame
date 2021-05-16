@@ -1,17 +1,5 @@
-<h1>Search Results:</h1>
+<?= $this->headLink()->prependStylesheet($this->basePath('dist/vue-search-results.css')) ?>
 
-<h2><?= $this->subtitle ?></h2>
+<div id="vueAppSearchResults" data-color="<?= $this->color ?>" data-terms=<?= $this->terms ?>></div>
 
-<ul class="list-unstyled">
-    <?php foreach ($this->games as $game): ?>
-        <li class="media pb-4 d-flex flex-wrap">
-            <img src="<?= $game['thumbnail'] ?>" class="mr-3 rounded pb-2" alt="<?= $game['title'] ?>">
-            <div class="media-body">
-                <h5 class="mt-0 mb-1">
-                    <a href="<?= $this->url('game', ['id' => $game['id']]) ?>"><?= $game['title'] ?></a>
-                </h5>
-                <p><?= $game['short_description'] ?></p>
-            </div>
-        </li>
-    <?php endforeach; ?>
-</ul>
+<script src="<?= $this->basePath('dist/vue-search-results.js') ?>"></script>

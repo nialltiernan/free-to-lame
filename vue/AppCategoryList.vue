@@ -38,12 +38,6 @@
   </div>
 
   <div class="row mb-3">
-    <h2 class="col shadow-sm pb-2"><a :href="mmotps">MMO-TPS</a></h2>
-    <h2 class="col shadow-sm pb-2"><a :href="military">Military</a></h2>
-    <h2 class="col shadow-sm pb-2"><a :href="multiplayerOnlineBattleArena">Online Battle Arena</a></h2>
-  </div>
-
-  <div class="row mb-3">
     <h2 class="col shadow-sm pb-2"><a :href="openWorld">Open World</a></h2>
     <h2 class="col shadow-sm pb-2"><a :href="permadeath">Permadeath</a></h2>
     <h2 class="col shadow-sm pb-2"><a :href="pixel">Pixel</a></h2>

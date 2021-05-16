@@ -8,6 +8,7 @@ use Laminas\Mvc\Plugin\Identity\Identity;
 class UserColorPlugin extends AbstractPlugin
 {
     public const NAME = 'UserColorPlugin';
+    const DEFAULT_COLOR = 'blue';
 
     public function getColor(Identity $identity): string
     {
@@ -17,6 +18,6 @@ class UserColorPlugin extends AbstractPlugin
             return $user->getColor();
         }
 
-        return 'blue';
+        return self::DEFAULT_COLOR;
     }
 }
