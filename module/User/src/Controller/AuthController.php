@@ -10,6 +10,7 @@ use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
 use Laminas\Mvc\Plugin\Identity\Identity;
 use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
+use User\Exception\CouldNotCreateUserException;
 use User\Form\LoginForm;
 use User\Form\RegisterForm;
 use User\Repository\UserWriteRepositoryInterface;
@@ -34,27 +35,36 @@ class AuthController extends AbstractActionController
     }
 
     /**
-     * @return \Laminas\Http\Response | \Laminas\View\Model\ViewModel
+     * @return \Laminas\Http\Response|\Laminas\View\Model\ViewModel
      */
     public function registerAction()
     {
         if ($this->getRequest()->isGet()) {
-            return new ViewModel(['form' => $this->registerForm]);
+            return new ViewModel();
         }
 
-        $params = $this->getRequest()->getPost();
-        $this->registerForm->setData($params);
+        $data = json_decode($this->getRequest()->getContent(), true);
+
+        $this->registerForm->setData($data);
 
         if (!$this->registerForm->isValid()) {
-            $this->flashMessenger->addErrorMessage('Invalid input');
-            return new ViewModel(['form' => $this->registerForm]);
+            return (new Response())
+                ->setStatusCode(Response::STATUS_CODE_400)
+                ->setReasonPhrase('Registration failed')
+                ->setContent(json_encode($this->registerForm->getMessages()));
         }
 
-        $this->writeRepository->create($params->toArray());
-        $this->authenticate($params['username'], $params['password']);
-        $this->flashMessenger->addSuccessMessage('Account created successfully!');
+        try {
+            $this->writeRepository->create($data);
+        } catch (CouldNotCreateUserException $exception) {
+            return (new Response())
+                ->setStatusCode(Response::STATUS_CODE_500)
+                ->setReasonPhrase($exception->getMessage());
+        }
 
-        return $this->redirect()->toRoute('home');
+        $this->authenticate($data['username'], $data['password']);
+        $this->flashMessenger->addSuccessMessage('Account created successfully!');
+        return (new Response())->setStatusCode(Response::STATUS_CODE_201);
     }
 
     /**

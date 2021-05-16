@@ -2,6 +2,7 @@
 
 namespace User\Controller;
 
+use Laminas\Authentication\AuthenticationServiceInterface;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
@@ -128,11 +129,10 @@ class AccountController extends AbstractActionController
         return (new Response)->setStatusCode(Response::STATUS_CODE_201);
     }
 
-    private function getAuthenticationService(): AuthenticationService
+    private function getAuthenticationService(): AuthenticationServiceInterface
     {
         /** @var \Laminas\Mvc\Plugin\Identity\Identity $identity */
         $identity = $this->plugin(Identity::class);
-
         return $identity->getAuthenticationService();
     }
 

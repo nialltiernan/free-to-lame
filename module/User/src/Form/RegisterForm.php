@@ -28,34 +28,17 @@ class RegisterForm extends Form
         $this->inputFilter = new InputFilter();
         $this->db = $options['db'];
 
-        $this->setAttribute('action', 'register');
         $this->addUsername();
         $this->addEmail();
         $this->addPassword();
-        $this->addSubmit();
 
         $this->setInputFilter($this->inputFilter);
     }
 
     private function addUsername()
     {
-        $this->addUsernameInput();
-        $this->addUsernameInputFilter();
-    }
+        $this->add(new Text('username'));
 
-    private function addUsernameInput(): void
-    {
-        $input = new Text('username');
-
-        $input->setLabel('Username');
-        $input->setAttributes(['class' => 'form-control', 'id' => 'username', 'placeholder' => 'Username']);
-        $input->setLabelAttributes(['class' => 'visually-hidden', 'for' => 'username']);
-
-        $this->add($input);
-    }
-
-    private function addUsernameInputFilter(): void
-    {
         $filter = new Input('username');
 
         $filter->getValidatorChain()->attach(new StringLength(2));
@@ -69,23 +52,8 @@ class RegisterForm extends Form
 
     private function addEmail()
     {
-        $this->addEmailInput();
-        $this->addEmailInputFilter();
-    }
+        $this->add(new Email('email'));
 
-    private function addEmailInput(): void
-    {
-        $input = new Email('email');
-
-        $input->setLabel('Email');
-        $input->setAttributes(['class' => 'form-control', 'id' => 'email', 'placeholder' => 'Email']);
-        $input->setLabelAttributes(['class' => 'visually-hidden', 'for' => 'email']);
-
-        $this->add($input);
-    }
-
-    private function addEmailInputFilter(): void
-    {
         $filter = new Input('email');
 
         $filter->getValidatorChain()->attach(new EmailAddress());
@@ -99,36 +67,11 @@ class RegisterForm extends Form
 
     private function addPassword()
     {
-        $this->addPasswordInput();
-        $this->addPasswordInputFilter();
-    }
+        $this->add(new Password('password'));
 
-    private function addPasswordInput(): void
-    {
-        $input = new Password('password');
+        $filter = new Input('password');
+        $filter->getValidatorChain()->attach(new StringLength(8));
 
-        $input->setLabel('Password');
-        $input->setAttributes(['class' => 'form-control', 'id' => 'password', 'placeholder' => 'Password']);
-        $input->setLabelAttributes(['class' => 'visually-hidden', 'for' => 'password']);
-
-        $this->add($input);
-    }
-
-    private function addPasswordInputFilter(): void
-    {
-        $inputFilter = new Input('password');
-        $inputFilter->getValidatorChain()->attach(new StringLength(8));
-
-        $this->inputFilter->add($inputFilter);
-    }
-
-    private function addSubmit()
-    {
-        $submit = new Submit('submit');
-
-        $submit->setValue('Register');
-        $submit->setAttribute('class', 'btn btn-primary');
-
-        $this->add($submit);
+        $this->inputFilter->add($filter);
     }
 }

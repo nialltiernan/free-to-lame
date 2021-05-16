@@ -14,6 +14,7 @@ module.exports = {
         'platform-list': './vue/main-platform-list.js',
         account: './vue/main-account.js',
         login: './vue/main-login.js',
+        register: './vue/main-register.js',
     },
     mode: 'development',
     output: {

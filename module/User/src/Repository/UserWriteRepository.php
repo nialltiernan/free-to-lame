@@ -18,6 +18,8 @@ use User\Model\User;
 class UserWriteRepository implements UserWriteRepositoryInterface
 {
 
+    public const DEFAULT_COLOR = '#ff0000';
+
     private DatabaseAdapter $db;
     private UserCreatedEvent $createdEvent;
 
@@ -77,7 +79,7 @@ class UserWriteRepository implements UserWriteRepositoryInterface
         $user->setEmail($data['email']);
         $user->setUsername($data['username']);
         $user->setPassword($data['username']);
-        $user->setColor($data['color']);
+        $user->setColor(self::DEFAULT_COLOR);
 
         return $user;
     }

@@ -102,9 +102,7 @@ export default {
     },
 
     async updateAccount() {
-      this.errors = {};
-      this.inputStatus.username = null;
-      this.inputStatus.email = null;
+      this.clearErrors();
 
       const url = BASE_URL + '/account/' + this.userId + '/update';
 
@@ -137,6 +135,12 @@ export default {
       console.log(response.statusText);
     },
 
+    clearErrors() {
+      this.errors = {};
+      this.inputStatus.username = null;
+      this.inputStatus.email = null;
+    },
+
     setInputStatusSuccess() {
       for (let status in this.inputStatus) {
         this.inputStatus[status] = 'success';
@@ -153,24 +157,15 @@ export default {
     },
 
     showAccountUpdatedMessage() {
-      this.$Notification.success({
-        title: 'Account updated',
-        text: 'You have updated your preferences'
-      })
+      this.$Notification.success({title: 'Account updated', text: 'You have updated your preferences'})
     },
 
     showValidationFailedMessage() {
-      this.$Notification.warning({
-        title: 'Validation failed',
-        text: 'Please fix the input'
-      })
+      this.$Notification.warning({title: 'Validation failed', text: 'Please fix the input'})
     },
 
     showErrorMessage() {
-      this.$Notification.danger({
-        title: 'Oops!',
-        text: 'Something has gone wrong'
-      })
+      this.$Notification.danger({title: 'Oops!', text: 'Something has gone wrong'})
     }
   },
   computed: {

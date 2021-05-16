@@ -1,43 +1,5 @@
-<style>
-    ul {
-        color: red;
-    }
-</style>
+<?= $this->headLink()->prependStylesheet($this->basePath('dist/vue-register.css')) ?>
 
-<?php
-/**
- * @var \Laminas\Form\Form $form
- * @var \Laminas\Mvc\Plugin\FlashMessenger\View\Helper\FlashMessenger $flashMessenger
- */
+<div id="vueAppRegister"></div>
 
-use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
-
-$flashMessenger = $this->flashMessenger();
-?>
-
-<?= $flashMessenger->render(FlashMessenger::NAMESPACE_ERROR, ['alert', 'alert-danger', 'list-unstyled', 'text-center']) ?>
-
-<h1>Register</h1>
-
-<?php $form->prepare() ?>
-<?= $this->form()->openTag($this->form) ?>
-
-<div class="form-group">
-    <?= $this->formRow($form->get('username')) ?>
-</div>
-
-<div class="form-group">
-    <?= $this->formRow($form->get('email')) ?>
-</div>
-
-<div class="form-group">
-    <?= $this->formRow($form->get('password')) ?>
-</div>
-
-<input type="hidden" name="color" value="#ff0000"></input>
-
-<?= $this->formRow($form->get('submit')) ?>
-
-<?= $this->form()->closeTag() ?>
-
-
+<script src="<?= $this->basePath('dist/vue-register.js') ?>"></script>
