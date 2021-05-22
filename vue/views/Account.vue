@@ -49,8 +49,8 @@
 </template>
 
 <script>
-import LoadingSpinner from './components/LoadingSpinner.vue';
-import AccountDelete from './components/AccountDelete.vue';
+import LoadingSpinner from '../components/LoadingSpinner.vue';
+import AccountDelete from '../components/AccountDelete.vue';
 
 export default {
   components: {LoadingSpinner, AccountDelete},

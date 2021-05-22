@@ -34,17 +34,7 @@
         ?>
     </head>
     <body>
-        <?php $this->navigation('navigation')->menu()->setPartial('application/navigation/nav.phtml') ?>
-        <?= $this->navigation('navigation')->menu()->render() ?>
-
-        <div class="container mt-3">
-            <?= $this->content ?>
-            <hr>
-            <footer class="mb-3">
-                <p>Content provided by <a href="https://www.freetogame.com/api-doc">FreeToGame</a>.
-            </footer>
-        </div>
-
+        <?= $this->content ?>
         <?= $this->inlineScript()->prependFile($this->basePath('js/search-bar.js')) ?>
     </body>
 </html>

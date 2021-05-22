@@ -6,11 +6,11 @@
       <it-select placeholder="Sort by" v-model="sortByValue" :options="sortByOptions" @change="reloadData"/>
     </div>
   </div>
-  <GameGrid :games="games" :color="color"/>
+  <GameGrid :games="games"/>
 </template>
 
 <script>
-import GameGrid from './components/GameGrid.vue';
+import GameGrid from '../components/GameGrid.vue';
 
 export default {
   components: {GameGrid},
@@ -18,14 +18,11 @@ export default {
     platform: {
       type: String,
       required: true
-    },
-    color: {
-      type: String,
-      required: true
     }
   },
   data() {
     return {
+      activePlatform: null,
       games: [],
       sortByValue: null,
       sortByOptions: [
@@ -46,7 +43,9 @@ export default {
   },
   methods: {
     async fetchData(sortBy = 'popularity') {
-      const url = BASE_URL + '/platform/' + this.platform + '/json?sort-by=' + sortBy;
+      this.clearGames();
+
+      const url = BASE_URL + '/platform/' + this.activePlatform + '/json?sort-by=' + sortBy;
 
       let response = await fetch(url);
 
@@ -57,6 +56,22 @@ export default {
 
       this.games = await response.json();
     },
+
+    initActivePlatform() {
+      this.activePlatform = this.platform;
+    },
+
+    updateActivePlatform(platform) {
+      this.activePlatform = platform;
+    },
+
+    clearGames() {
+      this.games = [];
+    },
+
+    clearSortBy() {
+      this.sortByValue = null;
+    }
   },
   computed: {
     renderTitle() {
@@ -73,7 +88,15 @@ export default {
     }
   },
   created() {
-    this.fetchData()
+    this.initActivePlatform();
+
+    this.fetchData();
+
+    this.$watch(() => this.$route.params, (params) => {
+        this.updateActivePlatform(params.platform);
+        this.clearSortBy();
+        this.fetchData();
+    });
   }
 }
 </script>

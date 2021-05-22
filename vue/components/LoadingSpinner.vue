@@ -1,21 +1,26 @@
 <template>
   <section class="text-center">
-    <it-loading :radius="radius" :color="color"></it-loading>
+    <it-loading :radius="radius" :color="loadingColor"></it-loading>
   </section>
 </template>
 
 <script>
 export default {
   name: 'LoadingSpinner',
+  data() {
+    return {
+      loadingColor: null
+    }
+  },
   props: {
     radius : {
       type: Number,
       default: 32
     },
-    color: {
-      type: String,
-      default: 'blue'
-    }
+  },
+  inject: ['color'],
+  created() {
+    this.loadingColor = this.color;
   }
 }
 </script>

@@ -18,12 +18,12 @@
 
   <div v-else>
     <br>
-    <LoadingSpinner :radius="64" :color="color"/>
+    <LoadingSpinner :radius="64"/>
   </div>
 </template>
 
 <script>
-import LoadingSpinner from './components/LoadingSpinner.vue';
+import LoadingSpinner from '../components/LoadingSpinner.vue';
 
 export default {
   components: {LoadingSpinner},
@@ -32,10 +32,7 @@ export default {
       type: String,
       required: true
     },
-    color: {
-      type: String,
-      required: true
-    }
+    inject: ['color'],
   },
   data() {
     return {

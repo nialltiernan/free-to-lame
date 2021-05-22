@@ -1,36 +1,26 @@
 <template>
   <div class="row">
-    <GameThumbnail :source="thumbnailSource" :play-url="playUrl" :color="color"/>
+    <GameThumbnail :source="thumbnailSource" :play-url="playUrl"/>
     <GameDescriptionMain :title="title" :genre="genre" :platform="platform" :publisher="publisher"
-                            :developer="developer" :color="color"
-                            :releaseDate="releaseDate" :description="description"/>
+                         :developer="developer" :releaseDate="releaseDate" :description="description"/>
   </div>
-  <GameScreenshots :screenshots="screenshots" :color="color"/>
+  <GameScreenshots :screenshots="screenshots"/>
   <GameSystemRequirements v-if="hasRequirements" :requirements="systemRequirements"/>
 </template>
 
 <script>
-import GameThumbnail from './components/GameThumbnail.vue';
-import GameDescriptionMain from './components/GameDescriptionMain.vue';
-import GameScreenshots from './components/GameScreenshots.vue'
-import GameSystemRequirements from './components/GameSystemRequirements.vue';
+import GameThumbnail from '../components/GameThumbnail.vue';
+import GameDescriptionMain from '../components/GameDescriptionMain.vue';
+import GameScreenshots from '../components/GameScreenshots.vue'
+import GameSystemRequirements from '../components/GameSystemRequirements.vue';
 
 export default {
-  components: {
-    GameThumbnail,
-    GameDescriptionMain,
-    GameScreenshots,
-    GameSystemRequirements
-  },
+  components: {GameThumbnail, GameDescriptionMain, GameScreenshots, GameSystemRequirements},
   props: {
     gameId: {
       type: String,
       required: true
     },
-    color: {
-      type: String,
-      required: true
-    }
   },
   data() {
     return {

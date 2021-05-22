@@ -7,7 +7,10 @@
         <div class="d-flex justify-content-between align-items-center">
           <div class="btn-group">
             <a :href="game.game_url" class="btn btn-sm btn-outline-secondary">Play now</a>
-            <a :href="detailsUrl" class="btn btn-sm btn-outline-secondary">Details</a>
+            <router-link :to="{ name: 'Game', params: { gameId:game.id} }"
+                         class="btn btn-sm btn-outline-secondary">
+              Details
+            </router-link>
           </div>
           <small class="text-muted d-md-none d-lg-block">{{ game.release_date }}</small>
         </div>
@@ -23,14 +26,11 @@ export default {
     game: {
       type: Object,
       required: true
-    }
+    },
   },
   computed: {
     shortDescription() {
       return this.game.short_description.substring(0, 110);
-    },
-    detailsUrl() {
-      return BASE_URL + '/game/' + this.game.id
     }
   }
 }

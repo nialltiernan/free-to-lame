@@ -7,15 +7,6 @@ require('dotenv').config()
 module.exports = {
     entry: {
         app: './vue/main.js',
-        game: './vue/main-game.js',
-        category: './vue/main-category.js',
-        'category-list': './vue/main-category-list.js',
-        platform: './vue/main-platform.js',
-        'platform-list': './vue/main-platform-list.js',
-        'search-results': './vue/main-search-results.js',
-        account: './vue/main-account.js',
-        login: './vue/main-login.js',
-        register: './vue/main-register.js',
     },
     mode: 'development',
     output: {
@@ -40,13 +31,21 @@ module.exports = {
             },
         ]
     },
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.esm-bundler.js'
+        },
+        extensions: ['.js']
+    },
     plugins: [
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
             filename: 'vue-[name].css'
         }),
         new webpack.DefinePlugin({
-            BASE_URL: JSON.stringify(process.env.BASE_URL)
+            BASE_URL: JSON.stringify(process.env.BASE_URL),
+            __VUE_OPTIONS_API__: true,
+            __VUE_PROD_DEVTOOLS__: false
         })
     ]
 }

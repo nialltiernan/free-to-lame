@@ -11,7 +11,7 @@
 
   <div v-else>
     <br><br>
-    <LoadingSpinner :radius="64" :color="color" />
+    <LoadingSpinner :radius="64"/>
     <br><br>
   </div>
 </template>
@@ -22,18 +22,11 @@ import LoadingSpinner from './LoadingSpinner.vue';
 
 export default {
   name: 'GameGrid',
-  components: {
-    GameCard,
-    LoadingSpinner
-  },
+  components: {GameCard, LoadingSpinner},
   props: {
     games: {
       type: Array,
       required: true
-    },
-    color: {
-      type: String,
-      default: 'blue'
     }
   },
   computed: {

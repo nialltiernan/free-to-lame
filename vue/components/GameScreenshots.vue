@@ -23,7 +23,7 @@
 
   <div v-else>
     <br><br>
-    <LoadingSpinner :radius="64" :color="color" />
+    <LoadingSpinner :radius="64"/>
     <br><br>
   </div>
 </template>
@@ -37,10 +37,6 @@ export default {
   props: {
     screenshots: {
       type: Array,
-      required: true
-    },
-    color: {
-      type: String,
       required: true
     }
   },
