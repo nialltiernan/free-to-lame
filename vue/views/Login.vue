@@ -47,19 +47,22 @@ export default {
         })
       });
 
-      if (response.status === 200) {
-        window.location.href = BASE_URL;
-        return;
-      }
-
       if (response.status === 401) {
         this.setInputStatusDanger();
         this.showInvalidCredentialsMessage();
         return;
       }
 
-      alert('HTTP-Error: ' + response.status);
-      console.log(response.statusText);
+      if (!response.ok) {
+        alert('Something has gone wrong')
+        return;
+      }
+
+      this.showLoginSuccessMessage();
+
+      let user = await response.json();
+      this.$store.commit('logIn', user);
+      await this.$router.push({name: 'Account', params: {userId: user.id, color: user.color}});
     },
 
     setInputStatusDanger() {
@@ -73,6 +76,10 @@ export default {
         title: 'Invalid credentials',
         text: 'You cannot log in because you have entered invalid credentials'
       })
+    },
+
+    showLoginSuccessMessage() {
+      this.$Notification.success({title: 'Successfully logged in', text: 'You have logged in'});
     }
   },
 }

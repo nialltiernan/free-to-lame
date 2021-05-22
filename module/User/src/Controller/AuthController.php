@@ -21,7 +21,6 @@ class AuthController extends AbstractActionController
     private UserWriteRepositoryInterface $writeRepository;
     private RegisterForm $registerForm;
     private LoginForm $loginForm;
-    private FlashMessenger $flashMessenger;
 
     public function __construct(
         UserWriteRepositoryInterface $writeRepository,
@@ -31,7 +30,6 @@ class AuthController extends AbstractActionController
         $this->writeRepository = $writeRepository;
         $this->registerForm = $registerForm;
         $this->loginForm = $loginForm;
-        $this->flashMessenger = $this->plugin(FlashMessenger::class);
     }
 
     /**
@@ -55,7 +53,7 @@ class AuthController extends AbstractActionController
         }
 
         try {
-            $this->writeRepository->create($data);
+            $user = $this->writeRepository->create($data);
         } catch (CouldNotCreateUserException $exception) {
             return (new Response())
                 ->setStatusCode(Response::STATUS_CODE_500)
@@ -63,8 +61,7 @@ class AuthController extends AbstractActionController
         }
 
         $this->authenticate($data['username'], $data['password']);
-        $this->flashMessenger->addSuccessMessage('Account created successfully!');
-        return (new Response())->setStatusCode(Response::STATUS_CODE_201);
+        return (new JsonModel(['data' => $user->toArray()]))->setTemplate('json/index.phtml');
     }
 
     /**
@@ -83,7 +80,6 @@ class AuthController extends AbstractActionController
         if ($authenticationService->hasIdentity()) {
             /** @var \User\Model\User $user */
             $user = $authenticationService->getIdentity();
-            $this->flashMessenger->addSuccessMessage('You have logged in, ' . $user->getUsername());
             return (new JsonModel(['data' => $user->toArray()]))->setTemplate('json/index.phtml');
         }
 
@@ -107,12 +103,15 @@ class AuthController extends AbstractActionController
         return $identity->getAuthenticationService();
     }
 
-    public function logoutAction(): Response
+    public function logoutAction(): JsonModel
+    {
+        $this->logoutUser();
+        return (new JsonModel(['data' => ['status' => 'success']]))->setTemplate('json/index.phtml');
+    }
+
+    private function logoutUser(): void
     {
         $authenticationService = $this->getAuthenticationService();
         $authenticationService->clearIdentity();
-
-        $this->flashMessenger->addInfoMessage('You have logged out');
-        return $this->redirect()->toRoute('home');
     }
 }

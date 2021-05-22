@@ -168,30 +168,51 @@
             </div>
           </li>
 
-          <li class="nav-item">
+          <li v-if="isLoggedIn" class="nav-item">
+            <router-link class="nav-link" :to="{ name: 'Account', params: {userId: userId, color: userColor}}">Account
+            </router-link>
+          </li>
+          <li v-if="isLoggedIn" class="nav-item">
+            <LogoutButton/>
+          </li>
+
+          <li v-if="!isLoggedIn" class="nav-item">
             <router-link class="nav-link" :to="{ name: 'Register' }">Register</router-link>
           </li>
-          <li class="nav-item">
+          <li v-if="!isLoggedIn" class="nav-item">
             <router-link class="nav-link" :to="{ name: 'Login' }">Login</router-link>
           </li>
+
         </ul>
-        <form :action="searchResults" method="post" class="form-inline">
-          <div id="search-form" class="mr-2" style="width: 250px"></div>
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        <SearchForm/>
       </div>
     </div>
   </nav>
-
 </template>
 
 <script>
+import SearchForm from './SearchForm.vue';
+import LogoutButton from './LogoutButton.vue';
+
 export default {
   name: 'Navigation',
-  computed: {
-    searchResults() {
-      return BASE_URL + '/search-results';
+  components: {SearchForm, LogoutButton},
+  data() {
+    return {
+      userColor: null
     }
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isLoggedIn;
+    },
+    userId() {
+      return this.$store.getters.loggedInUser.id;
+    }
+  },
+  inject: ['color'],
+  created() {
+    this.userColor = this.color;
   }
 }
 </script>

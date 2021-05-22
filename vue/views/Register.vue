@@ -60,19 +60,22 @@ export default {
         })
       });
 
-      if (response.ok) {
-        this.redirectToHomepage();
-        return;
-      }
-
       if (response.status === 400) {
         this.showRegistrationFailedMessage();
         this.processErrors(await response.json())
         return;
       }
 
-      this.showErrorMessage();
-      console.log(response.statusText);
+      if (!response.ok) {
+        this.showErrorMessage();
+        return;
+      }
+
+      this.showRegistrationSuccessMessage();
+
+      let user = await response.json();
+      this.$store.commit('logIn', user);
+      await this.$router.push({name: 'Account', params: {userId: user.id, color: user.color}});
     },
 
     clearErrors() {
@@ -91,8 +94,8 @@ export default {
       }
     },
 
-    redirectToHomepage() {
-      window.location.href = BASE_URL;
+    showRegistrationSuccessMessage() {
+      this.$Notification.success({title: 'Registration successful', text: 'Thank you for creating an account'})
     },
 
     showRegistrationFailedMessage() {
