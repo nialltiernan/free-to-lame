@@ -119,20 +119,19 @@ export default {
         })
       });
 
-      if (response.ok) {
-        this.setInputStatusSuccess();
-        this.showAccountUpdatedMessage();
-        return;
-      }
-
       if (response.status === 400) {
         this.showValidationFailedMessage();
         this.processErrors(await response.json())
         return;
       }
 
-      this.showErrorMessage();
-      console.log(response.statusText);
+      if (!response.ok) {
+        this.showErrorMessage();
+        return;
+      }
+
+      this.setInputStatusSuccess();
+      this.showAccountUpdatedMessage();
     },
 
     clearErrors() {

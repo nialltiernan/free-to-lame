@@ -72,7 +72,11 @@ class AccountController extends AbstractActionController
         return (new JsonModel(['data' => $data]))->setTemplate('json/index.phtml');
     }
 
-    public function deleteUserAction(): Response
+    /**
+     * @return \Laminas\Http\Response|\Laminas\View\Model\JsonModel
+     * @throws \User\Exception\UserDoesNotExistException
+     */
+    public function deleteUserAction()
     {
         if (!$this->hasUserAccess()) {
             return $this->redirect()->toRoute('home');
@@ -80,9 +84,8 @@ class AccountController extends AbstractActionController
 
         $this->logoutUser();
         $this->writeRepository->delete((int) $this->params()->fromRoute('userId'));
-        $this->flashAccountDeletedMessage();
 
-        return $this->redirect()->toRoute('home');
+        return (new JsonModel(['data' => ['action' => 'deleteAccount']]))->setTemplate('json/index.phtml');
     }
 
     /**
@@ -152,13 +155,6 @@ class AccountController extends AbstractActionController
         /** @var \Laminas\Mvc\Plugin\Identity\Identity $identity */
         $identity = $this->plugin(Identity::class);
         $identity->getAuthenticationService()->clearIdentity();
-    }
-
-    private function flashAccountDeletedMessage(): void
-    {
-        /** @var \Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger $flashMessenger */
-        $flashMessenger = $this->plugin(FlashMessenger::class);
-        $flashMessenger->addInfoMessage('Account deleted');
     }
 
     private function hasUserAccess(): bool

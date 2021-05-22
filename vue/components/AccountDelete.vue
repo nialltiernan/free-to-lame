@@ -29,9 +29,26 @@ export default {
     }
   },
   methods: {
-    deleteAccount() {
-      document.location = BASE_URL + '/account/' + this.userId + '/delete';
-    }
+    async deleteAccount() {
+      await this.$router.push({name: 'Home'})
+
+      this.$store.commit('logOut');
+
+      const URL = BASE_URL + '/account/' + this.userId + '/delete';
+
+      let response = await fetch(URL);
+
+      if (!response.ok) {
+        alert('Something has gone wrong');
+        return;
+      }
+
+      this.showDeleteSuccessMessage();
+    },
+
+    showDeleteSuccessMessage() {
+      this.$Notification.success({title: 'Successfully deleted account', text: 'You have deleted your account'})
+    },
   }
 }
 </script>
