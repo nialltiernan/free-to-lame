@@ -9,6 +9,7 @@ import Game from './views/Game.vue';
 import Login from './views/Login.vue';
 import Register from './views/Register.vue';
 import Account from './views/Account.vue';
+import SearchResults from './views/SearchResults.vue';
 
 const routes = [
     {path: '/', name: 'Home', component: Homepage},
@@ -20,6 +21,7 @@ const routes = [
     {path: '/login', name: 'Login', component: Login},
     {path: '/register', name: 'Register', component: Register},
     {path: '/account', name: 'Account', component: Account, props: true},
+    {path: '/search-results', name: 'SearchResults', component: SearchResults, props: true},
 ];
 
 const router = createRouter({

@@ -17,16 +17,6 @@ return [
                     ],
                 ],
             ],
-            'search-results' => [
-                'type'    => Literal::class,
-                'options' => [
-                    'route'    => '/search-results',
-                    'defaults' => [
-                        'controller' => SearchResultsController::class,
-                        'action'     => 'index',
-                    ],
-                ],
-            ],
         ],
     ],
     'controllers' => [

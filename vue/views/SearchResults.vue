@@ -29,7 +29,7 @@ export default {
   components: {LoadingSpinner},
   props: {
     terms: {
-      type: String,
+      type: Array,
       required: true
     },
     inject: ['color'],
@@ -37,11 +37,13 @@ export default {
   data() {
     return {
       games: [],
-      isLoaded: false,
+      activeTerms: [],
     }
   },
   methods: {
     async fetchData() {
+      this.clearGames();
+
       const url = BASE_URL + '/search';
 
       let response = await fetch(url, {
@@ -50,32 +52,50 @@ export default {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: this.terms
+        body: JSON.stringify(this.activeTerms)
       });
 
-      let data = await response.json();
+      this.games = await response.json();
+    },
 
-      this.isLoaded = true;
-      this.games = data;
+    initActiveTerms() {
+      this.activeTerms = this.terms;
+    },
+
+    updateActiveTerms(terms) {
+      this.activeTerms = terms
     },
 
     gameUrl(game) {
       return BASE_URL + '/game/' + game.id;
-    }
+    },
+
+    clearGames() {
+      this.games = [];
+    },
   },
   computed: {
     subtitle() {
-      let terms = this.terms.split(',');
-
-      let titleCaseArray = terms.map(function (term) {
+      let titleCaseArray = this.terms.map(function (term) {
         return term[0].toUpperCase() + term.substr(1);
       })
 
       return titleCaseArray.join(', ');
+    },
+
+    isLoaded() {
+      return this.games.length;
     }
   },
   created() {
-    this.fetchData()
+    this.initActiveTerms();
+
+    this.fetchData();
+
+    this.$watch(() => this.$route.params, (params) => {
+      this.updateActiveTerms(params.terms);
+      this.fetchData();
+    });
   }
 }
 </script>
