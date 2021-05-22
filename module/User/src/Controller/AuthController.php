@@ -105,7 +105,7 @@ class AuthController extends AbstractActionController
     public function logoutAction(): JsonModel
     {
         $this->logoutUser();
-        return (new JsonModel(['data' => ['status' => 'success']]))->setTemplate('json/index.phtml');
+        return (new JsonModel(['data' => ['action' => 'logout']]))->setTemplate('json/index.phtml');
     }
 
     private function logoutUser(): void

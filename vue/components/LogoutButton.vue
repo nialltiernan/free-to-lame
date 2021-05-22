@@ -7,17 +7,20 @@ export default {
   name: 'LogoutButton',
   methods: {
     async logOut() {
+      await this.$router.push({name: 'Home'})
+
+      this.$store.commit('logOut');
+
       const URL = BASE_URL + '/logout';
 
       let response = await fetch(URL);
 
       if (!response.ok) {
         alert('Something has gone wrong');
+        return;
       }
 
       this.showLogOutSuccessMessage();
-      this.$store.commit('logOut');
-      await this.$router.push({name: 'Home'})
     },
 
     showLogOutSuccessMessage() {
