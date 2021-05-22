@@ -6,7 +6,6 @@ namespace User\Controller;
 use Laminas\Authentication\AuthenticationServiceInterface;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
-use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
 use Laminas\Mvc\Plugin\Identity\Identity;
 use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
