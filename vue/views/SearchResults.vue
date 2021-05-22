@@ -8,7 +8,7 @@
         <img :src="game.thumbnail" class="mr-3 rounded pb-2" :alt="game.title">
         <div class="media-body">
           <h5 class="mt-0 mb-1">
-            <a :href="gameUrl(game)">{{ game.title }}</a>
+            <router-link :to="{ name: 'Game', params: {gameId: game.id}}">{{ game.title }}</router-link>
           </h5>
           <p>{{ game.short_description }}</p>
         </div>
@@ -64,10 +64,6 @@ export default {
 
     updateActiveTerms(terms) {
       this.activeTerms = terms
-    },
-
-    gameUrl(game) {
-      return BASE_URL + '/game/' + game.id;
     },
 
     clearGames() {

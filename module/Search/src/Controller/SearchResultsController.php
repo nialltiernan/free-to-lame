@@ -9,8 +9,15 @@ use Search\Service\SearchResultGamesRetriever;
 
 class SearchResultsController extends AbstractActionController
 {
-    public function indexJsonAction(): JsonModel
+    /**
+     * @return \Laminas\Http\Response|\Laminas\View\Model\JsonModel
+     */
+    public function indexJsonAction()
     {
+        if ($this->getRequest()->isGet()) {
+            return $this->redirect()->toRoute('home');
+        }
+
         $terms = json_decode($this->getRequest()->getContent(), true);
 
         $data = SearchResultGamesRetriever::execute($terms);
