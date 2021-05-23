@@ -32,7 +32,6 @@ export default {
       type: Array,
       required: true
     },
-    inject: ['color'],
   },
   data() {
     return {

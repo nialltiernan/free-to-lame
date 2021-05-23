@@ -13,17 +13,6 @@ import Footer from './components/Footer.vue';
 
 export default {
   components: {Navigation, Footer},
-  props: {
-    color: {
-      type: String,
-      required: true
-    }
-  },
-  provide() {
-    return {
-      color: this.color
-    }
-  },
 }
 </script>
 

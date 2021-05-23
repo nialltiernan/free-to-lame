@@ -61,8 +61,11 @@ export default {
       this.showLoginSuccessMessage();
 
       let user = await response.json();
+
       this.$store.commit('logIn', user);
-      await this.$router.push({name: 'Account', params: {userId: user.id, color: user.color}});
+      this.$store.commit('setColor', user.color);
+
+      await this.$router.push({name: 'Account', params: {userId: user.id}});
     },
 
     setInputStatusDanger() {

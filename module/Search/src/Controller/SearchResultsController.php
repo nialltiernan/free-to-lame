@@ -18,7 +18,7 @@ class SearchResultsController extends AbstractActionController
             return $this->redirect()->toRoute('home');
         }
 
-        $terms = json_decode($this->getRequest()->getContent(), true);
+        $terms = json_decode($this->getRequest()->getContent(), true) ?? [];
 
         $data = SearchResultGamesRetriever::execute($terms);
 

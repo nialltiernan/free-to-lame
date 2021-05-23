@@ -3,7 +3,8 @@ import {createStore} from 'vuex'
 const store = createStore({
     state() {
         return {
-            user: null
+            user: null,
+            color: 'blue'
         }
     },
     mutations: {
@@ -12,6 +13,9 @@ const store = createStore({
         },
         logOut(state) {
             state.user = null;
+        },
+        setColor(state, color) {
+            state.color = color;
         }
     },
     getters: {
@@ -21,6 +25,9 @@ const store = createStore({
         loggedInUser(state) {
             return state.user;
         },
+        color(state) {
+            return state.color;
+        }
     }
 })
 

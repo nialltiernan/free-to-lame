@@ -1,12 +1,12 @@
 <template>
   <h1>
-    <it-avatar size="70px" :color="selectedColor"/>
+    <it-avatar size="70px" :color="color"/>
     My Account
   </h1>
   <h2>
     Welcome,
     <span v-if="isLoaded" class="d-inline-block">{{ username }}</span>
-    <span v-else class="d-inline-block"><it-loading :radius="15" :stroke="4" :color="selectedColor"/> </span>
+    <span v-else class="d-inline-block"><it-loading :radius="15" :stroke="4" :color="color"/> </span>
   </h2>
 
   <form v-if="isLoaded" @submit.prevent="updateAccount">
@@ -59,17 +59,13 @@ export default {
       type: String,
       required: true
     },
-    color: {
-      type: String,
-      required: true
-    }
   },
   data() {
     return {
       username: '',
       email: '',
       isLoaded: false,
-      selectedColor: this.color,
+      color: this.$store.getters.color,
       errors: {},
       inputStatus: {
         username: null,
@@ -92,13 +88,12 @@ export default {
 
       this.username = data.username;
       this.email = data.email;
-      this.selectedColor = data.color;
 
       this.isLoaded = true;
     },
 
     updateFavoriteColor(color) {
-      this.selectedColor = color.hex;
+      this.color = color.hex;
     },
 
     async updateAccount() {
@@ -115,7 +110,7 @@ export default {
         body: JSON.stringify({
           username: this.username,
           email: this.email,
-          color: this.selectedColor
+          color: this.color
         })
       });
 
@@ -129,6 +124,8 @@ export default {
         this.showErrorMessage();
         return;
       }
+
+      this.$store.commit('setColor', this.color);
 
       this.setInputStatusSuccess();
       this.showAccountUpdatedMessage();
@@ -167,6 +164,7 @@ export default {
       this.$Notification.danger({title: 'Oops!', text: 'Something has gone wrong'})
     }
   },
+
   computed: {
     usernameInput() {
       if ('username' in this.errors) {
@@ -174,6 +172,7 @@ export default {
       }
       return {status: this.inputStatus.username, message: null};
     },
+
     emailInput() {
       if ('email' in this.errors) {
         return {status: 'danger', message: this.errors.email};
@@ -181,6 +180,7 @@ export default {
       return {status: this.inputStatus.email, message: null};
     },
   },
+
   created() {
     this.fetchData()
   }

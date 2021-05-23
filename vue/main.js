@@ -8,14 +8,8 @@ import App from './App.vue'
 import router from './router.js';
 import store from './store.js'
 
-let container = document.getElementById('vueApp');
-
-let props = {
-    color: container.dataset.color
-};
-
-createApp(App, props)
+createApp(App)
     .use(router)
     .use(store)
     .use(Loading)
-    .mount(container)
+    .mount(document.getElementById('vueApp'))

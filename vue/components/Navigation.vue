@@ -169,7 +169,7 @@
           </li>
 
           <li v-if="isLoggedIn" class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'Account', params: {userId: userId, color: userColor}}">Account
+            <router-link class="nav-link" :to="{ name: 'Account', params: {userId: userId}}">Account
             </router-link>
           </li>
           <li v-if="isLoggedIn" class="nav-item">
@@ -210,10 +210,6 @@ export default {
       return this.$store.getters.loggedInUser.id;
     }
   },
-  inject: ['color'],
-  created() {
-    this.userColor = this.color;
-  }
 }
 </script>
 
