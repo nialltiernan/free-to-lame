@@ -3,6 +3,9 @@
 echo '#### Moving to project directory ####'
 cd /home/niall/Projects/free-to-lame || return
 
+echo '#### Clean up git ####'
+git checkout -f
+
 echo '#### Pulling code from git ####'
 git pull
 
