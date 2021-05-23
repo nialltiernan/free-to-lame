@@ -2,13 +2,13 @@
   <h1>Login</h1>
 
   <form @submit.prevent="login">
-    <div class="form-group">
+    <div class="form-group" :class="{ shake: inputStatus.username === 'danger'}">
       <label class="visually-hidden" for="username">Username</label>
       <it-input v-model="username" id="username" class="form-control" type="text" name="username" placeholder="Username"
                 :status="inputStatus.username" suffix-icon="face"/>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" :class="{ shake: inputStatus.username === 'danger'}">
       <label class="visually-hidden" for="password">Password</label>
       <it-input v-model="password" id="password" class="form-control" type="password" name="password"
                 :status="inputStatus.password" placeholder="Password" suffix-icon="password"/>
@@ -33,6 +33,8 @@ export default {
   },
   methods: {
     async login() {
+      this.clearErrors();
+
       const url = BASE_URL + '/login';
 
       let response = await fetch(url, {
@@ -66,6 +68,11 @@ export default {
       this.$store.commit('setColor', user.color);
 
       await this.$router.push({name: 'Account', params: {userId: user.id}});
+    },
+
+    clearErrors() {
+      this.inputStatus.username = null;
+      this.inputStatus.password = null;
     },
 
     setInputStatusDanger() {

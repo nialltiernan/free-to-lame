@@ -14,14 +14,14 @@
       <tbody>
       <tr>
         <td>Username</td>
-        <td>
+        <td :class="{ shake: usernameInput.status === 'danger'}">
           <it-input v-model="username" :status="usernameInput.status" :message="usernameInput.message"
                     suffix-icon="face"/>
         </td>
       </tr>
       <tr>
         <td>Email</td>
-        <td>
+        <td :class="{ shake: emailInput.status === 'danger'}">
           <it-input v-model="email" :status="emailInput.status" :message="emailInput.message" suffix-icon="email"/>
         </td>
       </tr>
