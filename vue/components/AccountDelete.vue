@@ -1,6 +1,6 @@
 <template>
-  <button @click="confirmModal = true" class="btn-danger">Delete account</button>
-  <it-modal v-model="confirmModal">
+  <it-button type="danger" @click="showModal" class="btn-danger">Delete account</it-button>
+  <it-modal v-model="isModalVisible">
     <template #header>
       <h3>Delete account</h3>
     </template>
@@ -8,8 +8,8 @@
       Do you really want to delete your account? This cannot be undone.
     </template>
     <template #actions>
-      <button @click="confirmModal = false">Cancel</button>
-      <button class="btn-danger" @click="deleteAccount">Delete</button>
+      <it-button @click="hideModal">Cancel</it-button>
+      <it-button type="danger" @click="deleteAccount">Delete</it-button>
     </template>
   </it-modal>
 </template>
@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      confirmModal: false,
+      isModalVisible: false,
     }
   },
   methods: {
@@ -44,6 +44,14 @@ export default {
       }
 
       this.showDeleteSuccessMessage();
+    },
+    
+    showModal() {
+      this.isModalVisible = true;
+    },
+
+    hideModal() {
+      this.isModalVisible = false;
     },
 
     showDeleteSuccessMessage() {

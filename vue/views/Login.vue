@@ -14,7 +14,7 @@
                 :status="inputStatus.password" placeholder="Password" suffix-icon="password"/>
     </div>
 
-    <input class="btn btn-primary" type="submit" name="submit" value="Login"/>
+    <it-button type="primary">Login</it-button>
   </form>
 </template>
 

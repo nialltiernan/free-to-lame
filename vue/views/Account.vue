@@ -32,7 +32,7 @@
         </td>
       </tr>
       <tr>
-        <input class="btn-primary" type="submit" value="Update account">
+        <it-button type="primary">Update account</it-button>
       </tr>
       </tbody>
     </table>

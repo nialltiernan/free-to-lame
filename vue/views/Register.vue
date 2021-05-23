@@ -21,7 +21,7 @@
                 suffix-icon="password"/>
     </div>
 
-    <input class="btn btn-primary" type="submit" name="submit" value="Login"/>
+    <it-button type="primary">Register</it-button>
   </form>
 </template>
 
