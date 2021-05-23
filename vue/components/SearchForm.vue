@@ -22,8 +22,8 @@ export default {
 
     showInvalidSearchTermsMessage() {
       this.$Notification.warning({
-        title: 'Invalid search terms',
-        text: 'You must check some boxes to search',
+        title: 'No search terms selected',
+        text: 'Check some of the boxes to search',
         placement: 'top-left'
       })
     },
