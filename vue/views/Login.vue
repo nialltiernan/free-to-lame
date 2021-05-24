@@ -67,7 +67,7 @@ export default {
       let user = await response.json();
 
       this.$store.commit('logIn', user);
-      this.$store.commit('setColor', user.color);
+      this.$store.commit('color', user.color);
 
       await this.$router.push({name: 'Account', params: {userId: user.id}});
     },

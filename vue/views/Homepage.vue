@@ -25,6 +25,13 @@ export default {
   },
   methods: {
     async fetchData() {
+      let cache = this.$store.getters.homepageGames;
+
+      if (cache.length) {
+        this.games = cache;
+        return;
+      }
+
       const url = BASE_URL + '/json';
 
       let response = await fetch(url);
@@ -35,6 +42,7 @@ export default {
       }
 
       this.games = await response.json();
+      this.$store.commit('homepageGames', this.games);
     },
   },
   created() {

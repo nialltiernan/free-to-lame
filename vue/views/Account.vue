@@ -127,7 +127,7 @@ export default {
         return;
       }
 
-      this.$store.commit('setColor', this.color);
+      this.$store.commit('color', this.color);
 
       this.setInputStatusSuccess();
       this.showAccountUpdatedMessage();

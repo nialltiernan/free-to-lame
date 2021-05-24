@@ -4,7 +4,8 @@ const store = createStore({
     state() {
         return {
             user: null,
-            color: 'blue'
+            color: 'blue',
+            homepageGames: []
         }
     },
     mutations: {
@@ -14,8 +15,11 @@ const store = createStore({
         logOut(state) {
             state.user = null;
         },
-        setColor(state, color) {
+        color(state, color) {
             state.color = color;
+        },
+        homepageGames(state, games) {
+            state.homepageGames = games;
         }
     },
     getters: {
@@ -27,6 +31,9 @@ const store = createStore({
         },
         color(state) {
             return state.color;
+        },
+        homepageGames(state) {
+            return state.homepageGames
         }
     }
 })
