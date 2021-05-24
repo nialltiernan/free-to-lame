@@ -1,11 +1,13 @@
 <template>
-  <div class="row">
-    <GameThumbnail :source="thumbnailSource" :play-url="playUrl"/>
-    <GameDescriptionMain :title="title" :genre="genre" :platform="platform" :publisher="publisher"
-                         :developer="developer" :releaseDate="releaseDate" :description="description"/>
+  <div>
+    <div class="row">
+      <GameThumbnail :source="thumbnailSource" :play-url="playUrl"/>
+      <GameDescriptionMain :title="title" :genre="genre" :platform="platform" :publisher="publisher"
+                           :developer="developer" :releaseDate="releaseDate" :description="description"/>
+    </div>
+    <GameScreenshots :screenshots="screenshots"/>
+    <GameSystemRequirements v-if="hasRequirements" :requirements="systemRequirements"/>
   </div>
-  <GameScreenshots :screenshots="screenshots"/>
-  <GameSystemRequirements v-if="hasRequirements" :requirements="systemRequirements"/>
 </template>
 
 <script>

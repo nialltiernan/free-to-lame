@@ -1,14 +1,16 @@
 <template>
-  <section class="pb-2 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Free to play games</h1>
-        <p class="lead text-muted">Most popular games that are free to play right now</p>
+  <div>
+    <section class="pb-2 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light">Free to play games</h1>
+          <p class="lead text-muted">Most popular games that are free to play right now</p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <GameGrid :games="games"/>
+    <GameGrid :games="games"/>
+  </div>
 </template>
 
 <script>

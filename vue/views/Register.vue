@@ -1,28 +1,30 @@
 <template>
-  <h1>Register</h1>
+  <div>
+    <h1>Register</h1>
 
-  <form @submit.prevent="register">
-    <div class="form-group" :class="{ shake: usernameInput.status === 'danger'}">
-      <label class="visually-hidden" for="username">Username</label>
-      <it-input v-model="username" id="username" class="form-control" type="text" name="username" placeholder="Username"
-                :status="usernameInput.status" :message="usernameInput.message" suffix-icon="face"/>
-    </div>
+    <form @submit.prevent="register">
+      <div class="form-group" :class="{ shake: usernameInput.status === 'danger'}">
+        <label class="visually-hidden" for="username">Username</label>
+        <it-input v-model="username" id="username" class="form-control" type="text" name="username" placeholder="Username"
+                  :status="usernameInput.status" :message="usernameInput.message" suffix-icon="face"/>
+      </div>
 
-    <div class="form-group" :class="{ shake: emailInput.status === 'danger'}">
-      <label class="visually-hidden" for="username">Email</label>
-      <it-input v-model="email" id="email" class="form-control" type="email" name="email" placeholder="Email"
-                :status="emailInput.status" :message="emailInput.message" suffix-icon="email"/>
-    </div>
+      <div class="form-group" :class="{ shake: emailInput.status === 'danger'}">
+        <label class="visually-hidden" for="username">Email</label>
+        <it-input v-model="email" id="email" class="form-control" type="email" name="email" placeholder="Email"
+                  :status="emailInput.status" :message="emailInput.message" suffix-icon="email"/>
+      </div>
 
-    <div class="form-group" :class="{ shake: passwordInput.status === 'danger'}">
-      <label class="visually-hidden" for="password">Password</label>
-      <it-input v-model="password" id="password" class="form-control" type="password" name="password"
-                :status="passwordInput.status" :message="passwordInput.message" placeholder="Password"
-                suffix-icon="password"/>
-    </div>
+      <div class="form-group" :class="{ shake: passwordInput.status === 'danger'}">
+        <label class="visually-hidden" for="password">Password</label>
+        <it-input v-model="password" id="password" class="form-control" type="password" name="password"
+                  :status="passwordInput.status" :message="passwordInput.message" placeholder="Password"
+                  suffix-icon="password"/>
+      </div>
 
-    <it-button type="primary">Register</it-button>
-  </form>
+      <it-button type="primary">Register</it-button>
+    </form>
+  </div>
 </template>
 
 <script>

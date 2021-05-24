@@ -1,21 +1,23 @@
 <template>
-  <h1>Login</h1>
+  <div>
+    <h1>Login</h1>
 
-  <form @submit.prevent="login">
-    <div class="form-group" :class="{ shake: inputStatus.username === 'danger'}">
-      <label class="visually-hidden" for="username">Username</label>
-      <it-input v-model="username" id="username" class="form-control" type="text" name="username" placeholder="Username"
-                :status="inputStatus.username" suffix-icon="face"/>
-    </div>
+    <form @submit.prevent="login">
+      <div class="form-group" :class="{ shake: inputStatus.username === 'danger'}">
+        <label class="visually-hidden" for="username">Username</label>
+        <it-input v-model="username" id="username" class="form-control" type="text" name="username" placeholder="Username"
+                  :status="inputStatus.username" suffix-icon="face"/>
+      </div>
 
-    <div class="form-group" :class="{ shake: inputStatus.username === 'danger'}">
-      <label class="visually-hidden" for="password">Password</label>
-      <it-input v-model="password" id="password" class="form-control" type="password" name="password"
-                :status="inputStatus.password" placeholder="Password" suffix-icon="password"/>
-    </div>
+      <div class="form-group" :class="{ shake: inputStatus.username === 'danger'}">
+        <label class="visually-hidden" for="password">Password</label>
+        <it-input v-model="password" id="password" class="form-control" type="password" name="password"
+                  :status="inputStatus.password" placeholder="Password" suffix-icon="password"/>
+      </div>
 
-    <it-button type="primary">Login</it-button>
-  </form>
+      <it-button type="primary">Login</it-button>
+    </form>
+  </div>
 </template>
 
 <script>

@@ -1,51 +1,53 @@
 <template>
-  <h1>
-    <it-avatar size="70px" :color="color"/>
-    My Account
-  </h1>
-  <h2>
-    Welcome,
-    <span v-if="isLoaded" class="d-inline-block">{{ username }}</span>
-    <span v-else class="d-inline-block"><it-loading :radius="15" :stroke="4" :color="color"/> </span>
-  </h2>
+  <div>
+    <h1>
+      <it-avatar size="70px" :color="color"/>
+      My Account
+    </h1>
+    <h2>
+      Welcome,
+      <span v-if="isLoaded" class="d-inline-block">{{ username }}</span>
+      <span v-else class="d-inline-block"><it-loading :radius="15" :stroke="4" :color="color"/> </span>
+    </h2>
 
-  <form v-if="isLoaded" @submit.prevent="updateAccount">
-    <table class="table mt-5">
-      <tbody>
-      <tr>
-        <td>Username</td>
-        <td :class="{ shake: usernameInput.status === 'danger'}">
-          <it-input v-model="username" :status="usernameInput.status" :message="usernameInput.message"
-                    suffix-icon="face"/>
-        </td>
-      </tr>
-      <tr>
-        <td>Email</td>
-        <td :class="{ shake: emailInput.status === 'danger'}">
-          <it-input v-model="email" :status="emailInput.status" :message="emailInput.message" suffix-icon="email"/>
-        </td>
-      </tr>
-      <tr>
-        <td>Favourite color</td>
-        <td>
-          <it-colorpicker :disable-alpha="true" :value="color" @change="updateFavoriteColor"/>
-        </td>
-      </tr>
-      <tr>
-        <it-button type="primary">Update account</it-button>
-      </tr>
-      </tbody>
-    </table>
-  </form>
+    <form v-if="isLoaded" @submit.prevent="updateAccount">
+      <table class="table mt-5">
+        <tbody>
+        <tr>
+          <td>Username</td>
+          <td :class="{ shake: usernameInput.status === 'danger'}">
+            <it-input v-model="username" :status="usernameInput.status" :message="usernameInput.message"
+                      suffix-icon="face"/>
+          </td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td :class="{ shake: emailInput.status === 'danger'}">
+            <it-input v-model="email" :status="emailInput.status" :message="emailInput.message" suffix-icon="email"/>
+          </td>
+        </tr>
+        <tr>
+          <td>Favourite color</td>
+          <td>
+            <it-colorpicker :disable-alpha="true" :value="color" @change="updateFavoriteColor"/>
+          </td>
+        </tr>
+        <tr>
+          <it-button type="primary">Update account</it-button>
+        </tr>
+        </tbody>
+      </table>
+    </form>
 
-  <div v-else>
-    <br>
-    <LoadingSpinner :radius="46" :color="color"/>
+    <div v-else>
+      <br>
+      <LoadingSpinner :radius="46" :color="color"/>
+    </div>
+
+    <it-divider/>
+
+    <AccountDelete :user-id="userId"/>
   </div>
-
-  <it-divider/>
-
-  <AccountDelete :user-id="userId"/>
 </template>
 
 <script>

@@ -1,12 +1,14 @@
 <template>
-  <div class="row justify-content-between align-items-center pb-3 px-4">
-    <h1>{{ renderTitle }}</h1>
+  <div>
+    <div class="row justify-content-between align-items-center pb-3 px-4">
+      <h1>{{ renderTitle }}</h1>
 
-    <div class="d-flex flex-row-reverse">
-      <it-select placeholder="Sort by" v-model="sortByValue" :options="sortByOptions" @change="reloadData"/>
+      <div class="d-flex flex-row-reverse">
+        <it-select placeholder="Sort by" v-model="sortByValue" :options="sortByOptions" @change="reloadData"/>
+      </div>
     </div>
+    <GameGrid :games="games"/>
   </div>
-  <GameGrid :games="games"/>
 </template>
 
 <script>
