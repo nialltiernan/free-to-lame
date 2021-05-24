@@ -1,15 +1,3 @@
-<?php
-
-use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
-
-/** @var \Laminas\Mvc\Plugin\FlashMessenger\View\Helper\FlashMessenger $flashMessenger */
-$flashMessenger = $this->flashMessenger();
-?>
-
-<?= $flashMessenger->render(FlashMessenger::NAMESPACE_SUCCESS, ['alert', 'alert-success', 'list-unstyled', 'text-center']) ?>
-
-<?= $flashMessenger->render(FlashMessenger::NAMESPACE_INFO, ['alert', 'alert-primary', 'list-unstyled', 'text-center']) ?>
-
 <?= $this->headLink()->prependStylesheet($this->basePath('dist/vue-app.css')) ?>
 
 <div id="vueApp" data-color="<?= $this->color ?>"></div>

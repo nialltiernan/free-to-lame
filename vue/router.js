@@ -17,7 +17,7 @@ const routes = [
     {path: '/platforms', name: 'Platforms', component: Platforms},
     {path: '/platform/:platform', name: 'Platform', component: Platform, props: true},
     {path: '/categories', name: 'Categories', component: Categories},
-    {path: '/categories/:category', name: 'Category', component: Category, props: true},
+    {path: '/category/:category', name: 'Category', component: Category, props: true},
     {path: '/login', name: 'Login', component: Login},
     {path: '/register', name: 'Register', component: Register},
     {path: '/account', name: 'Account', component: Account, props: true},
