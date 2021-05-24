@@ -1,5 +1,6 @@
 <?php
 
+use Game\Controller\IndexController;
 use Laminas\Authentication\AuthenticationService as LaminasAuthenticationService;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
@@ -63,8 +64,8 @@ return [
                 'options' => [
                     'route'    => '/register',
                     'defaults' => [
-                        'controller' => AuthController::class,
-                        'action'     => 'register',
+                        'controller' => IndexController::class,
+                        'action'     => 'index',
                     ],
                 ],
             ],
@@ -73,8 +74,8 @@ return [
                 'options' => [
                     'route'    => '/login',
                     'defaults' => [
-                        'controller' => AuthController::class,
-                        'action'     => 'login',
+                        'controller' => IndexController::class,
+                        'action'     => 'index',
                     ],
                 ],
             ],
