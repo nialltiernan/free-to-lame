@@ -4,7 +4,7 @@
   "description": "Learn Laminas and Vue",
   "main": "vue/main.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --mode production",
     "watch": "webpack --watch"
   },
   "repository": {

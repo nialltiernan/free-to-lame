@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace User\View\Helper;
 
+use Laminas\Authentication\AuthenticationServiceInterface;
 use Laminas\View\Helper\AbstractHelper;
-use User\Service\AuthenticationService;
 
 class AuthenticationHelper extends AbstractHelper
 {
-    private AuthenticationService $service;
+    private AuthenticationServiceInterface $service;
 
-    public function __construct(AuthenticationService $service)
+    public function __construct(AuthenticationServiceInterface $service)
     {
         $this->service = $service;
     }
