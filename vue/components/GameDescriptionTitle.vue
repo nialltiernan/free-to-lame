@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-between align-items-center">
+  <div class="d-flex justify-content-between align-items-center flex-wrap">
     <h1>{{ title }}</h1>
     <img v-if="platformLogo" style="height: 2.5rem" :src="platformLogo" :alt="platform" />
     <span v-else class="badge badge-secondary mx-1 mt-1">{{ platform }}</span>
