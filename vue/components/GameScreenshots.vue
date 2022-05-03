@@ -1,7 +1,7 @@
 <template>
-  <div v-if="isLoaded" id="carouselExampleIndicators" class="carousel slide mt-5" data-ride="carousel">
+  <div v-if="isLoaded" id="screenshotCarousel" class="carousel slide mt-5" data-ride="carousel">
     <ol class="carousel-indicators">
-      <li v-for="screenshot in screenshots" :key="screenshot.id" data-target="#carouselExampleIndicators"
+      <li v-for="screenshot in screenshots" :key="screenshot.id" data-target="#screenshotCarousel"
           :data-slide-to="screenshot.id" :class="{ active: isActive(screenshot.id) }">
       </li>
     </ol>
@@ -11,11 +11,11 @@
         <img :src="screenshot.image" class="d-block w-100" alt="Screenshot">
       </div>
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <a class="carousel-control-prev" href="#screenshotCarousel" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="sr-only">Previous</span>
     </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <a class="carousel-control-next" href="#screenshotCarousel" role="button" data-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
