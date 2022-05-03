@@ -6,10 +6,10 @@
   </div>
 
   <div class="d-flex flex-wrap mb-2">
-    <span class="badge badge-secondary mr-2 mt-1">{{ genre }}</span>
-    <span class="badge badge-secondary mr-2 mt-1">{{ publisher }}</span>
-    <span class="badge badge-secondary mr-2 mt-1">{{ developer }}</span>
-    <span class="badge badge-secondary mt-1">{{ releaseDate }}</span>
+    <span class="badge badge-secondary mr-2 mt-1 p-1">{{ genre }}</span>
+    <span class="badge badge-secondary mr-2 mt-1 p-1">{{ publisher }}</span>
+    <span class="badge badge-secondary mr-2 mt-1 p-1">{{ developer }}</span>
+    <span class="badge badge-secondary mt-1 p-1">{{ releaseDate }}</span>
   </div>
 </template>
 
