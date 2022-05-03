@@ -1,6 +1,9 @@
 <template>
   <div class="mt-5">
-    <h2>System requirements</h2>
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>System requirements</h2>
+      <img :src="logo" alt="System requirements">
+    </div>
 
     <table class="table">
 
@@ -30,6 +33,11 @@ export default {
         return 'OS';
       }
       return string[0].toUpperCase() + string.substring(1);
+    }
+  },
+  computed: {
+    logo() {
+      return BASE_URL + '/img/system.png';
     }
   }
 }
