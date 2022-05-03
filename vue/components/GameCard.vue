@@ -1,19 +1,17 @@
 <template>
   <div class="col">
     <div class="card shadow-sm">
-      <img :src="game.thumbnail" class="img-fluid rounded" :alt="game.title">
+      <router-link :to="{ name: 'Game', params: { gameId:game.id} }"
+                   class="btn btn-sm btn-outline-secondary">
+        <img :src="game.thumbnail" class="img-fluid rounded" :alt="game.title">
+      </router-link>
       <div class="card-body">
-        <p class="card-text">{{ shortDescription }}</p>
         <div class="d-flex justify-content-between align-items-center">
-          <div class="btn-group">
-            <a :href="game.game_url" class="btn btn-sm btn-outline-secondary">Play now</a>
-            <router-link :to="{ name: 'Game', params: { gameId:game.id} }"
-                         class="btn btn-sm btn-outline-secondary">
-              Details
-            </router-link>
-          </div>
-          <small class="text-muted d-md-none d-lg-block">{{ game.release_date }}</small>
+          <span class="badge badge-secondary mr-2 p-1">{{ game.genre }}</span>
+          <img v-if="platformLogo" style="height: 1.5rem" :src="platformLogo" :alt="game.platform" />
+          <span v-else class="badge badge-secondary p-1">{{ game.platform }}</span>
         </div>
+        <p class="card-text mt-1">{{ shortDescription }}</p>
       </div>
     </div>
   </div>
@@ -28,9 +26,35 @@ export default {
       required: true
     },
   },
+  data() {
+    return {
+      platformLogo: null,
+    }
+  },
   computed: {
     shortDescription() {
-      return this.game.short_description.substring(0, 110);
+      return this.game.short_description.substring(0, 50).trim() + '...';
+    },
+    isPlatformWindows() {
+      return this.game.platform === 'PC (Windows)';
+    },
+    isPlatformBrowser() {
+      return this.game.platform === 'Web Browser';
+    },
+  },
+  methods: {
+    getWindowsLogo() {
+      return BASE_URL + '/img/windows-logo.svg';
+    },
+    getBrowserLogo() {
+      return BASE_URL + '/img/internet-monitor.svg';
+    },
+  },
+  created() {
+    if (this.isPlatformWindows) {
+      this.platformLogo = this.getWindowsLogo();
+    } else if (this.isPlatformBrowser) {
+      this.platformLogo = this.getBrowserLogo();
     }
   }
 }

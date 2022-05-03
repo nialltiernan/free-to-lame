@@ -59,17 +59,15 @@ export default {
     getWindowsLogo() {
       return BASE_URL + '/img/windows-logo.svg';
     },
-    getRandomBrowserLogo() {
-      const browsers = ['chrome', 'edge', 'firefox', 'safari'];
-      const browser = browsers[Math.floor(Math.random()*browsers.length)];
-      return BASE_URL + '/img/' + browser + '-logo.svg';
+    getBrowserLogo() {
+      return BASE_URL + '/img/internet-monitor.svg';
     },
   },
   created() {
     if (this.isPlatformWindows) {
       this.platformLogo = this.getWindowsLogo();
     } else if (this.isPlatformBrowser) {
-      this.platformLogo = this.getRandomBrowserLogo();
+      this.platformLogo = this.getBrowserLogo();
     }
   }
 }
