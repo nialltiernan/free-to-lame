@@ -51,6 +51,14 @@ export default {
     }
   }
 }
+
+document.addEventListener('keydown', (event) => {
+  if (event.code ===  'ArrowLeft') {
+    $('#screenshotCarousel').carousel('prev')
+  } else if (event.code ===  'ArrowRight') {
+    $('#screenshotCarousel').carousel('next')
+  }
+});
 </script>
 
 <style scoped>
