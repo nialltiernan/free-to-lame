@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-6">
-    <div v-if="isLoaded" class="row g-0 rounded overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+    <div v-if="isLoaded" class="row g-0 rounded overflow-hidden flex-md-row h-md-250 position-relative">
       <div class="col p-4 d-flex flex-column position-static">
         <GameDescriptionTitle :title="title" :genre="genre" :platform="platform" :publisher="publisher"
                                  :developer="developer" :releaseDate="releaseDate"/>
