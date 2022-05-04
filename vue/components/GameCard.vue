@@ -12,7 +12,11 @@
           </router-link>
           <span v-else class="badge badge-secondary p-1">{{ game.platform }}</span>
         </div>
-        <p class="card-text mt-1">{{ shortDescription }}</p>
+        <p class="card-text mt-1">
+          {{ showDescription }}
+          <span v-if="!showFullDescription" @click="showMore" class="badge badge-secondary badge-pill">+</span>
+          <span v-else @click="showLess" class="badge badge-secondary badge-pill">-</span>
+        </p>
       </div>
     </div>
   </div>
@@ -30,10 +34,14 @@ export default {
   data() {
     return {
       platformLogo: null,
+      showFullDescription: false
     }
   },
   computed: {
-    shortDescription() {
+    showDescription() {
+      return this.showFullDescription ? this.game.short_description : this.miniDescription;
+    },
+    miniDescription() {
       return this.game.short_description.substring(0, 50).trim() + '...';
     },
     isPlatformWindows() {
@@ -53,6 +61,12 @@ export default {
     getBrowserLogo() {
       return BASE_URL + '/img/internet-monitor.svg';
     },
+    showMore() {
+      this.showFullDescription = true;
+    },
+    showLess() {
+      this.showFullDescription = false;
+    }
   },
   created() {
     if (this.isPlatformWindows) {

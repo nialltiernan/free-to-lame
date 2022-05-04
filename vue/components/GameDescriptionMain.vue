@@ -70,10 +70,10 @@ export default {
       return this.title !== '';
     },
     showDescription() {
-      return this.showFullDescription ? this.description : this.showDescriptionStart;
+      return this.showFullDescription ? this.description : this.shortDescription;
     },
-    showDescriptionStart() {
-      return this.description.substr(0, 450) + '...';
+    shortDescription() {
+      return this.description.substr(0, 450).trim() + '...';
     }
   },
   methods: {
