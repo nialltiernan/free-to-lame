@@ -35,7 +35,7 @@ export default {
     return {
       platformLogo: null,
       showFullDescription: false,
-      eyeImage: this.getEyeEnabledImage()
+      eyeImage: this.getImageEyeEnabled()
     }
   },
   computed: {
@@ -56,32 +56,32 @@ export default {
     }
   },
   methods: {
-    getWindowsLogo() {
+    getImageWindowsLogo() {
       return BASE_URL + '/img/windows-logo.svg';
     },
-    getBrowserLogo() {
+    getImageBrowserLogo() {
       return BASE_URL + '/img/internet-monitor.svg';
     },
-    getEyeEnabledImage() {
+    getImageEyeEnabled() {
       return BASE_URL + '/img/eye-enabled.png';
     },
-    getEyeDisabledImage() {
+    getImageEyeDisabled() {
       return BASE_URL + '/img/eye-disabled.png';
     },
     showMore() {
       this.showFullDescription = true;
-      this.eyeImage = this.getEyeDisabledImage();
+      this.eyeImage = this.getImageEyeDisabled();
     },
     showLess() {
       this.showFullDescription = false;
-      this.eyeImage = this.getEyeEnabledImage();
+      this.eyeImage = this.getImageEyeEnabled();
     }
   },
   created() {
     if (this.isPlatformWindows) {
-      this.platformLogo = this.getWindowsLogo();
+      this.platformLogo = this.getImageWindowsLogo();
     } else if (this.isPlatformBrowser) {
-      this.platformLogo = this.getBrowserLogo();
+      this.platformLogo = this.getImageBrowserLogo();
     }
   }
 }
