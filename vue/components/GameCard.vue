@@ -12,11 +12,11 @@
           </router-link>
           <span v-else class="badge badge-secondary p-1">{{ game.platform }}</span>
         </div>
-        <p class="card-text mt-1">
-          {{ showDescription }}
-          <span v-if="!showFullDescription" @click="showMore" class="badge badge-secondary badge-pill">+</span>
-          <span v-else @click="showLess" class="badge badge-secondary badge-pill">-</span>
-        </p>
+        <div class="d-flex justify-content-between align-items-end">
+          <p class="card-text mt-1">{{ showDescription }}</p>
+          <img v-if="!showFullDescription" @click="showMore" :src="eyeImage" alt="show more" style="height: 1.5rem"/>
+          <img v-else @click="showLess" :src="eyeImage" alt="show less" style="height: 1.5rem" />
+        </div>
       </div>
     </div>
   </div>
@@ -34,7 +34,8 @@ export default {
   data() {
     return {
       platformLogo: null,
-      showFullDescription: false
+      showFullDescription: false,
+      eyeImage: this.getEyeEnabledImage()
     }
   },
   computed: {
@@ -61,11 +62,19 @@ export default {
     getBrowserLogo() {
       return BASE_URL + '/img/internet-monitor.svg';
     },
+    getEyeEnabledImage() {
+      return BASE_URL + '/img/eye-enabled.png';
+    },
+    getEyeDisabledImage() {
+      return BASE_URL + '/img/eye-disabled.png';
+    },
     showMore() {
       this.showFullDescription = true;
+      this.eyeImage = this.getEyeDisabledImage();
     },
     showLess() {
       this.showFullDescription = false;
+      this.eyeImage = this.getEyeEnabledImage();
     }
   },
   created() {
