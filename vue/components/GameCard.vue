@@ -1,5 +1,5 @@
 <template>
-  <div class="col">
+  <div class="col mb-3">
     <div class="card shadow-sm">
       <router-link :to="{ name: 'Game', params: { gameId:game.id} }" class="btn btn-sm btn-outline-secondary">
         <img :src="game.thumbnail" class="img-fluid rounded" :alt="game.title">
