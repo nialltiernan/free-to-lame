@@ -7,8 +7,8 @@
 
         <p>
           {{ showDescription }}
-          <button v-if="!showFullDescription" @click="showMore" class="btn btn-info">Show more</button>
-          <button v-else @click="showLess" class="btn btn-info">Show less</button>
+          <img v-if="!showFullDescription" @click="showMore" :src="eyeImage" alt="show more" style="height: 1.5rem" />
+          <img v-else @click="showLess" :src="eyeImage" alt="show less" style="height: 1.5rem" />
         </p>
       </div>
     </div>
@@ -63,6 +63,7 @@ export default {
   data() {
     return {
       showFullDescription: false,
+      eyeImage: this.getImageEyeEnabled()
     }
   },
   computed: {
@@ -77,11 +78,19 @@ export default {
     }
   },
   methods: {
+    getImageEyeEnabled() {
+      return BASE_URL + '/img/eye-enabled.png';
+    },
+    getImageEyeDisabled() {
+      return BASE_URL + '/img/eye-disabled.png';
+    },
     showMore() {
       this.showFullDescription = true;
+      this.eyeImage = this.getImageEyeDisabled();
     },
     showLess() {
       this.showFullDescription = false;
+      this.eyeImage = this.getImageEyeEnabled();
     }
   }
 }
