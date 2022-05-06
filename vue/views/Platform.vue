@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row justify-content-between align-items-center pb-3 px-4">
-      <h1>{{ renderTitle }}</h1>
+      <h1>{{ header }}</h1>
 
       <div class="d-flex flex-row-reverse">
         <it-select placeholder="Sort by" v-model="sortByValue" :options="sortByOptions" @change="reloadData"/>
@@ -60,7 +60,7 @@ export default {
     },
 
     initActivePlatform() {
-      this.activePlatform = this.platform;
+      this.activePlatform = this.updateActivePlatform(this.platform);
     },
 
     updateActivePlatform(platform) {
@@ -76,10 +76,16 @@ export default {
     }
   },
   computed: {
-    renderTitle() {
-      if (this.platform === 'pc') {
-        return 'PC';
-      }
+    header() {
+      return this.isPlatformPc ? this.headerPc : this.headerBrowser;
+    },
+    isPlatformPc() {
+      return this.platform === 'pc';
+    },
+    headerPc() {
+      return 'PC';
+    },
+    headerBrowser() {
       return this.platform[0].toUpperCase() + this.platform.substr(1);
     },
     reloadData() {
