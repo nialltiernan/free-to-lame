@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-between align-items-center flex-wrap">
+  <div class="d-flex justify-content-between align-items-center flex-wrap mb-1">
     <h1>{{ title }}</h1>
 
     <router-link v-if="platformLogo" :to="{ name: 'Platform', params: {platform: routerPlatform} }">
