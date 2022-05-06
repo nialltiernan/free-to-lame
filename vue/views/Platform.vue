@@ -4,6 +4,7 @@
       <h1>{{ header }}</h1>
 
       <div class="d-flex flex-row-reverse">
+        <img :src="headerImage" :alt="header" class="ml-3" style="height: 2rem" />
         <it-select placeholder="Sort by" v-model="sortByValue" :options="sortByOptions" @change="reloadData"/>
       </div>
     </div>
@@ -88,12 +89,21 @@ export default {
     headerBrowser() {
       return this.platform[0].toUpperCase() + this.platform.substr(1);
     },
+    headerImage() {
+      return this.isPlatformPc ? this.windowsImage : this.browserImage;
+    },
+    windowsImage() {
+      return BASE_URL + '/img/windows-logo.svg';
+    },
+    browserImage() {
+      return BASE_URL + '/img/internet-monitor.svg';
+    },
     reloadData() {
       if (!this.sortByValue) {
         return;
       }
       this.fetchData(this.sortByValue.value)
-    }
+    },
   },
   created() {
     this.initActivePlatform();
