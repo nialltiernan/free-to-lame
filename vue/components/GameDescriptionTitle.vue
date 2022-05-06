@@ -3,7 +3,7 @@
     <h1>{{ title }}</h1>
 
     <router-link v-if="platformLogo" :to="{ name: 'Platform', params: {platform: routerPlatform} }">
-      <img style="height: 3rem" :src="platformLogo" :alt="platform" />
+      <img style="height: 2.5rem" :src="platformLogo" :alt="platform" />
     </router-link>
     <span v-else class="badge badge-secondary mx-1 mt-1">{{ platform }}</span>
   </div>
