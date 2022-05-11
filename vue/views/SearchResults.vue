@@ -4,17 +4,7 @@
     <h2>{{ subtitle }}</h2>
 
     <div v-if="isLoaded">
-      <ul class="list-unstyled">
-        <li v-for="game in games" :key="game.id" class="media pb-4 d-flex flex-wrap">
-          <img :src="game.thumbnail" class="mr-3 rounded pb-2" :alt="game.title">
-          <div class="media-body">
-            <h5 class="mt-0 mb-1">
-              <router-link :to="{ name: 'Game', params: {gameId: game.id}}">{{ game.title }}</router-link>
-            </h5>
-            <p>{{ game.short_description }}</p>
-          </div>
-        </li>
-      </ul>
+      <GameGrid :games="games"/>
     </div>
 
     <div v-else>
@@ -26,9 +16,10 @@
 
 <script>
 import LoadingSpinner from '../components/LoadingSpinner.vue';
+import GameGrid from '../components/GameGrid.vue';
 
 export default {
-  components: {LoadingSpinner},
+  components: {LoadingSpinner, GameGrid},
   props: {
     terms: {
       type: Array,
