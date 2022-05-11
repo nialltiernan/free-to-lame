@@ -41,7 +41,7 @@
 
     <div v-else>
       <br>
-      <LoadingSpinner :radius="46" :color="color"/>
+      <LoadingSpinner :radius="46"/>
     </div>
 
     <it-divider/>
