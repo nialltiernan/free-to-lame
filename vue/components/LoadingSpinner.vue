@@ -12,10 +12,14 @@ export default {
       type: Number,
       default: 32
     },
+    color : {
+      type: String,
+      default: ''
+    }
   },
   computed: {
     color() {
-      return this.$store.getters.color;
+      return this.color ? this.color : this.$store.getters.color;
     }
   }
 }

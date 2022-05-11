@@ -28,8 +28,9 @@
         </tr>
         <tr>
           <td>Favourite color</td>
-          <td>
+          <td class="d-flex justify-content-between align-items-center flex-wrap">
             <it-colorpicker :disable-alpha="true" :value="color" @change="updateFavoriteColor"/>
+            <LoadingSpinner :radius="46" :color="color"/>
           </td>
         </tr>
         <tr>
