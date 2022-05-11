@@ -1,24 +1,6 @@
 <template>
-  <div v-if="isLoaded" id="screenshotCarousel" class="carousel slide mt-5" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <li v-for="screenshot in screenshots" :key="screenshot.id" data-target="#screenshotCarousel"
-          :data-slide-to="screenshot.id" :class="{ active: isActive(screenshot.id) }">
-      </li>
-    </ol>
-    <div class="carousel-inner">
-      <div v-for="screenshot in screenshots" :key="screenshot.id" class="carousel-item"
-           :class="{ active: isActive(screenshot.id) }">
-        <img :src="screenshot.image" class="d-block w-100" alt="Screenshot">
-      </div>
-    </div>
-    <a class="carousel-control-prev" href="#screenshotCarousel" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#screenshotCarousel" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
+  <div v-if="isLoaded" class="mt-5">
+    <ImageCarousel carousel-id="screenshotCarousel" :images="screenshots"/>
   </div>
 
   <div v-else>
@@ -30,10 +12,11 @@
 
 <script>
 import LoadingSpinner from './LoadingSpinner.vue';
+import ImageCarousel from './ImageCarousel.vue';
 
 export default {
   name: 'GameScreenshots',
-  components: { LoadingSpinner },
+  components: { LoadingSpinner, ImageCarousel },
   props: {
     screenshots: {
       type: Array,
@@ -52,13 +35,6 @@ export default {
   }
 }
 
-document.addEventListener('keydown', (event) => {
-  if (event.code ===  'ArrowLeft') {
-    $('#screenshotCarousel').carousel('prev')
-  } else if (event.code ===  'ArrowRight') {
-    $('#screenshotCarousel').carousel('next')
-  }
-});
 </script>
 
 <style scoped>
