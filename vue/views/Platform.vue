@@ -1,12 +1,11 @@
 <template>
   <div>
     <div class="row justify-content-between align-items-center pb-3 px-4">
-      <h1>{{ header }}</h1>
-
-      <div class="d-flex flex-row-reverse">
+      <div class="d-flex align-items-center">
+        <h1>{{ header }}</h1>
         <img :src="headerImage" :alt="header" class="ml-3" style="height: 2rem" />
-        <it-select placeholder="Sort by" v-model="sortByValue" :options="sortByOptions" @change="reloadData"/>
       </div>
+      <it-select placeholder="Sort by" v-model="sortByValue" :options="sortByOptions" @change="reloadData"/>
     </div>
     <GameGrid :games="games"/>
   </div>
