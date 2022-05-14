@@ -8,7 +8,7 @@
     <div class="carousel-inner">
       <div v-for="screenshot in images" :key="screenshot.id" class="carousel-item"
            :class="{ active: isActive(screenshot.id) }">
-        <img :src="screenshot.image" class="d-block w-100" alt="Screenshot">
+        <img :src="screenshot.image" class="d-block w-100" alt="Screenshot" data-toggle="modal" data-target="#screenshotModal">
       </div>
     </div>
     <a class="carousel-control-prev" :href="carouselSelector" role="button" data-slide="prev">

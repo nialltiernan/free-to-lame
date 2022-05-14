@@ -1,6 +1,16 @@
 <template>
   <div v-if="isLoaded" class="mt-5">
     <ImageCarousel carousel-id="screenshotCarousel" :images="screenshots"/>
+
+    <div class="modal fade" id="screenshotModal" tabindex="-1" aria-labelledby="screenshotModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <ImageCarousel carousel-id="modalCarousel" :images="screenshots"/>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div v-else>
