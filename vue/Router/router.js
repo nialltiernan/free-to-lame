@@ -1,15 +1,15 @@
 import {createRouter, createWebHistory} from 'vue-router';
 
-import Homepage from './Views/Homepage.vue';
-import Platform from './Views/Platform.vue';
-import Platforms from './Views/Platforms.vue';
-import Categories from './Views/Categories.vue';
-import Category from './Views/Category.vue';
-import Game from './Views/Game.vue';
-import Login from './Views/Login.vue';
-import Register from './Views/Register.vue';
-import Account from './Views/Account.vue';
-import SearchResults from './Views/SearchResults.vue';
+import Homepage from '../Views/Homepage.vue';
+import Platform from '../Views/Platform.vue';
+import Platforms from '../Views/Platforms.vue';
+import Categories from '../Views/Categories.vue';
+import Category from '../Views/Category.vue';
+import Game from '../Views/Game.vue';
+import Login from '../Views/Login.vue';
+import Register from '../Views/Register.vue';
+import Account from '../Views/Account.vue';
+import SearchResults from '../Views/SearchResults.vue';
 
 const routes = [
     {path: '/', name: 'Home', component: Homepage},
