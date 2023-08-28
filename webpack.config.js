@@ -6,7 +6,7 @@ require('dotenv').config()
 
 module.exports = {
     entry: {
-        app: './vue/main.js',
+        app: './vue/App/main.js',
     },
     mode: 'development',
     output: {
