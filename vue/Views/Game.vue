@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import GameThumbnail from '../components/GameThumbnail.vue';
-import GameDescriptionMain from '../components/GameDescriptionMain.vue';
-import GameScreenshots from '../components/GameScreenshots.vue'
-import GameSystemRequirements from '../components/GameSystemRequirements.vue';
+import GameThumbnail from '../Components/GameThumbnail.vue';
+import GameDescriptionMain from '../Components/GameDescriptionMain.vue';
+import GameScreenshots from '../Components/GameScreenshots.vue'
+import GameSystemRequirements from '../Components/GameSystemRequirements.vue';
 
 export default {
   components: {GameThumbnail, GameDescriptionMain, GameScreenshots, GameSystemRequirements},

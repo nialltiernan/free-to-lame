@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import GameGrid from '../components/GameGrid.vue';
+import GameGrid from '../Components/GameGrid.vue';
 
 export default {
   components: {GameGrid},

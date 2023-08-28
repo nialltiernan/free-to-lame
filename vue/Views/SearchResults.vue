@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import LoadingSpinner from '../components/LoadingSpinner.vue';
-import GameGrid from '../components/GameGrid.vue';
+import LoadingSpinner from '../Components/LoadingSpinner.vue';
+import GameGrid from '../Components/GameGrid.vue';
 
 export default {
   components: {LoadingSpinner, GameGrid},
