@@ -5,7 +5,7 @@ import '../../node_modules/equal-vue/dist/style.css'
 
 import App from './App.vue'
 
-import router from '../Router/router.js';
-import store from '../Store/store.js'
+import Router from '../Router/Router.js';
+import Store from '../Store/Store.js'
 
-createApp(App).use(router).use(store).use(Loading).mount(document.getElementById('vueApp'))
+createApp(App).use(Router).use(Store).use(Loading).mount(document.getElementById('vueApp'))

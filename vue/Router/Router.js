@@ -24,9 +24,9 @@ const routes = [
     {path: '/search-results', name: 'SearchResults', component: SearchResults, props: true},
 ];
 
-const router = createRouter({
+const Router = createRouter({
     history: createWebHistory(),
     routes: routes
 });
 
-export default router;
+export default Router;
