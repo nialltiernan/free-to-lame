@@ -8,8 +8,4 @@ import App from './App.vue'
 import router from '../Router/router.js';
 import store from '../Store/store.js'
 
-createApp(App)
-    .use(router)
-    .use(store)
-    .use(Loading)
-    .mount(document.getElementById('vueApp'))
+createApp(App).use(router).use(store).use(Loading).mount(document.getElementById('vueApp'))
