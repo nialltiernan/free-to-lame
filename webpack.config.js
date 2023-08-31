@@ -5,9 +5,7 @@ const { VueLoaderPlugin } = require('vue-loader');
 require('dotenv').config()
 
 module.exports = {
-    entry: {
-        app: './vue/App/main.js',
-    },
+    entry: { app: './vue/App/main.js' },
     mode: 'development',
     output: {
         path: path.resolve(__dirname, './public/dist'),
@@ -16,32 +14,17 @@ module.exports = {
     },
     module: {
         rules: [
-            {
-                test: /\.vue$/,
-                loader: 'vue-loader'
-            },
-            {
-                test: /\.css$/,
-                use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                    },
-                    'css-loader'
-                ]
-            },
+            { test: /\.vue$/, loader: 'vue-loader' },
+            { test: /\.css$/, use: [{loader: MiniCssExtractPlugin.loader,}, 'css-loader'] },
         ]
     },
     resolve: {
-        alias: {
-            vue: 'vue/dist/vue.esm-bundler.js'
-        },
+        alias: { vue: 'vue/dist/vue.esm-bundler.js' },
         extensions: ['.js']
     },
     plugins: [
         new VueLoaderPlugin(),
-        new MiniCssExtractPlugin({
-            filename: 'vue-[name].css'
-        }),
+        new MiniCssExtractPlugin({ filename: 'vue-[name].css' }),
         new webpack.DefinePlugin({
             BASE_URL: JSON.stringify(process.env.BASE_URL),
             __VUE_OPTIONS_API__: true,
