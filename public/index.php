@@ -5,6 +5,8 @@ declare(strict_types=1);
 use Laminas\Mvc\Application;
 use Laminas\Stdlib\ArrayUtils;
 
+header('Access-Control-Allow-Origin: *');
+
 /**
  * This makes our life easier when dealing with paths. Everything is relative
  * to the application root now.
